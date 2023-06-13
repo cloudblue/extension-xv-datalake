@@ -1,0 +1,42 @@
+version: '3'
+volumes:
+  node_modules:
+
+services:
+  extension-xv-datalake_dev:
+    container_name: extension-xv-datalake_dev
+    build:
+      context: .
+    working_dir: /extension
+    command: cextrun -d --no-rich-logging
+    volumes:
+      - .:/extension
+      - node_modules:/extension/node_modules
+    env_file:
+      - .extension-xv-datalake_dev.env
+
+  extension-xv-datalake_bash:
+    container_name: extension-xv-datalake_bash
+    build:
+      context: .
+    working_dir: /extension
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/extension
+      - node_modules:/extension/node_modules
+    env_file:
+      - .extension-xv-datalake_dev.env
+
+  extension-xv-datalake_test:
+    container_name: extension-xv-datalake_test
+    build:
+      context: .
+    working_dir: /extension
+    command: extension-test
+    volumes:
+      - .:/extension
+      - node_modules:/extension/node_modules
+    env_file:
+      - .extension-xv-datalake_dev.env

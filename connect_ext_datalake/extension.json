@@ -1,0 +1,9 @@
+{
+  "name": "Xvantage Data Lake Extension",
+  "description": "This extension is responsoible for publishing Cloudblue Connect data to Xvantage Datalake.",
+  "version": "0.1.0",
+  "audience": ["reseller", "distributor"],
+  "readme_url": "https://example.com/README.md",
+  "changelog_url": "https://example.com/CHANGELOG.md",
+  "icon": "googleExtensionBaseline"
+}

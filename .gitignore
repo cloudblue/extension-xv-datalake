@@ -1,0 +1,7 @@
+*.pyc
+htmlcov
+.coverage
+coverage.xml
+.extension-xv-datalake_dev.env
+node_modules
+ui/tests/coverage
