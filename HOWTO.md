@@ -16,7 +16,7 @@ $ docker compose build
 Once your container is built, you can access the project folder and run:
 
 ```sh
-$ docker compose up extension-xv-datalake_dev
+$ docker compose up extension_xv_datalake_dev
 ```
 
 > please note that in this way you will run the docker container and if you do changes on the code you will need to stop it and start it again.
@@ -25,7 +25,7 @@ $ docker compose up extension-xv-datalake_dev
 If you would like to develop and test at the same time, we recommend you run your project using the command:
 
 ```sh
-$ docker compose run extension-xv-datalake_bash
+$ docker compose run extension_xv_datalake_bash
 ```
 
 Once you get the interactive shell an help banner will be displayed to inform you about the included tools that can help you with the development of your extension.
@@ -34,7 +34,7 @@ Once you get the interactive shell an help banner will be displayed to inform yo
 Additionally, a basic boilerplate for writing unit tests has been created, you can run the tests using:
 
 ```sh
-$ docker compose run extension-xv-datalake_test
+$ docker compose run extension_xv_datalake_test
 ```
 
 

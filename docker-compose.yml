@@ -3,8 +3,8 @@ volumes:
   node_modules:
 
 services:
-  extension-xv-datalake_dev:
-    container_name: extension-xv-datalake_dev
+  extension_xv_datalake_dev:
+    container_name: extension_xv_datalake_dev
     build:
       context: .
     working_dir: /extension
@@ -15,8 +15,8 @@ services:
     env_file:
       - .extension-xv-datalake_dev.env
 
-  extension-xv-datalake_bash:
-    container_name: extension-xv-datalake_bash
+  extension_xv_datalake_bash:
+    container_name: extension_xv_datalake_bash
     build:
       context: .
     working_dir: /extension
@@ -29,8 +29,8 @@ services:
     env_file:
       - .extension-xv-datalake_dev.env
 
-  extension-xv-datalake_test:
-    container_name: extension-xv-datalake_test
+  extension_xv_datalake_test:
+    container_name: extension_xv_datalake_test
     build:
       context: .
     working_dir: /extension
