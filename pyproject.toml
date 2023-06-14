@@ -10,8 +10,8 @@ packages = [
 readme = "./README.md"
 
 [tool.poetry.plugins."connect.eaas.ext"]
-"eventsapp" = "connect_ext_datalake.events:Extension-Xv-DatalakeEventsApplication"
-"webapp" = "connect_ext_datalake.webapp:Extension-Xv-DatalakeWebApplication"
+"eventsapp" = "connect_ext_datalake.events:DatalakeExtensionEventsApplication"
+"webapp" = "connect_ext_datalake.webapp:DatalakeExtensionWebApplication"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
