@@ -90,12 +90,12 @@ def publish_products(
         products: list[Product],
         installation: any,
     ):
-    product_ids = (map(lambda product: product.id, products))
+    pubsub_client = get_pubsub_client(installation)
+    product_ids = list(map(lambda product: product.id, products))
 
     connect_products = client.products.filter(
-        R().id.anyof(product_ids)
+        id__in=product_ids,
     )
-    pubsub_client = get_pubsub_client(installation)
 
     for connect_product in connect_products:
         payload = prepare_product_data_from_product(client, connect_product)
