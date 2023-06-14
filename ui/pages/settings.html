@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2023, Ingram Micro - Rahul Mondal 
+Copyright (c) 2023, Rahul
 All rights reserved.
 -->
 <!DOCTYPE html>
@@ -14,18 +14,24 @@ All rights reserved.
 
 <body>
     <div id="loader"></div>
-    <div id="app">
-        <settings-card title="Choose your marketplaces you want to include in chart">
-            <div class="list-wrapper">
-                <ul id="marketplaces" class="list">
-                </ul>
-            </div>
+    <div id="app" class="hidden">
+        <settings-card title="Message Publisher Settings">
+            <form>
+                <div class="group">
+                    <input type="text" id="account_info" />
+                    <label>Account Credential</label>
+                </div>
+                <div class="group">
+                    <input type="text" id="product_topic" />
+                    <label>Product Info Topic</label>
+                </div>
+            </form>
             <div class="button-container">
                 <button id="save" class="button" disabled>SAVE</button>
             </div>
         </settings-card>
     </div>
-    <div id="error">
+    <div id="error" class="hidden">
         <settings-card title="Error">
             <div class="error-message">
                 <p id="error-message">Something went wrong. Please try to reload the page.</p>

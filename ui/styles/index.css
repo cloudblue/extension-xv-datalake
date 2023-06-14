@@ -1,9 +1,15 @@
 /*
-Copyright (c) 2023, Ingram Micro - Rahul Mondal 
+Copyright (c) 2023, Rahul
 All rights reserved.
 */
 body {
     font-family: "Roboto", sans-serif;
+}
+
+settings-card {
+    margin: 0 auto;
+    max-width: 680px;
+    display: block;
 }
 
 .hidden {
@@ -20,12 +26,13 @@ body {
     margin: 0 auto;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-    }
+}
 
-    @keyframes rotation {
+@keyframes rotation {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -323,4 +330,58 @@ h1 {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+}
+
+
+form {
+    margin: 45px auto;
+    min-width: 600px;
+}
+
+.group {
+    position: relative;
+    margin: 45px 0;
+}
+
+
+input {
+    background: none;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #757575;
+    width: 610px;
+}
+
+input:focus {
+    outline: none;
+    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+input:focus~label {
+    top: -14px;
+    font-size: 12px;
+    color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+input[type="password"] {
+    letter-spacing: 0.3em;
+}
+
+label {
+    top: -14px;
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    transition: 300ms ease all;
+    color: #757575;
+}
+
+.bar {
+    position: relative;
+    display: block;
 }

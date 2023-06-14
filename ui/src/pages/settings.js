@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2023, Ingram Micro - Rahul Mondal
+Copyright (c) 2023, Rahul
 All rights reserved.
 */
 import createApp, {

@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 536:
+/***/ 256:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 
@@ -11,124 +11,50 @@ var dist = __webpack_require__(164);
 ;// CONCATENATED MODULE: ./ui/src/utils.js
 
 /*
-Copyright (c) 2023, Ingram Micro - Rahul Mondal
+Copyright (c) 2023, Rahul
 All rights reserved.
 */
 // API calls to the backend
-const utils_getSettings = () => fetch('/api/settings').then((response) => response.json());
+const getSettings = () => fetch('/api/settings').then((response) => response.json());
 
-const getChart = () => fetch('/api/chart').then((response) => response.json());
-
-const utils_getMarketplaces = () => fetch('/api/marketplaces').then((response) => response.json());
-
-const utils_updateSettings = (settings) => fetch('/api/settings', {
+const updateSettings = (settings) => fetch('/api/settings', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(settings),
 }).then((response) => response.json());
 
-// data processing
-const utils_processMarketplaces = (
-  allMarketplaces,
-  selectedMarketplaces,
-) => allMarketplaces.map((marketplace) => {
-  const checked = !!selectedMarketplaces.find(
-    (selectedMarketplace) => selectedMarketplace.id === marketplace.id,
-  );
-
-  return { ...marketplace, checked };
-});
-
-const utils_processSelectedMarketplaces = (
-  allMarketplaces,
-  checkboxes,
-) => checkboxes.map((checkbox) => allMarketplaces.find(
-  (marketplace) => marketplace.id === checkbox.value,
-));
-
-const utils_processCheckboxes = (
-  checkboxes,
-) => Array.from(checkboxes).filter(checkbox => checkbox.checked);
-
 ;// CONCATENATED MODULE: ./ui/src/components.js
 /*
-Copyright (c) 2023, Ingram Micro - Rahul Mondal
+Copyright (c) 2023, Rahul
 All rights reserved.
 */
-// prepare UI components
-const prepareMarketplaces = (marketplaces) => {
-  try {
-    return marketplaces.reduce((list, marketplace) => `${list}<li class="list-item">
-        <div class="list-item-image">
-          <img src="${marketplace.icon}" alt="Thumbnail">
-        </div>
-        <div class="list-item-content">
-          <h4>${marketplace.id} - ${marketplace.name}</h4>
-          <p>${marketplace.description}</p>
-        </div>
-      </li>`, '');
-  } catch (e) { return ''; }
-};
-
-const components_prepareMarketplacesWithSwitch = (marketplaces) => {
-  try {
-    return marketplaces.reduce((list, marketplace) => `${list}<li class="list-item">
-        <div class="list-item-image">
-          <img src="${marketplace.icon}" alt="Thumbnail">
-        </div>
-        <div class="list-item-content">
-          <h4>${marketplace.name}</h4>
-          <p>${marketplace.description}</p>
-        </div>
-        <div class="list-item switch">
-          <label class="switch">
-              <input type="checkbox" role="switch" value="${marketplace.id}"${marketplace.checked ? ' checked' : ''}>
-              <span></span>
-          </label>
-        </div>
-      </li>`, '');
-  } catch (e) { return ''; }
-};
-
-const prepareChart = (chartData) => `<img src="https://quickchart.io/chart?c=${encodeURI(JSON.stringify(chartData))}">`;
-
-// render UI components
-const components_renderMarketplaces = (marketplaces) => {
-  const element = document.getElementById('marketplaces');
-  element.innerHTML = marketplaces;
-};
-
-const renderChart = (chart) => {
-  const element = document.getElementById('chart');
-  element.innerHTML = chart;
-};
 
 // render UI components - buttons
-const components_enableButton = (id, text) => {
+const enableButton = (id, text) => {
   const element = document.getElementById(id);
   element.disabled = false;
   if (text) element.innerText = text;
 };
 
-const components_disableButton = (id, text) => {
+const disableButton = (id, text) => {
   const element = document.getElementById(id);
   element.disabled = true;
   if (text) element.innerText = text;
 };
 
-const components_addEventListener = (id, event, callback) => {
+const addEventListener = (id, event, callback) => {
   const element = document.getElementById(id);
   element.addEventListener(event, callback);
 };
 
 // render UI components - show/hide
-const components_showComponent = (id) => {
+const showComponent = (id) => {
   if (!id) return;
   const element = document.getElementById(id);
   element.classList.remove('hidden');
 };
 
-const components_hideComponent = (id) => {
+const hideComponent = (id) => {
   if (!id) return;
   const element = document.getElementById(id);
   element.classList.add('hidden');
@@ -136,9 +62,10 @@ const components_hideComponent = (id) => {
 
 ;// CONCATENATED MODULE: ./ui/src/pages.js
 /*
-Copyright (c) 2023, Ingram Micro - Rahul Mondal
+Copyright (c) 2023, Rahul
 All rights reserved.
 */
+
 
 
 
@@ -147,10 +74,12 @@ const saveSettingsData = async (app) => {
   if (!app) return;
   disableButton('save', 'Saving...');
   try {
-    const allMarketplaces = await getMarketplaces();
-    const checkboxes = processCheckboxes(document.getElementsByTagName('input'));
-    const marketplaces = processSelectedMarketplaces(allMarketplaces, checkboxes);
-    await updateSettings({ marketplaces });
+    // eslint-disable-next-line camelcase
+    const account_info = JSON.parse(document.getElementById('account_info').value);
+    // eslint-disable-next-line camelcase
+    const product_topic = document.getElementById('product_topic').value;
+    // eslint-disable-next-line camelcase
+    await updateSettings({ account_info, product_topic });
     app.emit('snackbar:message', 'Settings saved');
   } catch (error) {
     app.emit('snackbar:error', error);
@@ -158,30 +87,24 @@ const saveSettingsData = async (app) => {
   enableButton('save', 'Save');
 };
 
-const index = async () => {
-  components_hideComponent('app');
-  components_showComponent('loader');
-  const settings = await utils_getSettings();
-  const chartData = await getChart();
-  const chart = prepareChart(chartData);
-  const marketplaces = prepareMarketplaces(settings.marketplaces);
-  components_hideComponent('loader');
-  components_showComponent('app');
-  renderChart(chart);
-  components_renderMarketplaces(marketplaces);
-};
-
 const settings = async (app) => {
   if (!app) return;
   showComponent('loader');
   hideComponent('app');
   hideComponent('error');
+  enableButton('save', 'Save');
   try {
-    const allMarketplaces = await getMarketplaces();
-    const { marketplaces: selectedMarketpaces } = await getSettings();
-    const preparedMarketplaces = processMarketplaces(allMarketplaces, selectedMarketpaces);
-    const marketplaces = prepareMarketplacesWithSwitch(preparedMarketplaces);
-    renderMarketplaces(marketplaces);
+    // eslint-disable-next-line camelcase
+    const { account_info, product_topic } = await getSettings();
+
+    const accountInfoInput = document.getElementById('account_info');
+    // eslint-disable-next-line camelcase
+    accountInfoInput.value = JSON.stringify(account_info);
+
+    const productTopicInput = document.getElementById('product_topic');
+    // eslint-disable-next-line camelcase
+    productTopicInput.value = product_topic;
+
     enableButton('save', 'Save');
     addEventListener('save', 'click', saveSettingsData.bind(null, app));
     showComponent('app');
@@ -190,11 +113,12 @@ const settings = async (app) => {
     showComponent('error');
   }
   hideComponent('loader');
+  showComponent('app');
 };
 
-;// CONCATENATED MODULE: ./ui/src/pages/index.js
+;// CONCATENATED MODULE: ./ui/src/pages/settings.js
 /*
-Copyright (c) 2023, Ingram Micro - Rahul Mondal
+Copyright (c) 2023, Rahul
 All rights reserved.
 */
 
@@ -203,8 +127,8 @@ All rights reserved.
 
 
 
-(0,dist/* default */.ZP)({ 'main-card': dist/* Card */.Zb })
-  .then(() => { index(); });
+(0,dist/* default */.ZP)({ 'settings-card': dist/* Card */.Zb })
+  .then(settings);
 
 
 /***/ })
@@ -296,7 +220,7 @@ All rights reserved.
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			826: 0
+/******/ 			571: 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -346,7 +270,7 @@ All rights reserved.
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], () => (__webpack_require__(536)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], () => (__webpack_require__(256)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

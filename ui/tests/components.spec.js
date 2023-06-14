@@ -1,119 +1,17 @@
 /*
-Copyright (c) 2023, Ingram Micro - Rahul Mondal 
+Copyright (c) 2023, Rahul
 All rights reserved.
-*/import {
+*/
+import {
   addEventListener,
   disableButton,
   enableButton,
   hideComponent,
-  prepareChart,
-  prepareMarketplaces,
-  prepareMarketplacesWithSwitch,
-  renderChart,
-  renderMarketplaces,
   showComponent,
 } from '@/components';
 
 
 describe('components.js', () => {
-  describe('prepareMarketplaces', () => {
-    test('returns "" if marketplaces is empty', () => {
-      const result = prepareMarketplaces([]);
-      expect(result).toBe('');
-    });
-
-    test('returns "" if marketplaces is not array', () => {
-      const result = prepareMarketplaces({});
-      expect(result).toBe('');
-    });
-
-    test('returns a list of marketplaces', () => {
-      const result = prepareMarketplaces([{
-        icon: 'icon', id: 'id', name: 'name', description: 'description',
-      }]);
-      expect(result).toBe(`<li class="list-item">
-        <div class="list-item-image">
-          <img src="icon" alt="Thumbnail">
-        </div>
-        <div class="list-item-content">
-          <h4>id - name</h4>
-          <p>description</p>
-        </div>
-      </li>`);
-    });
-  });
-
-  describe('prepareMarketplacesWithSwitch', () => {
-    test('returns "" if marketplaces is empty', () => {
-      const result = prepareMarketplacesWithSwitch([]);
-      expect(result).toBe('');
-    });
-    test('returns "" if marketplaces is not array', () => {
-      const result = prepareMarketplacesWithSwitch({});
-      expect(result).toBe('');
-    });
-    test.each([[`<li class="list-item">
-        <div class="list-item-image">
-          <img src="icon" alt="Thumbnail">
-        </div>
-        <div class="list-item-content">
-          <h4>name</h4>
-          <p>description</p>
-        </div>
-        <div class="list-item switch">
-          <label class="switch">
-              <input type="checkbox" role="switch" value="id" checked>
-              <span></span>
-          </label>
-        </div>
-      </li>`, {
-      icon: 'icon', id: 'id', name: 'name', description: 'description', checked: true,
-    }],
-    [`<li class="list-item">
-        <div class="list-item-image">
-          <img src="icon2" alt="Thumbnail">
-        </div>
-        <div class="list-item-content">
-          <h4>name2</h4>
-          <p>description2</p>
-        </div>
-        <div class="list-item switch">
-          <label class="switch">
-              <input type="checkbox" role="switch" value="id2">
-              <span></span>
-          </label>
-        </div>
-      </li>`, {
-      icon: 'icon2', id: 'id2', name: 'name2', description: 'description2', checked: false,
-    }]])('returns a list of marketplaces with switch', (expected, marketplace) => {
-      const result = prepareMarketplacesWithSwitch([marketplace]);
-      expect(result).toBe(expected);
-    });
-  });
-
-  describe('prepareChart', () => {
-    test('returns a chart', () => {
-      const result = prepareChart({ type: 'bar' });
-      expect(result).toBe('<img src="https://quickchart.io/chart?c=%7B%22type%22:%22bar%22%7D">');
-    });
-  });
-
-  describe('renderChart', () => {
-    test('renders a chart', () => {
-      document.body.innerHTML = '<div id="chart"></div>';
-      renderChart('<img src="/a.jpg">');
-      expect(document.getElementById('chart').innerHTML).toBe('<img src="/a.jpg">');
-    });
-  });
-
-  describe('renderMarketplaces', () => {
-    test('renders a list of marketplaces', () => {
-      document.body.innerHTML = '<div id="marketplaces"></div>';
-      renderMarketplaces('<li>item</li>');
-      expect(document.getElementById('marketplaces').innerHTML).toBe('<li>item</li>');
-    });
-  });
-
   describe('enableButton', () => {
     beforeEach(() => {
       document.body.innerHTML = '<button id="button" disabled></button>';
@@ -153,6 +51,7 @@ describe('components.js', () => {
       expect(callback).toBeCalled();
     });
   });
+
   describe('showLoader', () => {
     beforeEach(() => {
       document.body.innerHTML = '<div id="loader" class="hidden"></div>';

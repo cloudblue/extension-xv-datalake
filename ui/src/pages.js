@@ -1,26 +1,17 @@
 /*
-Copyright (c) 2023, Ingram Micro - Rahul Mondal
+Copyright (c) 2023, Rahul
 All rights reserved.
 */
 import {
-  getChart,
-  getMarketplaces,
   getSettings,
-  processCheckboxes,
-  processMarketplaces,
-  processSelectedMarketplaces,
   updateSettings,
 } from './utils';
+
 import {
   addEventListener,
   disableButton,
   enableButton,
   hideComponent,
-  prepareChart,
-  prepareMarketplaces,
-  prepareMarketplacesWithSwitch,
-  renderChart,
-  renderMarketplaces,
   showComponent,
 } from './components';
 
@@ -29,10 +20,12 @@ export const saveSettingsData = async (app) => {
   if (!app) return;
   disableButton('save', 'Saving...');
   try {
-    const allMarketplaces = await getMarketplaces();
-    const checkboxes = processCheckboxes(document.getElementsByTagName('input'));
-    const marketplaces = processSelectedMarketplaces(allMarketplaces, checkboxes);
-    await updateSettings({ marketplaces });
+    // eslint-disable-next-line camelcase
+    const account_info = JSON.parse(document.getElementById('account_info').value);
+    // eslint-disable-next-line camelcase
+    const product_topic = document.getElementById('product_topic').value;
+    // eslint-disable-next-line camelcase
+    await updateSettings({ account_info, product_topic });
     app.emit('snackbar:message', 'Settings saved');
   } catch (error) {
     app.emit('snackbar:error', error);
@@ -40,30 +33,24 @@ export const saveSettingsData = async (app) => {
   enableButton('save', 'Save');
 };
 
-export const index = async () => {
-  hideComponent('app');
-  showComponent('loader');
-  const settings = await getSettings();
-  const chartData = await getChart();
-  const chart = prepareChart(chartData);
-  const marketplaces = prepareMarketplaces(settings.marketplaces);
-  hideComponent('loader');
-  showComponent('app');
-  renderChart(chart);
-  renderMarketplaces(marketplaces);
-};
-
 export const settings = async (app) => {
   if (!app) return;
   showComponent('loader');
   hideComponent('app');
   hideComponent('error');
+  enableButton('save', 'Save');
   try {
-    const allMarketplaces = await getMarketplaces();
-    const { marketplaces: selectedMarketpaces } = await getSettings();
-    const preparedMarketplaces = processMarketplaces(allMarketplaces, selectedMarketpaces);
-    const marketplaces = prepareMarketplacesWithSwitch(preparedMarketplaces);
-    renderMarketplaces(marketplaces);
+    // eslint-disable-next-line camelcase
+    const { account_info, product_topic } = await getSettings();
+
+    const accountInfoInput = document.getElementById('account_info');
+    // eslint-disable-next-line camelcase
+    accountInfoInput.value = JSON.stringify(account_info);
+
+    const productTopicInput = document.getElementById('product_topic');
+    // eslint-disable-next-line camelcase
+    productTopicInput.value = product_topic;
+
     enableButton('save', 'Save');
     addEventListener('save', 'click', saveSettingsData.bind(null, app));
     showComponent('app');
@@ -72,4 +59,5 @@ export const settings = async (app) => {
     showComponent('error');
   }
   hideComponent('loader');
+  showComponent('app');
 };
