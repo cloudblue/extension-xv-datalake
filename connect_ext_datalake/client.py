@@ -23,11 +23,11 @@ class GooglePubsubClient:
         )
 
         self.publisher = pubsub_v1.PublisherClient(credentials=credentials)
-    
+
     def validate(self):
         try:
             return self.publisher.get_topic({'topic': self.topic_name})
-        except Exception as e:
+        except Exception:
             return False
 
     def publish(self, data):

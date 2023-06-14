@@ -10,3 +10,10 @@ from pydantic import BaseModel
 class Settings(BaseModel):
     account_info: dict
     product_topic: str
+
+
+class Product(BaseModel):
+    id: str
+    name: str
+    icon: str
+    status: str
