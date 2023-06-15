@@ -6,6 +6,8 @@
 import pytest
 from connect.client import AsyncConnectClient, ConnectClient
 
+from connect_ext_datalake.schemas import Settings
+
 
 @pytest.fixture
 def connect_client():
@@ -157,11 +159,18 @@ def parameters():
 
 
 @pytest.fixture
-def installation():
-    return {
-        'id': 'EIN-000',
-        'settings': {
+def settings():
+    return Settings.parse_obj(
+        {
             'account_info': {},
             'product_topic': '',
         },
+    )
+
+
+@pytest.fixture
+def installation(settings):
+    return {
+        'id': 'EIN-000',
+        'settings': settings.dict(),
     }
