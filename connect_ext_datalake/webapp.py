@@ -55,7 +55,7 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
             },
         )
         return settings
-    
+
     @router.get(
         '/products',
         summary='Retrieve Product List',
@@ -70,7 +70,6 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
     @router.post(
         '/products/publish',
         summary='Publish Products Info',
-        response_model=Settings,
     )
     def publish_product_info(
         self,
@@ -79,4 +78,3 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
         client: ConnectClient = Depends(get_installation_client),
     ):
         publish_products(client, products, installation)
-

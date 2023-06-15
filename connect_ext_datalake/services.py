@@ -23,14 +23,14 @@ def get_pubsub_client(installation):
         raise Exception('Extension settings are not configured correctly.')
 
 
-def remove_prorperties(dict: dict, properties: list):
-    for property in properties:
-        if property in dict.keys():
-            dict.pop(property)
+def remove_properties(dict: dict, properties: list):
+    for prop in properties:
+        if prop in dict.keys():
+            dict.pop(prop)
 
 
 def sanitize_product(product: dict):
-    remove_prorperties(
+    remove_properties(
         product,
         [
             'customer_ui_settings',
@@ -45,7 +45,7 @@ def sanitize_product(product: dict):
 
 def sanitize_parameters(parameters: list):
     for parameter in parameters:
-        remove_prorperties(
+        remove_properties(
             parameter,
             ['events'],
         )
@@ -86,27 +86,23 @@ def prepare_product_data_from_product(client, product):
 
 
 def publish_products(
-        client: ConnectClient,
-        products: list[Product],
-        installation: any,
-    ):
+    client: ConnectClient,
+    products: list[Product],
+    installation,
+):
     pubsub_client = get_pubsub_client(installation)
-    product_ids = list(map(lambda product: product.id, products))
+    product_ids = [product.id for product in products]
 
-    connect_products = client.products.filter(
-        id__in=product_ids,
-    )
+    connect_products = client.products.filter(id__in=product_ids)
 
     for connect_product in connect_products:
         payload = prepare_product_data_from_product(client, connect_product)
         pubsub_client.publish(payload)
 
 
-
 def list_products(client: ConnectClient):
     connect_products = client.products.filter(
-        R().visibility.listing.eq(True) or
-        R().visibility.syndication.eq(True),
+        R().visibility.listing.eq(True) or R().visibility.syndication.eq(True),
     ).all()
 
     return list(map(Product.parse_obj, connect_products))

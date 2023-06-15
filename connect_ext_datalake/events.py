@@ -7,8 +7,6 @@ from connect.eaas.core.decorators import event
 from connect.eaas.core.extension import EventsApplicationBase
 from connect.eaas.core.responses import BackgroundResponse
 
-from connect_ext_datalake.client import GooglePubsubClient
-from connect_ext_datalake.schemas import Settings
 from connect_ext_datalake.services import (
     get_pubsub_client,
     prepare_product_data_from_listing_request,

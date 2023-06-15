@@ -6,8 +6,8 @@
 import base64
 import json
 
-from google.auth import jwt
-from google.cloud import pubsub_v1
+from google.auth.jwt import Credentials
+from google.cloud.pubsub_v1 import PublisherClient
 
 from connect_ext_datalake.schemas import Settings
 
@@ -17,16 +17,16 @@ class GooglePubsubClient:
         self.account = settings.account_info
         self.topic = settings.product_topic
 
-        credentials = jwt.Credentials.from_service_account_info(
+        credentials = Credentials.from_service_account_info(
             self.account,
             audience='https://pubsub.googleapis.com/google.pubsub.v1.Publisher',
         )
 
-        self.publisher = pubsub_v1.PublisherClient(credentials=credentials)
+        self.publisher = PublisherClient(credentials=credentials)
 
     def validate(self):
         try:
-            return self.publisher.get_topic({'topic': self.topic_name})
+            return self.publisher.get_topic({'topic': self.topic})
         except Exception:
             return False
 

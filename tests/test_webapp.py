@@ -3,7 +3,11 @@
 # Copyright (c) 2023, Rahul
 # All rights reserved.
 #
+from unittest.mock import patch
 
+from connect.client import R
+
+from connect_ext_datalake.client import GooglePubsubClient
 from connect_ext_datalake.schemas import Settings
 from connect_ext_datalake.webapp import DatalakeExtensionWebApplication
 
@@ -70,3 +74,77 @@ def test_save_settings(test_client_factory, client_mocker_factory):
 
     data = response.json()
     assert data == settings.dict()
+
+
+def test_list_products(test_client_factory, client_mocker_factory):
+    products = [
+        {
+            'id': 'PRD-000-000-001',
+            'name': 'Test Cisco Product',
+            'icon': '/media/VA-000-001/PRD-000-000-001/media/PRD-000-000-001-logo.png',
+            'status': 'published',
+        },
+        {
+            'id': 'PRD-000-000-002',
+            'name': 'A-R18-Dropbox-1',
+            'icon': '/media/VA-000-001/PRD-000-000-002/media/PRD-000-000-002-logo.png',
+            'status': 'published',
+        },
+        {
+            'id': 'PRD-000-000-003',
+            'name': 'Product CB A1',
+            'icon': '/media/VA-000-001/PRD-000-000-003/media/PRD-000-000-003-logo.png',
+            'status': 'published',
+        },
+    ]
+
+    client_mocker = client_mocker_factory()
+
+    client_mocker.products.filter(
+        R().visibility.listing.eq(True) or R().visibility.syndication.eq(True),
+    ).all().mock(return_value=products)
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.get('/api/products')
+
+    assert response.status_code == 200
+
+    data = response.json()
+    assert data == products
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_publish_product_info(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    test_client_factory,
+    client_mocker_factory,
+    product,
+    parameters,
+    installation,
+):
+
+    client_mocker = client_mocker_factory()
+
+    client_mocker.products.filter(
+        id__in=[product['id']],
+    ).all().mock(
+        return_value=[product],
+    )
+    client_mocker.products[product['id']].parameters.all().mock(
+        return_value=parameters,
+    )
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.post(
+        '/api/products/publish',
+        json=[product],
+        installation=installation,
+    )
+
+    assert response.status_code == 200

@@ -14,6 +14,6 @@ class Settings(BaseModel):
 
 class Product(BaseModel):
     id: str
-    name: str
-    icon: str
-    status: str
+    name: str | None = None
+    icon: str | None = None
+    status: str | None = None
