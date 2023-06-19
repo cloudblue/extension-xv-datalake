@@ -33,7 +33,6 @@ def sanitize_product(product: dict):
     remove_properties(
         product,
         [
-            'customer_ui_settings',
             'changes_description',
             'public',
             'events',

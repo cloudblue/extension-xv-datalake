@@ -14,8 +14,9 @@ from connect.eaas.core.extension import WebApplicationBase
 from connect.eaas.core.inject.common import get_call_context
 from connect.eaas.core.inject.models import Context
 from connect.eaas.core.inject.synchronous import get_installation, get_installation_client
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 
+from connect_ext_datalake.client import GooglePubsubClient
 from connect_ext_datalake.schemas import Product, Settings
 from connect_ext_datalake.services import list_products, publish_products
 
@@ -49,12 +50,16 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
         context: Context = Depends(get_call_context),
         client: ConnectClient = Depends(get_installation_client),
     ):
-        client('devops').installations[context.installation_id].update(
-            payload={
-                'settings': settings.dict(),
-            },
-        )
-        return settings
+        pubsub_client = GooglePubsubClient(settings)
+        if pubsub_client.validate():
+            client('devops').installations[context.installation_id].update(
+                payload={
+                    'settings': settings.dict(),
+                },
+            )
+            return settings
+        else:
+            raise HTTPException(status_code=400, detail='Configuration validation failed!')
 
     @router.get(
         '/products',

@@ -48,7 +48,16 @@ def test_retrieve_settings(test_client_factory):
     assert data['product_topic'] == 'projects/acc008787827/topics/connect-products-topic '
 
 
-def test_save_settings(test_client_factory, client_mocker_factory):
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_save_settings_validation_success(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    test_client_factory,
+    client_mocker_factory,
+):
     settings = Settings(
         account_info={'account_id': 'acc008787827'},
         product_topic='projects/acc008787827/topics/connect-products-topic ',
@@ -74,6 +83,31 @@ def test_save_settings(test_client_factory, client_mocker_factory):
 
     data = response.json()
     assert data == settings.dict()
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=False)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_save_settings_validation_failed(
+    mock_client_init,
+    mock_validate,
+    test_client_factory,
+):
+    settings = Settings(
+        account_info={'account_id': 'acc008787827'},
+        product_topic='projects/acc008787827/topics/connect-products-topic ',
+    )
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.post(
+        '/api/settings',
+        json=settings.dict(),
+        context={'installation_id': 'EIN-000'},
+    )
+    assert response.status_code == 400
+
+    data = response.json()
+    assert data == {'detail': 'Configuration validation failed!'}
 
 
 def test_list_products(test_client_factory, client_mocker_factory):
