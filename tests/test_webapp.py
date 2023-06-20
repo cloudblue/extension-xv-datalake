@@ -6,6 +6,7 @@
 from unittest.mock import patch
 
 from connect.client import R
+from google.api_core.exceptions import PermissionDenied
 
 from connect_ext_datalake.client import GooglePubsubClient
 from connect_ext_datalake.schemas import Settings
@@ -49,11 +50,9 @@ def test_retrieve_settings(test_client_factory):
 
 
 @patch.object(GooglePubsubClient, 'validate', return_value=True)
-@patch.object(GooglePubsubClient, 'publish', return_value=True)
 @patch.object(GooglePubsubClient, '__init__', return_value=None)
 def test_save_settings_validation_success(
     mock_client_init,
-    mock_publish,
     mock_validate,
     test_client_factory,
     client_mocker_factory,
@@ -85,7 +84,11 @@ def test_save_settings_validation_success(
     assert data == settings.dict()
 
 
-@patch.object(GooglePubsubClient, 'validate', return_value=False)
+@patch.object(
+    GooglePubsubClient,
+    'validate',
+    side_effect=PermissionDenied('Account details not valid.'),
+)
 @patch.object(GooglePubsubClient, '__init__', return_value=None)
 def test_save_settings_validation_failed(
     mock_client_init,
@@ -107,7 +110,51 @@ def test_save_settings_validation_failed(
     assert response.status_code == 400
 
     data = response.json()
-    assert data == {'detail': 'Configuration validation failed!'}
+    assert data == {'error': 'PermissionDenied : 403 Account details not valid.'}
+
+
+@patch.object(
+    GooglePubsubClient,
+    'validate',
+    side_effect=PermissionDenied('Account details not valid.'),
+)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_settings_validation_failed(
+    mock_client_init,
+    mock_validate,
+    test_client_factory,
+    installation,
+):
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.get(
+        '/api/settings/validate',
+        installation=installation,
+    )
+    assert response.status_code == 400
+
+    data = response.json()
+    assert data == {'error': 'PermissionDenied : 403 Account details not valid.'}
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_settings_validation_pass(
+    mock_client_init,
+    mock_validate,
+    test_client_factory,
+    installation,
+):
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.get(
+        '/api/settings/validate',
+        installation=installation,
+    )
+    assert response.status_code == 200
+
+    data = response.json()
+    assert data == {'account_info': {}, 'product_topic': ''}
 
 
 def test_list_products(test_client_factory, client_mocker_factory):

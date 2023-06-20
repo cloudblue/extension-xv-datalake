@@ -17,10 +17,9 @@ def get_pubsub_client(installation):
         ),
     )
 
-    if client.validate():
-        return client
-    else:
-        raise Exception('Extension settings are not configured correctly.')
+    client.validate()
+
+    return client
 
 
 def remove_properties(dict: dict, properties: list):

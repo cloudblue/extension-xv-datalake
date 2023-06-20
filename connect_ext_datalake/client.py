@@ -25,10 +25,7 @@ class GooglePubsubClient:
         self.publisher = PublisherClient(credentials=credentials)
 
     def validate(self):
-        try:
-            return self.publisher.get_topic({'topic': self.topic})
-        except Exception:
-            return False
+        return self.publisher.get_topic({'topic': self.topic})
 
     def publish(self, data):
         string_message = json.dumps(data)

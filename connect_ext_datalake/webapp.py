@@ -14,16 +14,20 @@ from connect.eaas.core.extension import WebApplicationBase
 from connect.eaas.core.inject.common import get_call_context
 from connect.eaas.core.inject.models import Context
 from connect.eaas.core.inject.synchronous import get_installation, get_installation_client
-from fastapi import Depends, HTTPException
+from fastapi import Depends
 
 from connect_ext_datalake.client import GooglePubsubClient
+from connect_ext_datalake.handlers import CustomExceptionHandlers
 from connect_ext_datalake.schemas import Product, Settings
 from connect_ext_datalake.services import list_products, publish_products
 
 
 @web_app(router)
 @account_settings_page('Datalake Pubsub Settings', '/static/settings.html')
-class DatalakeExtensionWebApplication(WebApplicationBase):
+class DatalakeExtensionWebApplication(
+    WebApplicationBase,
+    CustomExceptionHandlers,
+):
 
     @router.get(
         '/settings',
@@ -39,6 +43,26 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
             product_topic=installation['settings'].get('product_topic', ''),
         )
 
+    @router.get(
+        '/settings/validate',
+        summary='Validate Datalake Pubsub Settings',
+        response_model=Settings,
+    )
+    def validate_settings(
+            self,
+            installation: dict = Depends(get_installation),
+    ):
+        settings = Settings(
+            account_info=installation['settings'].get('account_info', {}),
+            product_topic=installation['settings'].get('product_topic', ''),
+        )
+
+        pubsub_client = GooglePubsubClient(settings)
+
+        pubsub_client.validate()
+
+        return settings
+
     @router.post(
         '/settings',
         summary='Save Datalake Pubsub Settings',
@@ -51,15 +75,14 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
         client: ConnectClient = Depends(get_installation_client),
     ):
         pubsub_client = GooglePubsubClient(settings)
-        if pubsub_client.validate():
-            client('devops').installations[context.installation_id].update(
-                payload={
-                    'settings': settings.dict(),
-                },
-            )
-            return settings
-        else:
-            raise HTTPException(status_code=400, detail='Configuration validation failed!')
+        pubsub_client.validate()
+
+        client('devops').installations[context.installation_id].update(
+            payload={
+                'settings': settings.dict(),
+            },
+        )
+        return settings
 
     @router.get(
         '/products',

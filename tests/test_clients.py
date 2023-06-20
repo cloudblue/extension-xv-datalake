@@ -1,6 +1,7 @@
 from asyncio import Future
 from unittest.mock import patch
 
+import pytest
 from google.cloud.pubsub_v1 import PublisherClient
 
 from connect_ext_datalake.client import GooglePubsubClient
@@ -33,7 +34,8 @@ def test_validate_failed(
 
     client = GooglePubsubClient(settings)
 
-    assert not client.validate()
+    with pytest.raises(Exception):
+        client.validate()
 
 
 @patch('google.auth.jwt.Credentials.from_service_account_info', return_value={})
