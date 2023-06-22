@@ -35,6 +35,10 @@ def sanitize_product(product: dict):
             'changes_description',
             'public',
             'events',
+            'configurations',
+            'usage_rule',
+            'stats',
+            'extensions',
         ],
     )
 

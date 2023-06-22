@@ -29,7 +29,7 @@ class GooglePubsubClient:
 
     def publish(self, data):
         string_message = json.dumps(data)
-        message = base64.b64encode(bytes(string_message, 'utf-8'))
+        message = bytes(string_message, 'utf-8')
         future = self.publisher.publish(self.topic, message, spam='eggs')
 
         return future.result()
