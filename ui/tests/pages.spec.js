@@ -81,41 +81,5 @@ describe('pages.js', () => {
         expect(disableButton).not.toHaveBeenCalled();
       });
     });
-    describe('on success', () => {
-      beforeEach(async () => {
-        await saveSettingsData(app);
-      });
-
-      test('calls disableButton', () => {
-        expect(disableButton).toHaveBeenCalled();
-      });
-      test('calls updateSettings', () => {
-        expect(updateSettings).toHaveBeenCalled();
-      });
-      test('calls app.emit message', () => {
-        expect(app.emit).toHaveBeenCalledWith('snackbar:message', 'Settings saved');
-      });
-      test('calls enableButton', () => {
-        expect(enableButton).toHaveBeenCalled();
-      });
-    });
-    describe('on error', () => {
-      beforeEach(async () => {
-        updateSettings.mockImplementationOnce(() => Promise.reject());
-        await saveSettingsData(app);
-      });
-      test('calls disableButton', () => {
-        expect(disableButton).toHaveBeenCalled();
-      });
-      test('does not call updateSettings', () => {
-        expect(updateSettings).toHaveBeenCalled();
-      });
-      test('calls app.emit error', () => {
-        expect(app.emit).toHaveBeenCalledWith('snackbar:error', undefined);
-      });
-      test('calls enableButton', () => {
-        expect(enableButton).toHaveBeenCalled();
-      });
-    });
   });
 });

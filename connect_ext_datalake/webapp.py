@@ -15,6 +15,7 @@ from connect.eaas.core.inject.common import get_call_context
 from connect.eaas.core.inject.models import Context
 from connect.eaas.core.inject.synchronous import get_installation, get_installation_client
 from fastapi import Depends
+from fastapi.responses import JSONResponse
 
 from connect_ext_datalake.client import GooglePubsubClient
 from connect_ext_datalake.handlers import CustomExceptionHandlers
@@ -59,9 +60,17 @@ class DatalakeExtensionWebApplication(
 
         pubsub_client = GooglePubsubClient(settings)
 
-        pubsub_client.validate()
+        try:
+            pubsub_client.validate()
 
-        return settings
+            return settings
+        except Exception as e:
+            return JSONResponse(
+                {
+                    'error': f'{type(e).__name__} : {str(e)}',
+                },
+                status_code=400,
+            )
 
     @router.post(
         '/settings',
@@ -74,15 +83,23 @@ class DatalakeExtensionWebApplication(
         context: Context = Depends(get_call_context),
         client: ConnectClient = Depends(get_installation_client),
     ):
-        pubsub_client = GooglePubsubClient(settings)
-        pubsub_client.validate()
+        try:
+            pubsub_client = GooglePubsubClient(settings)
+            pubsub_client.validate()
 
-        client('devops').installations[context.installation_id].update(
-            payload={
-                'settings': settings.dict(),
-            },
-        )
-        return settings
+            client('devops').installations[context.installation_id].update(
+                payload={
+                    'settings': settings.dict(),
+                },
+            )
+            return settings
+        except Exception as e:
+            return JSONResponse(
+                {
+                    'error': f'{type(e).__name__} : {str(e)}',
+                },
+                status_code=400,
+            )
 
     @router.get(
         '/products',
