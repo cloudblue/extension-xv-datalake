@@ -3,7 +3,6 @@
 # Copyright (c) 2023, Ingram Micro - Rahul Mondal
 # All rights reserved.
 #
-import base64
 import json
 
 from google.auth.jwt import Credentials
