@@ -18,17 +18,13 @@ from fastapi import Depends
 from fastapi.responses import JSONResponse
 
 from connect_ext_datalake.client import GooglePubsubClient
-from connect_ext_datalake.handlers import CustomExceptionHandlers
 from connect_ext_datalake.schemas import Product, Settings
 from connect_ext_datalake.services import list_products, publish_products
 
 
 @web_app(router)
 @account_settings_page('Datalake Pubsub Settings', '/static/settings.html')
-class DatalakeExtensionWebApplication(
-    WebApplicationBase,
-    CustomExceptionHandlers,
-):
+class DatalakeExtensionWebApplication(WebApplicationBase):
 
     @router.get(
         '/settings',
