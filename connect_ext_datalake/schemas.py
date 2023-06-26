@@ -17,3 +17,9 @@ class Product(BaseModel):
     name: str | None = None
     icon: str | None = None
     status: str | None = None
+
+
+class PublishProductResponse(BaseModel):
+    id: str
+    published: bool | None = None
+    error: str | None = None

@@ -5,7 +5,7 @@
 #
 from connect.client import ConnectClient, R
 
-from connect_ext_datalake.schemas import Product, Settings
+from connect_ext_datalake.schemas import Product, PublishProductResponse, Settings
 from connect_ext_datalake.client import GooglePubsubClient
 
 
@@ -92,14 +92,25 @@ def publish_products(
     products: list[Product],
     installation,
 ):
+    response = []
     pubsub_client = get_pubsub_client(installation)
     product_ids = [product.id for product in products]
 
     connect_products = client.products.filter(id__in=product_ids)
 
     for connect_product in connect_products:
-        payload = prepare_product_data_from_product(client, connect_product)
-        pubsub_client.publish(payload)
+        product_response = PublishProductResponse(id=connect_product['id'])
+        response.append(product_response)
+        try:
+            payload = prepare_product_data_from_product(client, connect_product)
+            pubsub_client.publish(payload)
+
+            product_response.published = True
+        except Exception as e:
+            product_response.published = False
+            product_response.error = f'{type(e).__name__} : {str(e)}'
+
+    return response
 
 
 def list_products(client: ConnectClient):

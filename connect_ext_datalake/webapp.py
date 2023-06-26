@@ -18,13 +18,21 @@ from fastapi import Depends
 from fastapi.responses import JSONResponse
 
 from connect_ext_datalake.client import GooglePubsubClient
-from connect_ext_datalake.schemas import Product, Settings
+from connect_ext_datalake.schemas import Product, PublishProductResponse, Settings
 from connect_ext_datalake.services import list_products, publish_products
 
 
 @web_app(router)
 @account_settings_page('Datalake Pubsub Settings', '/static/settings.html')
 class DatalakeExtensionWebApplication(WebApplicationBase):
+
+    def get_error_response(self, e: Exception):
+        return JSONResponse(
+            {
+                'error': f'{type(e).__name__} : {str(e)}',
+            },
+            status_code=400,
+        )
 
     @router.get(
         '/settings',
@@ -49,24 +57,18 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
             self,
             installation: dict = Depends(get_installation),
     ):
-        settings = Settings(
-            account_info=installation['settings'].get('account_info', {}),
-            product_topic=installation['settings'].get('product_topic', ''),
-        )
-
-        pubsub_client = GooglePubsubClient(settings)
-
         try:
+            settings = Settings(
+                account_info=installation['settings'].get('account_info', {}),
+                product_topic=installation['settings'].get('product_topic', ''),
+            )
+
+            pubsub_client = GooglePubsubClient(settings)
             pubsub_client.validate()
 
             return settings
         except Exception as e:
-            return JSONResponse(
-                {
-                    'error': f'{type(e).__name__} : {str(e)}',
-                },
-                status_code=400,
-            )
+            return self.get_error_response(e)
 
     @router.post(
         '/settings',
@@ -90,12 +92,7 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
             )
             return settings
         except Exception as e:
-            return JSONResponse(
-                {
-                    'error': f'{type(e).__name__} : {str(e)}',
-                },
-                status_code=400,
-            )
+            return self.get_error_response(e)
 
     @router.get(
         '/products',
@@ -111,6 +108,7 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
     @router.post(
         '/products/publish',
         summary='Publish Products Info',
+        response_model=list[PublishProductResponse],
     )
     def publish_product_info(
         self,
@@ -118,4 +116,7 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
         installation: dict = Depends(get_installation),
         client: ConnectClient = Depends(get_installation_client),
     ):
-        publish_products(client, products, installation)
+        try:
+            return publish_products(client, products, installation)
+        except Exception as e:
+            return self.get_error_response(e)
