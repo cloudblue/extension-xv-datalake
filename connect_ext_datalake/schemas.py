@@ -19,7 +19,5 @@ class Product(BaseModel):
     status: str | None = None
 
 
-class PublishProductResponse(BaseModel):
+class ProductInput(BaseModel):
     id: str
-    published: bool | None = None
-    error: str | None = None

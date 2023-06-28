@@ -3,9 +3,16 @@
 # Copyright (c) 2023, Ingram Micro - Rahul Mondal
 # All rights reserved.
 #
-from connect.client import ConnectClient, R
+from datetime import datetime, timedelta
 
-from connect_ext_datalake.schemas import Product, PublishProductResponse, Settings
+from connect.client import ConnectClient, R
+from connect.eaas.core.inject.models import Context
+
+from connect_ext_datalake.schemas import (
+    Product,
+    ProductInput,
+    Settings,
+)
 from connect_ext_datalake.client import GooglePubsubClient
 
 
@@ -87,30 +94,16 @@ def prepare_product_data_from_product(client, product):
     return data
 
 
-def publish_products(
-    client: ConnectClient,
-    products: list[Product],
-    installation,
+def publish_product(
+        client: ConnectClient,
+        pubsub_client: GooglePubsubClient,
+        product,
+        logger,
 ):
-    response = []
-    pubsub_client = get_pubsub_client(installation)
-    product_ids = [product.id for product in products]
-
-    connect_products = client.products.filter(id__in=product_ids)
-
-    for connect_product in connect_products:
-        product_response = PublishProductResponse(id=connect_product['id'])
-        response.append(product_response)
-        try:
-            payload = prepare_product_data_from_product(client, connect_product)
-            pubsub_client.publish(payload)
-
-            product_response.published = True
-        except Exception as e:
-            product_response.published = False
-            product_response.error = f'{type(e).__name__} : {str(e)}'
-
-    return response
+    payload = prepare_product_data_from_product(client, product)
+    logger.info(f"Start publishing product {product['id']}. Payload: {payload}")
+    pubsub_client.publish(payload)
+    logger.info(f"Publish of product {product['id']} is successful. Payload: {payload}")
 
 
 def list_products(client: ConnectClient):
@@ -119,3 +112,35 @@ def list_products(client: ConnectClient):
     ).all()
 
     return list(map(Product.parse_obj, connect_products))
+
+
+def create_task_publish_product(
+    logger,
+    client: ConnectClient,
+    context: Context,
+    installation: dict,
+    products: list[ProductInput] | None = None,
+):
+    payload = {
+        'method': 'publish_products',
+        'name': f'Publish Products - {context.account_id}',
+        'description': 'Publish products to Xvantage Goggle PubSub Topic. Products - All',
+        'parameter': {
+            'installation': installation,
+            'products': [product.dict() for product in products] if products else None,
+        },
+        'trigger': {
+            'type': 'onetime',
+            'date': (datetime.utcnow() + timedelta(0, 70)).isoformat(),
+        },
+    }
+
+    if products:
+        products_ids = ','.join([product.id for product in products])
+        description = f'Publish {products_ids} products to Xvantage Goggle PubSub Topic.'
+        payload['description'] = description
+
+    logger.info(f'Creating dynamic one time schedule method with payload: {payload}')
+
+    client('devops').services[context.extension_id].environments[
+        context.environment_id].schedules.create(payload=payload)

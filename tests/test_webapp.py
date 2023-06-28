@@ -56,6 +56,7 @@ def test_save_settings_validation_success(
     mock_validate,
     test_client_factory,
     client_mocker_factory,
+    context,
 ):
     settings = Settings(
         account_info={'account_id': 'acc008787827'},
@@ -76,7 +77,7 @@ def test_save_settings_validation_success(
     response = client.post(
         '/api/settings',
         json=settings.dict(),
-        context={'installation_id': 'EIN-000'},
+        context=context,
     )
     assert response.status_code == 200
 
@@ -157,28 +158,11 @@ def test_settings_validation_pass(
     assert data == {'account_info': {}, 'product_topic': ''}
 
 
-def test_list_products(test_client_factory, client_mocker_factory):
-    products = [
-        {
-            'id': 'PRD-000-000-001',
-            'name': 'Test Cisco Product',
-            'icon': '/media/VA-000-001/PRD-000-000-001/media/PRD-000-000-001-logo.png',
-            'status': 'published',
-        },
-        {
-            'id': 'PRD-000-000-002',
-            'name': 'A-R18-Dropbox-1',
-            'icon': '/media/VA-000-001/PRD-000-000-002/media/PRD-000-000-002-logo.png',
-            'status': 'published',
-        },
-        {
-            'id': 'PRD-000-000-003',
-            'name': 'Product CB A1',
-            'icon': '/media/VA-000-001/PRD-000-000-003/media/PRD-000-000-003-logo.png',
-            'status': 'published',
-        },
-    ]
-
+def test_list_products(
+    products,
+    test_client_factory,
+    client_mocker_factory,
+):
     client_mocker = client_mocker_factory()
 
     client_mocker.products.filter(
@@ -195,37 +179,93 @@ def test_list_products(test_client_factory, client_mocker_factory):
     assert data == products
 
 
-@patch.object(GooglePubsubClient, 'validate', return_value=True)
-@patch.object(GooglePubsubClient, 'publish', return_value=True)
-@patch.object(GooglePubsubClient, '__init__', return_value=None)
-def test_publish_product_info(
-    mock_client_init,
-    mock_publish,
-    mock_validate,
-    test_client_factory,
+def test_publish_product_info_success(
     client_mocker_factory,
+    test_client_factory,
     product,
-    parameters,
     installation,
+    context,
 ):
-
     client_mocker = client_mocker_factory()
 
-    client_mocker.products.filter(
-        id__in=[product['id']],
-    ).all().mock(
-        return_value=[product],
-    )
-    client_mocker.products[product['id']].parameters.all().mock(
-        return_value=parameters,
-    )
+    client_mocker('devops').services[context['extension_id']].environments[
+        context['environment_id']].schedules.create(return_value={})
 
     client = test_client_factory(DatalakeExtensionWebApplication)
 
     response = client.post(
-        '/api/products/publish',
+        '/api/products/*/publish',
         json=[product],
         installation=installation,
+        context=context,
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 202
+
+
+def test_publish_product_info_failed(
+    client_mocker_factory,
+    test_client_factory,
+    product,
+    installation,
+    context,
+):
+    client_mocker = client_mocker_factory()
+
+    client_mocker('devops').services[context['extension_id']].environments[
+        context['environment_id']].schedules.create(status_code=400)
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.post(
+        '/api/products/*/publish',
+        json=[product],
+        installation=installation,
+        context=context,
+    )
+
+    assert response.status_code == 400
+
+
+def test_publish_all_product_info_success(
+    client_mocker_factory,
+    test_client_factory,
+    installation,
+    context,
+):
+    client_mocker = client_mocker_factory()
+
+    client_mocker('devops').services[context['extension_id']].environments[
+        context['environment_id']].schedules.create(return_value={})
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.post(
+        '/api/products/*/publish-all',
+        installation=installation,
+        context=context,
+    )
+
+    assert response.status_code == 202
+
+
+def test_publish_all_product_info_failed(
+    client_mocker_factory,
+    test_client_factory,
+    installation,
+    context,
+):
+    client_mocker = client_mocker_factory()
+
+    client_mocker('devops').services[context['extension_id']].environments[
+        context['environment_id']].schedules.create(status_code=400)
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.post(
+        '/api/products/*/publish-all',
+        installation=installation,
+        context=context,
+    )
+
+    assert response.status_code == 400

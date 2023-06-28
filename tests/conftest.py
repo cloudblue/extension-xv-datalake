@@ -3,6 +3,8 @@
 # Copyright (c) 2023, Ingram Micro - Rahul Mondal
 # All rights reserved.
 #
+from datetime import datetime
+
 import pytest
 from connect.client import AsyncConnectClient, ConnectClient
 
@@ -159,6 +161,30 @@ def parameters():
 
 
 @pytest.fixture
+def products():
+    return [
+        {
+            'id': 'PRD-000-000-001',
+            'name': 'Test Cisco Product',
+            'icon': '/media/VA-000-001/PRD-000-000-001/media/PRD-000-000-001-logo.png',
+            'status': 'published',
+        },
+        {
+            'id': 'PRD-000-000-002',
+            'name': 'A-R18-Dropbox-1',
+            'icon': '/media/VA-000-001/PRD-000-000-002/media/PRD-000-000-002-logo.png',
+            'status': 'published',
+        },
+        {
+            'id': 'PRD-000-000-003',
+            'name': 'Product CB A1',
+            'icon': '/media/VA-000-001/PRD-000-000-003/media/PRD-000-000-003-logo.png',
+            'status': 'published',
+        },
+    ]
+
+
+@pytest.fixture
 def settings():
     return Settings.parse_obj(
         {
@@ -173,4 +199,35 @@ def installation(settings):
     return {
         'id': 'EIN-000',
         'settings': settings.dict(),
+    }
+
+
+@pytest.fixture
+def context(settings):
+    return {
+        'installation_id': 'EIN-000',
+        'account_id': 'PA-000-000',
+        'extension_id': 'EXT-000',
+        'environment_id': 'ENV-000',
+    }
+
+
+@pytest.fixture
+def schedule(
+    installation,
+    product,
+):
+    return {
+        'id': 'SCH-000',
+        'method': 'publish_products',
+        'name': 'Publish Products',
+        'description': 'Publish products to Xvantage Goggle PubSub Topic.',
+        'parameter': {
+            'installation': installation,
+            'products': [product],
+        },
+        'trigger': {
+            'type': 'onetime',
+            'date': datetime.utcnow().isoformat(),
+        },
     }

@@ -3,23 +3,32 @@
 # Copyright (c) 2023, Rahul Mondal
 # All rights reserved.
 #
+from logging import LoggerAdapter
 
 from connect.client import ConnectClient
+from connect.client.exceptions import ClientError
 from connect.eaas.core.decorators import (
     account_settings_page,
     router,
     web_app,
 )
 from connect.eaas.core.extension import WebApplicationBase
-from connect.eaas.core.inject.common import get_call_context
+from connect.eaas.core.inject.common import get_call_context, get_logger
 from connect.eaas.core.inject.models import Context
-from connect.eaas.core.inject.synchronous import get_installation, get_installation_client
+from connect.eaas.core.inject.synchronous import (
+    get_extension_client,
+    get_installation,
+    get_installation_client,
+)
 from fastapi import Depends
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 
 from connect_ext_datalake.client import GooglePubsubClient
-from connect_ext_datalake.schemas import Product, PublishProductResponse, Settings
-from connect_ext_datalake.services import list_products, publish_products
+from connect_ext_datalake.schemas import Product, ProductInput, Settings
+from connect_ext_datalake.services import (
+    create_task_publish_product,
+    list_products,
+)
 
 
 @web_app(router)
@@ -106,17 +115,47 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
         return list_products(client)
 
     @router.post(
-        '/products/publish',
+        '/products/*/publish',
         summary='Publish Products Info',
-        response_model=list[PublishProductResponse],
     )
     def publish_product_info(
         self,
-        products: list[Product],
+        products: list[ProductInput],
+        context: Context = Depends(get_call_context),
         installation: dict = Depends(get_installation),
         client: ConnectClient = Depends(get_installation_client),
+        logger: LoggerAdapter = Depends(get_logger),
     ):
         try:
-            return publish_products(client, products, installation)
-        except Exception as e:
+            create_task_publish_product(
+                logger,
+                client,
+                context,
+                installation,
+                products,
+            )
+            return HTMLResponse(status_code=202)
+        except ClientError as e:
+            return self.get_error_response(e)
+
+    @router.post(
+        '/products/*/publish-all',
+        summary='Publish Products Info',
+    )
+    def publish_all_product_info(
+            self,
+            context: Context = Depends(get_call_context),
+            client: ConnectClient = Depends(get_extension_client),
+            installation: dict = Depends(get_installation),
+            logger: LoggerAdapter = Depends(get_logger),
+    ):
+        try:
+            create_task_publish_product(
+                logger,
+                client,
+                context,
+                installation,
+            )
+            return HTMLResponse(status_code=202)
+        except ClientError as e:
             return self.get_error_response(e)
