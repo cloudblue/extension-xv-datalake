@@ -33,3 +33,9 @@ export const hideComponent = (id) => {
   const element = document.getElementById(id);
   element.classList.add('hidden');
 };
+
+export const setAttrOnComponent = (id, attrName, attrValue) => {
+  if (!id) return;
+  const element = document.getElementById(id);
+  element.setAttribute(attrName, attrValue);
+};
