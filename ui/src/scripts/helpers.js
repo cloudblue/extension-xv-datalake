@@ -21,7 +21,7 @@ import convert from 'color-convert';
 import {
   colorVars,
   colorsValues as predefinedColors,
-} from './constants';
+} from '~scripts/constants';
 
 
 /**

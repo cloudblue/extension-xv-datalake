@@ -41,7 +41,7 @@ module.exports = {
 
   entry: {
     // settings: path.resolve(__dirname, 'ui/src/pages/settings.js'),
-    settings: __dirname + '/ui/src/pages/settings.js',
+    settings: __dirname + '/ui/src/entrypoints/settings.js',
   },
 
   output: {
@@ -70,7 +70,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         // { from: path.resolve(__dirname, 'ui/images'), to: 'images' },
-        { from: __dirname + '/ui/images', to: 'images' },
+        { from: __dirname + '/ui/src/images', to: 'images' },
       ],
     }),
     new MiniCssExtractPlugin({
@@ -161,6 +161,23 @@ module.exports = {
   },
 
   resolve: {
+    alias: {
+      vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
+      '@': path.resolve(__dirname, 'ui/src'),
+      '~components': path.resolve(__dirname, 'ui/src/components'),
+      '~entrypoints': path.resolve(__dirname, 'ui/src/entrypoints'),
+      '~scripts': path.resolve(__dirname, 'ui/src/scripts'),
+      '~styles': path.resolve(__dirname, 'ui/src/styles'),
+      // rest: path.resolve(__dirname, 'ui/app/tools/rest'),
+      // '~api': path.resolve(__dirname, 'ui/app/api'),
+      // '~utils': path.resolve(__dirname, 'ui/src/tools/utils'),
+      // '~helpers': path.resolve(__dirname, 'ui/src/tools/helpers'),
+      // '~constants': path.resolve(__dirname, 'ui/src/tools/constants'),
+      // '~tools': path.resolve(__dirname, 'ui/app/tools'),
+      // '~mixins': path.resolve(__dirname, 'ui/app/tools/mixins'),
+      // '~views': path.resolve(__dirname, 'ui/app/views'),
+    },
+
     // extensions: ['.js', '.vue'],
 
     // fallback: {
@@ -168,26 +185,5 @@ module.exports = {
     // },
 
     // modules: [path.resolve(__dirname, 'node_modules')],
-
-    alias: {
-      // vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
-      // vue$: 'vue/dist/vue.esm-bundler.js',
-      '@': path.resolve(__dirname, 'ui/src'),
-      // '~utils': path.resolve(__dirname, 'ui/src/tools/utils'),
-      // '~helpers': path.resolve(__dirname, 'ui/src/tools/helpers'),
-      // '~constants': path.resolve(__dirname, 'ui/src/tools/constants'),
-      // '~components': path.resolve(__dirname, 'ui/src/components'),
-      // '~styles': path.resolve(__dirname, 'ui/styles'),
-      // rest: path.resolve(__dirname, 'ui/app/tools/rest'),
-      // '~tools': path.resolve(__dirname, 'ui/app/tools'),
-      // '~utils': path.resolve(__dirname, 'ui/app/tools/utils'),
-      // '~helpers': path.resolve(__dirname, 'ui/app/tools/helpers'),
-      // '~constants': path.resolve(__dirname, 'ui/app/tools/constants'),
-      // '~mixins': path.resolve(__dirname, 'ui/app/tools/mixins'),
-      // '~views': path.resolve(__dirname, 'ui/app/views'),
-      // '~components': path.resolve(__dirname, 'ui/app/components'),
-      // '~styles': path.resolve(__dirname, 'ui/app/styles'),
-      // '~api': path.resolve(__dirname, 'ui/app/api'),
-    },
   },
 };

@@ -3,20 +3,20 @@ Copyright (c) 2023, Rahul
 All rights reserved.
 */
 import {
-  combineStylesStr,
   getSettings,
-  getStyleCustomizations,
   updateSettings,
-} from './utils';
+} from '~scripts/api';
 
 import {
   addEventListener,
+  combineStylesStr,
   disableButton,
   enableButton,
+  getStyleCustomizations,
   hideComponent,
   setAttrOnComponent,
   showComponent,
-} from './components';
+} from '~scripts/utils';
 
 
 export const saveSettingsData = async (app) => {

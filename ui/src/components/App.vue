@@ -20,14 +20,17 @@
 
 
 <script>
-import SyncCard from './SyncCard.vue';
-import PubCard from './PubCard.vue';
-import ErrorCard from './ErrorCard.vue';
+import SyncCard from '~components/SyncCard.vue';
+import PubCard from '~components/PubCard.vue';
+import ErrorCard from '~components/ErrorCard.vue';
 
 import {
   getSettings,
+} from '~scripts/api';
+
+import {
   getStyleCustomizations,
-} from '../utils';
+} from '~scripts/utils';
 
 
 export default {

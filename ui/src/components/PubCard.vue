@@ -48,7 +48,7 @@
 <script>
 import {
   updateSettings,
-} from '../utils.js';
+} from '~scripts/api';
 
 import {
   googleUploadBaseline,
@@ -56,7 +56,7 @@ import {
 
 import {
   isValidJSON,
-} from '../helpers';
+} from '~scripts/helpers';
 
 // import hljs from 'highlight.js/lib/core';
 // import jsonLang from 'highlight.js/lib/languages/json'; // Replace with the desired language

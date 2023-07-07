@@ -15,9 +15,9 @@ import {
 import 'normalize.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto-mono/400.css';
-import '../../styles/index.css';
+import '~styles/settings.css';
 
-import App from './App.vue';
+import App from '~components/App.vue';
 
 
 createApp({
