@@ -66,28 +66,6 @@ export const settings = async (app) => {
 
     enableButton('save');
     addEventListener('save', 'click', saveSettingsData.bind(null, app));
-
-    // // NOTE: confirm logic
-
-    // const confirm = document.getElementById('confirm');
-
-    // const onConfirmClick = () => {
-    //   app.emit('confirm', {
-    //     title: 'Please confirm me!',
-    //     text: 'Don\'t read it — just say OK',
-    //   });
-    // };
-
-    // confirm.addEventListener('click', onConfirmClick);
-    // confirm.addEventListener('keydown', onConfirmClick);
-
-    // const result = document.getElementById('result');
-    // app.watch('confirmationToken', (val) => {
-    //   if (val) {
-    //     result.textContent = `${result.textContent}: ${val}`;
-    //     result.style.display = 'block';
-    //   }
-    // });
   } catch (error) {
     app.emit('snackbar:error', error);
     showComponent('error');

@@ -1,30 +1,45 @@
 <template>
 <section id="publishing-card" class="ez-card" title="Publishing">
     <header class="ez-card__header">
-        <h2 class="ez-card__title">Settings</h2>
-        <div class="ez-card__controls">
-            <button id="edit" class="button" type="button">Edit</button>
-            <button id="validate" class="button" type="button" disabled>Validate</button>
-        </div>
+      <h2 class="ez-card__title">Settings</h2>
+      <div class="ez-card__controls">
+        <button id="edit" class="btn" type="button" @click="isDialogOpen = true">Edit</button>
+        <button id="validate" class="btn" type="button" disabled>Validate</button>
+      </div>
     </header>
-    <form>
-        <div class="group">
-            <h4>Google Credentials JSON</h4>
-            <textarea type="text" id="account_info" @input="onCredsUpdate" materialize>
-                {{ accountInfo }}
-            </textarea>
-            <!-- <input type="text" id="account_info" /> -->
-            <!-- <p id="account-info">—</p> -->
-        </div>
-        <div class="group">
-            <h4>Pub/Sub Topic</h4>
-            <input type="text" :value="productTopic" @input="onTopicUpdate" id="product_topic" />
-            <!-- <p id="product-topic">—</p> -->
-        </div>
-    </form>
 
-    <div class="button-container">
-        <button id="save" class="button" disabled="!canSaveCreds">{{ saveBtnText }}</button>
+    <div class="group-set">
+      <h4 class="label-text">Google Credentials JSON</h4>
+      <p class="monospace-text">{{ validAccountInfo ? '*********' : '—' }}</p>
+    </div>
+
+    <div class="group-set">
+      <h4 class="label-text">Pub/Sub Topic</h4>
+      <p class="monospace-text">{{ productTopic || '—' }}</p>
+    </div>
+
+    <div class="ez-dialog" :class="{'ez-dialog_open': isDialogOpen}">
+      <section class="ez-dialog__inner">
+        <header class="ez-dialog__header">Settings</header>
+        <div class="ez-dialog__content">
+          <div class="custom-file-input ez-dialog__controls">
+            <label for="file-input" class="custom-file-input__label">{{ loadedFileName || 'Load from file' }}</label>
+            <input type="file" id="file-input" class="custom-file-input__input" @change="onFileChange"/>
+          </div>
+
+          <form action="" class="ez-dialog__form">
+            <label for="account_info" class="label-text">Google Credentials JSON</label>
+            <textarea :value="accountInfo" class="code account-info-area" id="account_info" @input="onAccountInfoUpdate" materialize ref="textarea-account-info"></textarea>
+
+            <label for="product_topic" class="label-text">Pub/Sub Topic</label>
+            <textarea :value="productTopic" class="code topic-area" id="product_topic" @input="onTopicUpdate" materialize></textarea>
+          </form>
+        </div>
+        <footer class="ez-dialog__footer">
+          <button type="button" class="btn btn_large" @click="isDialogOpen = false">Cancel</button>
+          <button @click="saveConfig" class="btn btn_large" :disabled="!canSaveCreds">{{ saveBtnText }}</button>
+        </footer>
+      </section>
     </div>
 </section>
 </template>
@@ -32,28 +47,46 @@
 
 <script>
 import {
-  isEmpty,
-  not,
-} from 'ramda';
+  updateSettings,
+} from '../utils.js';
 
+import {
+  googleUploadBaseline,
+} from '@cloudblueconnect/material-svg/baseline';
+
+import {
+  isValidJSON,
+} from '../helpers';
+
+// import hljs from 'highlight.js/lib/core';
+// import jsonLang from 'highlight.js/lib/languages/json'; // Replace with the desired language
+// import 'highlight.js/styles/default.css'; // Replace with the desired stylesheet
+
+// hljs.registerLanguage('json', jsonLang);
+
+const simplestJSONLength = 9;
 
 
 export default {
-
   inject: ['$injector'],
 
   props: {
-    accountInfo: Object,
+    accountInfo: String,
     productTopic: String,
   },
   data() {
     return {
       saveBtnText: 'Save',
+      isDialogOpen: false,
+      loadedFileName: '',
     };
   },
+
   computed: {
-    canSaveCreds: vm => not(isEmpty(vm.accountInfo)) && vm.productTopic,
+    validAccountInfo: vm => isValidJSON(vm.accountInfo) && vm.accountInfo.length >= simplestJSONLength,
+    canSaveCreds: vm => vm.validAccountInfo && !!vm.productTopic,
   },
+
   methods: {
     sendMsg(msg) {
       this.$injector.emit('snackbar:message', msg);
@@ -61,111 +94,61 @@ export default {
     handleErr(err) {
       this.$injector.emit('snackbar:error', err);
     },
-    async onSave() {
-      // export const saveSettingsData = async (app) => {
-      //   if (!app) return;
-      //   disableButton('save', 'Saving...');
-      //   try {
-      //     // eslint-disable-next-line camelcase
-      //     const account_info = JSON.parse(document.getElementById('account_info').value);
-      //     // eslint-disable-next-line camelcase
-      //     const product_topic = document.getElementById('product_topic').value;
-      //     // eslint-disable-next-line camelcase
-      //     await updateSettings({ account_info, product_topic });
 
-      //     app.emit({ name: 'snackbar:message', value: 'Settings saved' });
-      //   } catch (error) {
-      //     app.emit({ name: 'snackbar:error', value: error });
-      //   }
-      //   enableButton('save');
-      // };
-
+    async saveConfig() {
       this.saveBtnText = 'Saving...';
 
       try {
         // eslint-disable-next-line camelcase
-        const account_info = JSON.parse(this.credsJSON);
+        const account_info = JSON.parse(this.accountInfo);
         // eslint-disable-next-line camelcase
         const product_topic = this.productTopic;
 
         await updateSettings({ account_info, product_topic });
 
+        console.log('Success:');
+
         this.sendMsg('Settings saved');
       } catch (err) {
+
+        console.log('Got error:', err);
+
         this.handleErr(err);
       }
 
       this.saveBtnText = 'Save';
     },
-    onCredsUpdate(e) {
-      this.$emit('account-info-update', e.value);
+
+    onAccountInfoUpdate(e) {
+      this.$emit('account-info-update', e.target.value);
     },
     onTopicUpdate(e) {
-      this.$emit('product-topic-update', e.value);
+      this.$emit('product-topic-update', e.target.value);
     },
+
+    onFileChange(evt) {
+      const file = evt.target.files[0];
+      this.loadedFileName = file.name.slice(0, 20) + '...' + file.name.slice(-20, file.name.length);
+
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const fileContent = evt.target.result;
+        this.onAccountInfoUpdate({ target: { value: fileContent }});
+      };
+      reader.readAsText(file);
+    }
   },
 };
 </script>
 
 
 <style scoped>
-form {
-    margin: 45px auto;
-    min-width: 600px;
-}
-
-.group {
-    position: relative;
-    margin: 45px 0;
-}
-
-
-input {
-    background: none;
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid #757575;
-    width: 610px;
-}
-
-input:focus {
-    outline: none;
-    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
-}
-
-input:focus~label {
-    top: -14px;
-    font-size: 12px;
-    color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
-}
-
-input[type="password"] {
-    letter-spacing: 0.3em;
-}
-
-label {
-    top: -14px;
-    font-size: 12px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    transition: 300ms ease all;
-    color: #757575;
-}
-
-.bar {
-    position: relative;
-    display: block;
-}
-
 textarea[materialize] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+
+  box-sizing: border-box;
 
   width: 100%;
   padding: 12px;
@@ -184,61 +167,160 @@ textarea[materialize] {
 textarea[materialize]:focus-visible {
   outline-width: 0;
   border-color: var(--accent);
+  border-color: var(--dark-grey);
 }
 
 textarea[materialize]:disabled {
   border-style: dashed;
 }
 
+textarea[materialize].code,
+.code {
+  color: var(--base-text-color);
+  font-family: var(--monospace-font-family);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
 
-/*--------*/
-/* EZ-CARD */
-/*--------*/
-
-.ez-card { /* section */
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  padding: 18px 24px 24px 24px;
-  display: block;
-  text-decoration: inherit;
-  color: inherit;
-
-  margin: 0 auto;
-  max-width: 680px;
+  background: var(--controls-field-bg, #FBFBFB);
+  border: 1px solid var(--controls-field-outline, #D8D8D8);
+  border-radius: 2px;
 }
 
-.ez-card--error {
-  color: var(--nice-red);
+
+textarea[materialize].code:not(:last-child) {
+  margin-bottom: 24px;
 }
 
-.ez-card + .ez-card {
-  margin-top: 24px;
+.account-info-area {
+  min-height: 372px;
 }
 
-.ez-card__header{
+.topic-area {
+  min-height: 84px;
+}
+
+
+/*-----------*/
+/* EZ-DIALOG */
+/*-----------*/
+
+.ez-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+
+  background-color: rgba(255, 255, 255, 1);
+  z-index: 9999;
+  transition: opacity 0.3s ease-in;
+}
+
+.ez-dialog_open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ez-dialog__inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 580px;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid var(--light-grey, #E0E0E0);
+  background-color: white;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease-in;
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ez-dialog_open > .ez-dialog__inner {
+  opacity: 1;
+}
+
+.ez-dialog__header {
+  color: var(--base-text-color, #212121);
+  font-family: var(--theme-font-family);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  text-transform: capitalize;
+
+  padding: 24px 24px 20px 24px;
+  background-color: var(--white-smoke, #F5F5F5);
+}
+
+.ez-dialog__content {
+  position: relative;
+  padding: 24px;
+}
+
+.ez-dialog__form {
+  display: flex;
+  flex-flow: column nowrap;
+
+  width: auto;
+  margin: 0;
+}
+
+.ez-dialog__footer {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-start;
-  margin-bottom: 26px;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 8px 16px;
 }
 
-.ez-card__title {
-  flex-grow: 1;
-
-  line-height: 25px;
-  font-size: 20px;
-  margin: 0;
-}
-
-.ez-card__controls {
+.ez-dialog__controls {
+  position: absolute;
+  top: 20px;
+  right: 24px;
 }
 
 
-.ez-card__subtitle {
-  font-size: 14px;
+/*********************/
+/* custom-file-input */
+/*********************/
+
+.custom-file-input {
+
+}
+
+.custom-file-input__label {
+  box-sizing: border-box;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
   line-height: 20px;
-  color: #707070;
-  margin: 0;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+
+  color: var(--base-text-color, #212121);
+
+  display: flex;
+  height: 28px;
+  padding: 4px 10px 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  cursor: pointer;
+}
+
+.custom-file-input__input {
+  display: none;
 }
 </style>

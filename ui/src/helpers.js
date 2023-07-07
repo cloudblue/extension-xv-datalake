@@ -121,3 +121,20 @@ export const isBright = pipe(
   convert.hex.rgb,
   ([r, g, b]) => r * 0.299 + g * 0.587 + b * 0.114 > 180,
 );
+
+/**
+ * Check that json-like string is a valid JSON
+ *
+ * @function
+ * @param {string}
+ * @returns {boolean} is string a JSON or not
+ */
+export const isValidJSON = (jsonString) => {
+  try {
+    JSON.parse(jsonString);
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

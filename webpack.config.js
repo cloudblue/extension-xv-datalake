@@ -9,7 +9,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
-// const CircularDependencyPlugin = require('circular-dependency-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 
 const generateHtmlPlugin = (title) => {
@@ -40,7 +40,7 @@ module.exports = {
   mode: 'production',
 
   entry: {
-    // settings: path.resolve(__dirname, '/ui/src/pages/settings.js'),
+    // settings: path.resolve(__dirname, 'ui/src/pages/settings.js'),
     settings: __dirname + '/ui/src/pages/settings.js',
   },
 
@@ -69,7 +69,7 @@ module.exports = {
     ...pages,
     new CopyWebpackPlugin({
       patterns: [
-        // { from: path.resolve(__dirname, '/ui/images'), to: 'images' },
+        // { from: path.resolve(__dirname, 'ui/images'), to: 'images' },
         { from: __dirname + '/ui/images', to: 'images' },
       ],
     }),
@@ -80,25 +80,19 @@ module.exports = {
     new ESLintPlugin(),
     new VueLoaderPlugin(),
 
-    // new CircularDependencyPlugin({
-    //   exclude: /node_modules/,
-    //   include: /(.*\.vue)|(.*\.js)/,
-    //   failOnError: true,
-    //   allowAsyncCycles: false,
-    //   cwd: process.cwd(),
-    // }),
+    new CircularDependencyPlugin({
+      exclude: /node_modules/,
+      include: /(.*\.vue)|(.*\.js)/,
+      failOnError: true,
+      allowAsyncCycles: false,
+      cwd: process.cwd(),
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // use: {
-        //   loader: 'vue-loader',
-        //   options: {
-        //     customElement: true,
-        //   },
-        // },
       },
       {
         test: /\.js$/,
@@ -135,14 +129,9 @@ module.exports = {
         test: /\.html$/i,
         exclude: /settings.html/,
         use: [
-          // 'vue-loader',
           'html-loader',
         ],
       },
-      // {
-      //   test: /\.html$/i,
-      //   loader: 'html-loader',
-      // },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         exclude: /node_modules/,
@@ -171,37 +160,34 @@ module.exports = {
     ],
   },
 
-  // resolve: {
-  //   // extensions: ['.js', '.vue'],
-  //   alias: {
-  //     // vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
-  //     // vue$: 'vue/dist/vue.esm-bundler.js',
-  //     '@': path.resolve(__dirname, 'ui/src'),
-  //     '~utils': path.resolve(__dirname, 'ui/src/tools/utils'),
-  //     '~helpers': path.resolve(__dirname, 'ui/src/tools/helpers'),
-  //     '~constants': path.resolve(__dirname, 'ui/src/tools/constants'),
-  //     '~components': path.resolve(__dirname, 'ui/src/components'),
-  //     '~styles': path.resolve(__dirname, 'ui/styles'),
-  //   },
+  resolve: {
+    // extensions: ['.js', '.vue'],
 
-  //   // fallback: {
-  //   //   buffer: require.resolve('buffer'),
-  //   // },
+    // fallback: {
+    //   buffer: require.resolve('buffer'),
+    // },
 
-  //   // // modules: [path.resolve(__dirname, 'node_modules')],
+    // modules: [path.resolve(__dirname, 'node_modules')],
 
-  //   // alias: {
-  //   //   '@': path.resolve(__dirname, './'),
-  //   //   //   // rest: path.resolve(__dirname, 'ui/app/tools/rest'),
-  //   //   //   // '~tools': path.resolve(__dirname, 'ui/app/tools'),
-  //   //   //   // '~utils': path.resolve(__dirname, 'ui/app/tools/utils'),
-  //   //   //   // '~helpers': path.resolve(__dirname, 'ui/app/tools/helpers'),
-  //   //   //   // '~constants': path.resolve(__dirname, 'ui/app/tools/constants'),
-  //   //   //   // '~mixins': path.resolve(__dirname, 'ui/app/tools/mixins'),
-  //   //   //   // '~views': path.resolve(__dirname, 'ui/app/views'),
-  //   //   //   // '~components': path.resolve(__dirname, 'ui/app/components'),
-  //   //   //   // '~styles': path.resolve(__dirname, 'ui/app/styles'),
-  //   //   //   // '~api': path.resolve(__dirname, 'ui/app/api'),
-  //   // },
-  // },
+    alias: {
+      // vue$: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
+      // vue$: 'vue/dist/vue.esm-bundler.js',
+      '@': path.resolve(__dirname, 'ui/src'),
+      // '~utils': path.resolve(__dirname, 'ui/src/tools/utils'),
+      // '~helpers': path.resolve(__dirname, 'ui/src/tools/helpers'),
+      // '~constants': path.resolve(__dirname, 'ui/src/tools/constants'),
+      // '~components': path.resolve(__dirname, 'ui/src/components'),
+      // '~styles': path.resolve(__dirname, 'ui/styles'),
+      // rest: path.resolve(__dirname, 'ui/app/tools/rest'),
+      // '~tools': path.resolve(__dirname, 'ui/app/tools'),
+      // '~utils': path.resolve(__dirname, 'ui/app/tools/utils'),
+      // '~helpers': path.resolve(__dirname, 'ui/app/tools/helpers'),
+      // '~constants': path.resolve(__dirname, 'ui/app/tools/constants'),
+      // '~mixins': path.resolve(__dirname, 'ui/app/tools/mixins'),
+      // '~views': path.resolve(__dirname, 'ui/app/views'),
+      // '~components': path.resolve(__dirname, 'ui/app/components'),
+      // '~styles': path.resolve(__dirname, 'ui/app/styles'),
+      // '~api': path.resolve(__dirname, 'ui/app/api'),
+    },
+  },
 };

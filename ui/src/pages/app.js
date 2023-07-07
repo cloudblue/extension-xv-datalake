@@ -40,9 +40,6 @@ export default {
     },
 
     async fetchSettings() {
-      // eslint-disable-next-line
-      console.log('fetchSettings:');
-
       // eslint-disable-next-line camelcase
       const { account_info, product_topic, error } = await getSettings();
 

@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 493:
+/***/ 227:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 
@@ -14,10 +14,10 @@ var runtime_dom_esm_bundler = __webpack_require__(963);
 var runtime_core_esm_bundler = __webpack_require__(252);
 // EXTERNAL MODULE: ./node_modules/@vue/shared/dist/shared.esm-bundler.js
 var shared_esm_bundler = __webpack_require__(577);
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/App.vue?vue&type=template&id=7ed3de4f&scoped=true
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/App.vue?vue&type=template&id=6c422db8&scoped=true
 
 var _withScopeId = function _withScopeId(n) {
-  return _pushScopeId("data-v-7ed3de4f"), n = n(), _popScopeId(), n;
+  return _pushScopeId("data-v-6c422db8"), n = n(), _popScopeId(), n;
 };
 var _hoisted_1 = {
   key: 1
@@ -37,25 +37,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   })) : ((0,runtime_core_esm_bundler/* openBlock */.wg)(), (0,runtime_core_esm_bundler/* createElementBlock */.iD)("div", _hoisted_1, [(0,runtime_core_esm_bundler/* createVNode */.Wm)(_component_sync_card), (0,runtime_core_esm_bundler/* createVNode */.Wm)(_component_pub_card, {
     "account-info": $data.accountInfo,
-    "product-topic": _ctx.productTopic,
+    "product-topic": $data.productTopic,
     onAccountInfoUpdate: _cache[1] || (_cache[1] = function (evt) {
       return $data.accountInfo = evt;
     }),
-    onProductTopicUpdate: _cache[2] || (_cache[2] = function (avt) {
-      return _ctx.productTopic = _ctx.evt;
+    onProductTopicUpdate: _cache[2] || (_cache[2] = function (evt) {
+      return $data.productTopic = evt;
     })
   }, null, 8 /* PROPS */, ["account-info", "product-topic"]), $data.showError ? ((0,runtime_core_esm_bundler/* openBlock */.wg)(), (0,runtime_core_esm_bundler/* createBlock */.j4)(_component_error_card, {
     key: 0
   })) : (0,runtime_core_esm_bundler/* createCommentVNode */.kq)("v-if", true)]))], 4 /* STYLE */);
 }
-;// CONCATENATED MODULE: ./ui/src/pages/App.vue?vue&type=template&id=7ed3de4f&scoped=true
+;// CONCATENATED MODULE: ./ui/src/pages/App.vue?vue&type=template&id=6c422db8&scoped=true
 
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/SyncCard.vue?vue&type=template&id=379057e2&scoped=true
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/SyncCard.vue?vue&type=template&id=9d3f21ce
 
-var SyncCardvue_type_template_id_379057e2_scoped_true_withScopeId = function _withScopeId(n) {
-  return (0,runtime_core_esm_bundler/* pushScopeId */.dD)("data-v-379057e2"), n = n(), (0,runtime_core_esm_bundler/* popScopeId */.Cn)(), n;
-};
-var SyncCardvue_type_template_id_379057e2_scoped_true_hoisted_1 = {
+var SyncCardvue_type_template_id_9d3f21ce_hoisted_1 = {
   id: "synchronisation-card",
   "class": "ez-card",
   title: "Synchronisation"
@@ -66,24 +63,22 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "ez-card__title"
 };
-var _hoisted_4 = {
+var _hoisted_4 = /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("div", {
   "class": "ez-card__controls"
-};
-var _hoisted_5 = /*#__PURE__*/SyncCardvue_type_template_id_379057e2_scoped_true_withScopeId(function () {
-  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("button", {
-    id: "sync",
-    "class": "button",
-    type: "button",
-    disabled: ""
-  }, "Sync products", -1 /* HOISTED */);
-});
+}, [/*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("button", {
+  id: "sync",
+  "class": "btn btn_default",
+  type: "button",
+  disabled: ""
+}, "Sync products")], -1 /* HOISTED */);
 
-function SyncCardvue_type_template_id_379057e2_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,runtime_core_esm_bundler/* openBlock */.wg)(), (0,runtime_core_esm_bundler/* createElementBlock */.iD)("section", SyncCardvue_type_template_id_379057e2_scoped_true_hoisted_1, [(0,runtime_core_esm_bundler/* createElementVNode */._)("header", _hoisted_2, [(0,runtime_core_esm_bundler/* createElementVNode */._)("h2", _hoisted_3, (0,shared_esm_bundler/* toDisplayString */.zw)($props.title || 'Synchronisation'), 1 /* TEXT */), (0,runtime_core_esm_bundler/* createElementVNode */._)("div", _hoisted_4, [_hoisted_5, (0,runtime_core_esm_bundler/* createElementVNode */._)("span", null, (0,shared_esm_bundler/* toDisplayString */.zw)($data.hello), 1 /* TEXT */)])])]);
+function SyncCardvue_type_template_id_9d3f21ce_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,runtime_core_esm_bundler/* openBlock */.wg)(), (0,runtime_core_esm_bundler/* createElementBlock */.iD)("section", SyncCardvue_type_template_id_9d3f21ce_hoisted_1, [(0,runtime_core_esm_bundler/* createElementVNode */._)("header", _hoisted_2, [(0,runtime_core_esm_bundler/* createElementVNode */._)("h2", _hoisted_3, (0,shared_esm_bundler/* toDisplayString */.zw)($props.title || 'Synchronisation'), 1 /* TEXT */), _hoisted_4])]);
 }
-;// CONCATENATED MODULE: ./ui/src/pages/SyncCard.vue?vue&type=template&id=379057e2&scoped=true
+;// CONCATENATED MODULE: ./ui/src/pages/SyncCard.vue?vue&type=template&id=9d3f21ce
 
 ;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/SyncCard.vue?vue&type=script&lang=js
+
 /* harmony default export */ const SyncCardvue_type_script_lang_js = ({
   props: {
     title: String
@@ -104,219 +99,154 @@ var exportHelper = __webpack_require__(744);
 
 
 ;
-
-
-const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(SyncCardvue_type_script_lang_js, [['render',SyncCardvue_type_template_id_379057e2_scoped_true_render],['__scopeId',"data-v-379057e2"]])
+const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(SyncCardvue_type_script_lang_js, [['render',SyncCardvue_type_template_id_9d3f21ce_render]])
 
 /* harmony default export */ const SyncCard = (__exports__);
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/PubCard.vue?vue&type=template&id=7053460b&scoped=true
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/PubCard.vue?vue&type=template&id=666f37fe&scoped=true
 
-var PubCardvue_type_template_id_7053460b_scoped_true_withScopeId = function _withScopeId(n) {
-  return (0,runtime_core_esm_bundler/* pushScopeId */.dD)("data-v-7053460b"), n = n(), (0,runtime_core_esm_bundler/* popScopeId */.Cn)(), n;
+var PubCardvue_type_template_id_666f37fe_scoped_true_withScopeId = function _withScopeId(n) {
+  return (0,runtime_core_esm_bundler/* pushScopeId */.dD)("data-v-666f37fe"), n = n(), (0,runtime_core_esm_bundler/* popScopeId */.Cn)(), n;
 };
-var PubCardvue_type_template_id_7053460b_scoped_true_hoisted_1 = {
+var PubCardvue_type_template_id_666f37fe_scoped_true_hoisted_1 = {
   id: "publishing-card",
   "class": "ez-card",
   title: "Publishing"
 };
-var PubCardvue_type_template_id_7053460b_scoped_true_hoisted_2 = /*#__PURE__*/(0,runtime_core_esm_bundler/* createStaticVNode */.uE)("<header class=\"ez-card__header\" data-v-7053460b><h2 class=\"ez-card__title\" data-v-7053460b>Settings</h2><div class=\"ez-card__controls\" data-v-7053460b><button id=\"edit\" class=\"button\" type=\"button\" data-v-7053460b>Edit</button><button id=\"validate\" class=\"button\" type=\"button\" disabled data-v-7053460b>Validate</button></div></header>", 1);
-var PubCardvue_type_template_id_7053460b_scoped_true_hoisted_3 = {
-  "class": "group"
+var PubCardvue_type_template_id_666f37fe_scoped_true_hoisted_2 = {
+  "class": "ez-card__header"
 };
-var PubCardvue_type_template_id_7053460b_scoped_true_hoisted_4 = /*#__PURE__*/PubCardvue_type_template_id_7053460b_scoped_true_withScopeId(function () {
-  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("h4", null, "Google Credentials JSON", -1 /* HOISTED */);
+var PubCardvue_type_template_id_666f37fe_scoped_true_hoisted_3 = /*#__PURE__*/PubCardvue_type_template_id_666f37fe_scoped_true_withScopeId(function () {
+  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("h2", {
+    "class": "ez-card__title"
+  }, "Settings", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_7053460b_scoped_true_hoisted_5 = {
-  "class": "group"
+var PubCardvue_type_template_id_666f37fe_scoped_true_hoisted_4 = {
+  "class": "ez-card__controls"
 };
-var _hoisted_6 = /*#__PURE__*/PubCardvue_type_template_id_7053460b_scoped_true_withScopeId(function () {
-  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("h4", null, "Pub/Sub Topic", -1 /* HOISTED */);
+var _hoisted_5 = /*#__PURE__*/PubCardvue_type_template_id_666f37fe_scoped_true_withScopeId(function () {
+  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("button", {
+    id: "validate",
+    "class": "btn",
+    type: "button",
+    disabled: ""
+  }, "Validate", -1 /* HOISTED */);
 });
-var _hoisted_7 = ["value"];
+var _hoisted_6 = {
+  "class": "group-set"
+};
+var _hoisted_7 = /*#__PURE__*/PubCardvue_type_template_id_666f37fe_scoped_true_withScopeId(function () {
+  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("h4", {
+    "class": "label-text"
+  }, "Google Credentials JSON", -1 /* HOISTED */);
+});
 var _hoisted_8 = {
-  "class": "button-container"
+  "class": "monospace-text"
 };
 var _hoisted_9 = {
-  id: "save",
-  "class": "button",
-  disabled: "!canSaveCreds"
+  "class": "group-set"
 };
-function PubCardvue_type_template_id_7053460b_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,runtime_core_esm_bundler/* openBlock */.wg)(), (0,runtime_core_esm_bundler/* createElementBlock */.iD)("section", PubCardvue_type_template_id_7053460b_scoped_true_hoisted_1, [PubCardvue_type_template_id_7053460b_scoped_true_hoisted_2, (0,runtime_core_esm_bundler/* createElementVNode */._)("form", null, [(0,runtime_core_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_7053460b_scoped_true_hoisted_3, [PubCardvue_type_template_id_7053460b_scoped_true_hoisted_4, (0,runtime_core_esm_bundler/* createElementVNode */._)("textarea", {
-    type: "text",
+var _hoisted_10 = /*#__PURE__*/PubCardvue_type_template_id_666f37fe_scoped_true_withScopeId(function () {
+  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("h4", {
+    "class": "label-text"
+  }, "Pub/Sub Topic", -1 /* HOISTED */);
+});
+var _hoisted_11 = {
+  "class": "monospace-text"
+};
+var _hoisted_12 = {
+  "class": "ez-dialog__inner"
+};
+var _hoisted_13 = /*#__PURE__*/PubCardvue_type_template_id_666f37fe_scoped_true_withScopeId(function () {
+  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("header", {
+    "class": "ez-dialog__header"
+  }, "Settings", -1 /* HOISTED */);
+});
+var _hoisted_14 = {
+  "class": "ez-dialog__content"
+};
+var _hoisted_15 = {
+  "class": "custom-file-input ez-dialog__controls"
+};
+var _hoisted_16 = {
+  "for": "file-input",
+  "class": "custom-file-input__label"
+};
+var _hoisted_17 = {
+  action: "",
+  "class": "ez-dialog__form"
+};
+var _hoisted_18 = /*#__PURE__*/PubCardvue_type_template_id_666f37fe_scoped_true_withScopeId(function () {
+  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("label", {
+    "for": "account_info",
+    "class": "label-text"
+  }, "Google Credentials JSON", -1 /* HOISTED */);
+});
+var _hoisted_19 = ["value"];
+var _hoisted_20 = /*#__PURE__*/PubCardvue_type_template_id_666f37fe_scoped_true_withScopeId(function () {
+  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("label", {
+    "for": "product_topic",
+    "class": "label-text"
+  }, "Pub/Sub Topic", -1 /* HOISTED */);
+});
+var _hoisted_21 = ["value"];
+var _hoisted_22 = {
+  "class": "ez-dialog__footer"
+};
+var _hoisted_23 = ["disabled"];
+function PubCardvue_type_template_id_666f37fe_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,runtime_core_esm_bundler/* openBlock */.wg)(), (0,runtime_core_esm_bundler/* createElementBlock */.iD)("section", PubCardvue_type_template_id_666f37fe_scoped_true_hoisted_1, [(0,runtime_core_esm_bundler/* createElementVNode */._)("header", PubCardvue_type_template_id_666f37fe_scoped_true_hoisted_2, [PubCardvue_type_template_id_666f37fe_scoped_true_hoisted_3, (0,runtime_core_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_666f37fe_scoped_true_hoisted_4, [(0,runtime_core_esm_bundler/* createElementVNode */._)("button", {
+    id: "edit",
+    "class": "btn",
+    type: "button",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $data.isDialogOpen = true;
+    })
+  }, "Edit"), _hoisted_5])]), (0,runtime_core_esm_bundler/* createElementVNode */._)("div", _hoisted_6, [_hoisted_7, (0,runtime_core_esm_bundler/* createElementVNode */._)("p", _hoisted_8, (0,shared_esm_bundler/* toDisplayString */.zw)($options.validAccountInfo ? '*********' : '—'), 1 /* TEXT */)]), (0,runtime_core_esm_bundler/* createElementVNode */._)("div", _hoisted_9, [_hoisted_10, (0,runtime_core_esm_bundler/* createElementVNode */._)("p", _hoisted_11, (0,shared_esm_bundler/* toDisplayString */.zw)($props.productTopic || '—'), 1 /* TEXT */)]), (0,runtime_core_esm_bundler/* createElementVNode */._)("div", {
+    "class": (0,shared_esm_bundler/* normalizeClass */.C_)(["ez-dialog", {
+      'ez-dialog_open': $data.isDialogOpen
+    }])
+  }, [(0,runtime_core_esm_bundler/* createElementVNode */._)("section", _hoisted_12, [_hoisted_13, (0,runtime_core_esm_bundler/* createElementVNode */._)("div", _hoisted_14, [(0,runtime_core_esm_bundler/* createElementVNode */._)("div", _hoisted_15, [(0,runtime_core_esm_bundler/* createElementVNode */._)("label", _hoisted_16, (0,shared_esm_bundler/* toDisplayString */.zw)($data.loadedFileName || 'Load from file'), 1 /* TEXT */), (0,runtime_core_esm_bundler/* createElementVNode */._)("input", {
+    type: "file",
+    id: "file-input",
+    "class": "custom-file-input__input",
+    onChange: _cache[1] || (_cache[1] = function () {
+      return $options.onFileChange && $options.onFileChange.apply($options, arguments);
+    })
+  }, null, 32 /* HYDRATE_EVENTS */)]), (0,runtime_core_esm_bundler/* createElementVNode */._)("form", _hoisted_17, [_hoisted_18, (0,runtime_core_esm_bundler/* createElementVNode */._)("textarea", {
+    value: $props.accountInfo,
+    "class": "code account-info-area",
     id: "account_info",
-    onInput: _cache[0] || (_cache[0] = function () {
-      return $options.onCredsUpdate && $options.onCredsUpdate.apply($options, arguments);
+    onInput: _cache[2] || (_cache[2] = function () {
+      return $options.onAccountInfoUpdate && $options.onAccountInfoUpdate.apply($options, arguments);
     }),
-    materialize: ""
-  }, "\n                " + (0,shared_esm_bundler/* toDisplayString */.zw)($props.accountInfo) + "\n            ", 33 /* TEXT, HYDRATE_EVENTS */), (0,runtime_core_esm_bundler/* createCommentVNode */.kq)(" <input type=\"text\" id=\"account_info\" /> "), (0,runtime_core_esm_bundler/* createCommentVNode */.kq)(" <p id=\"account-info\">—</p> ")]), (0,runtime_core_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_7053460b_scoped_true_hoisted_5, [_hoisted_6, (0,runtime_core_esm_bundler/* createElementVNode */._)("input", {
-    type: "text",
+    materialize: "",
+    ref: "textarea-account-info"
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_19), _hoisted_20, (0,runtime_core_esm_bundler/* createElementVNode */._)("textarea", {
     value: $props.productTopic,
-    onInput: _cache[1] || (_cache[1] = function () {
+    "class": "code topic-area",
+    id: "product_topic",
+    onInput: _cache[3] || (_cache[3] = function () {
       return $options.onTopicUpdate && $options.onTopicUpdate.apply($options, arguments);
     }),
-    id: "product_topic"
-  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_7), (0,runtime_core_esm_bundler/* createCommentVNode */.kq)(" <p id=\"product-topic\">—</p> ")])]), (0,runtime_core_esm_bundler/* createElementVNode */._)("div", _hoisted_8, [(0,runtime_core_esm_bundler/* createElementVNode */._)("button", _hoisted_9, (0,shared_esm_bundler/* toDisplayString */.zw)($data.saveBtnText), 1 /* TEXT */)])]);
+    materialize: ""
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_21)])]), (0,runtime_core_esm_bundler/* createElementVNode */._)("footer", _hoisted_22, [(0,runtime_core_esm_bundler/* createElementVNode */._)("button", {
+    type: "button",
+    "class": "btn btn_large",
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $data.isDialogOpen = false;
+    })
+  }, "Cancel"), (0,runtime_core_esm_bundler/* createElementVNode */._)("button", {
+    onClick: _cache[5] || (_cache[5] = function () {
+      return $options.saveConfig && $options.saveConfig.apply($options, arguments);
+    }),
+    "class": "btn btn_large",
+    disabled: !$options.canSaveCreds
+  }, (0,shared_esm_bundler/* toDisplayString */.zw)($data.saveBtnText), 9 /* TEXT, PROPS */, _hoisted_23)])])], 2 /* CLASS */)]);
 }
-;// CONCATENATED MODULE: ./ui/src/pages/PubCard.vue?vue&type=template&id=7053460b&scoped=true
+;// CONCATENATED MODULE: ./ui/src/pages/PubCard.vue?vue&type=template&id=666f37fe&scoped=true
 
-// EXTERNAL MODULE: ./node_modules/ramda/es/index.js + 233 modules
-var es = __webpack_require__(99);
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/PubCard.vue?vue&type=script&lang=js
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-/* harmony default export */ const PubCardvue_type_script_lang_js = ({
-  inject: ['$injector'],
-  props: {
-    accountInfo: Object,
-    productTopic: String
-  },
-  data: function data() {
-    return {
-      saveBtnText: 'Save'
-    };
-  },
-  computed: {
-    canSaveCreds: function canSaveCreds(vm) {
-      return (0,es/* not */.ffD)((0,es/* isEmpty */.xbD)(vm.accountInfo)) && vm.productTopic;
-    }
-  },
-  methods: {
-    sendMsg: function sendMsg(msg) {
-      this.$injector.emit('snackbar:message', msg);
-    },
-    handleErr: function handleErr(err) {
-      this.$injector.emit('snackbar:error', err);
-    },
-    onSave: function onSave() {
-      var _this = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var account_info, product_topic;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
-            case 0:
-              // export const saveSettingsData = async (app) => {
-              //   if (!app) return;
-              //   disableButton('save', 'Saving...');
-              //   try {
-              //     // eslint-disable-next-line camelcase
-              //     const account_info = JSON.parse(document.getElementById('account_info').value);
-              //     // eslint-disable-next-line camelcase
-              //     const product_topic = document.getElementById('product_topic').value;
-              //     // eslint-disable-next-line camelcase
-              //     await updateSettings({ account_info, product_topic });
-
-              //     app.emit({ name: 'snackbar:message', value: 'Settings saved' });
-              //   } catch (error) {
-              //     app.emit({ name: 'snackbar:error', value: error });
-              //   }
-              //   enableButton('save');
-              // };
-
-              _this.saveBtnText = 'Saving...';
-              _context.prev = 1;
-              // eslint-disable-next-line camelcase
-              account_info = JSON.parse(_this.credsJSON); // eslint-disable-next-line camelcase
-              product_topic = _this.productTopic;
-              _context.next = 6;
-              return updateSettings({
-                account_info: account_info,
-                product_topic: product_topic
-              });
-            case 6:
-              _this.sendMsg('Settings saved');
-              _context.next = 12;
-              break;
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
-              _this.handleErr(_context.t0);
-            case 12:
-              _this.saveBtnText = 'Save';
-            case 13:
-            case "end":
-              return _context.stop();
-          }
-        }, _callee, null, [[1, 9]]);
-      }))();
-    },
-    onCredsUpdate: function onCredsUpdate(e) {
-      this.$emit('account-info-update', e.value);
-    },
-    onTopicUpdate: function onTopicUpdate(e) {
-      this.$emit('product-topic-update', e.value);
-    }
-  }
-});
-;// CONCATENATED MODULE: ./ui/src/pages/PubCard.vue?vue&type=script&lang=js
- 
-;// CONCATENATED MODULE: ./ui/src/pages/PubCard.vue
-
-
-
-
-;
-
-
-const PubCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(PubCardvue_type_script_lang_js, [['render',PubCardvue_type_template_id_7053460b_scoped_true_render],['__scopeId',"data-v-7053460b"]])
-
-/* harmony default export */ const PubCard = (PubCard_exports_);
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/ErrorCard.vue?vue&type=template&id=71b90f14&scoped=true
-
-var ErrorCardvue_type_template_id_71b90f14_scoped_true_withScopeId = function _withScopeId(n) {
-  return (0,runtime_core_esm_bundler/* pushScopeId */.dD)("data-v-71b90f14"), n = n(), (0,runtime_core_esm_bundler/* popScopeId */.Cn)(), n;
-};
-var ErrorCardvue_type_template_id_71b90f14_scoped_true_hoisted_1 = {
-  "class": "ez-card hidden ez-card--error",
-  id: "error"
-};
-var ErrorCardvue_type_template_id_71b90f14_scoped_true_hoisted_2 = /*#__PURE__*/ErrorCardvue_type_template_id_71b90f14_scoped_true_withScopeId(function () {
-  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("div", {
-    "class": "ez-card__header"
-  }, [/*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("h2", {
-    "class": "ez-card__title"
-  }, "Error")], -1 /* HOISTED */);
-});
-var ErrorCardvue_type_template_id_71b90f14_scoped_true_hoisted_3 = /*#__PURE__*/ErrorCardvue_type_template_id_71b90f14_scoped_true_withScopeId(function () {
-  return /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("div", {
-    "class": "error-message"
-  }, [/*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("p", {
-    id: "error-message"
-  }, "Something went wrong. Please try to reload the page.")], -1 /* HOISTED */);
-});
-var ErrorCardvue_type_template_id_71b90f14_scoped_true_hoisted_4 = [ErrorCardvue_type_template_id_71b90f14_scoped_true_hoisted_2, ErrorCardvue_type_template_id_71b90f14_scoped_true_hoisted_3];
-function ErrorCardvue_type_template_id_71b90f14_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,runtime_core_esm_bundler/* openBlock */.wg)(), (0,runtime_core_esm_bundler/* createElementBlock */.iD)("section", ErrorCardvue_type_template_id_71b90f14_scoped_true_hoisted_1, ErrorCardvue_type_template_id_71b90f14_scoped_true_hoisted_4);
-}
-;// CONCATENATED MODULE: ./ui/src/pages/ErrorCard.vue?vue&type=template&id=71b90f14&scoped=true
-
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/ErrorCard.vue?vue&type=script&lang=js
-/* harmony default export */ const ErrorCardvue_type_script_lang_js = ({
-  props: {
-    title: String
-  },
-  data: function data() {
-    return {
-      hello: 'hello world!'
-    };
-  }
-});
-;// CONCATENATED MODULE: ./ui/src/pages/ErrorCard.vue?vue&type=script&lang=js
- 
-;// CONCATENATED MODULE: ./ui/src/pages/ErrorCard.vue
-
-
-
-
-;
-
-
-const ErrorCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(ErrorCardvue_type_script_lang_js, [['render',ErrorCardvue_type_template_id_71b90f14_scoped_true_render],['__scopeId',"data-v-71b90f14"]])
-
-/* harmony default export */ const ErrorCard = (ErrorCard_exports_);
+// EXTERNAL MODULE: ./node_modules/ramda/es/index.js + 232 modules
+var es = __webpack_require__(429);
 // EXTERNAL MODULE: ./node_modules/color-convert/index.js
 var color_convert = __webpack_require__(85);
 var color_convert_default = /*#__PURE__*/__webpack_require__.n(color_convert);
@@ -346,10 +276,10 @@ var remove_circle_baseline = __webpack_require__(159);
 var animated = __webpack_require__(513);
 ;// CONCATENATED MODULE: ./ui/src/constants.js
 var _colorsValues;
-function constants_typeof(obj) { "@babel/helpers - typeof"; return constants_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, constants_typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return constants_typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (constants_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (constants_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -566,6 +496,22 @@ var isBright = (0,es/* pipe */.zGw)((0,es/* replace */.gxs)('#', ''), (color_con
     b = _ref2[2];
   return r * 0.299 + g * 0.587 + b * 0.114 > 180;
 });
+
+/**
+ * Check that json-like string is a valid JSON
+ *
+ * @function
+ * @param {string}
+ * @returns {boolean} is string a JSON or not
+ */
+var isValidJSON = function isValidJSON(jsonString) {
+  try {
+    JSON.parse(jsonString);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 ;// CONCATENATED MODULE: ./ui/src/utils.js
 function utils_typeof(obj) { "@babel/helpers - typeof"; return utils_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, utils_typeof(obj); }
 function utils_slicedToArray(arr, i) { return utils_arrayWithHoles(arr) || utils_iterableToArrayLimit(arr, i) || utils_unsupportedIterableToArray(arr, i) || utils_nonIterableRest(); }
@@ -585,23 +531,58 @@ All rights reserved.
 
 
 
-// API calls to the backend
-var getSettings = function getSettings() {
-  return fetch('/api/settings').then(function (response) {
-    return response.json();
-  });
+// API calls to the backend //
+
+// Retrieve Datalake Pubsub Settings │ GET    │ /settings
+// Validate Datalake Pubsub Settings │ GET    │ /settings/validate
+// Save Datalake Pubsub Settings     │ POST   │ /settings
+//
+// Retrieve Product List             │ GET    │ /products
+// Publish Products Info             │ POST   │ /products/*/publish
+// Publish Products Info             │ POST   │ /products/*/publish-all
+
+var getJson = function getJson(r) {
+  return r.json();
 };
-var utils_updateSettings = function updateSettings(settings) {
+
+// Settings API:
+
+var getSettings = function getSettings() {
+  return fetch('/api/settings').then(getJson);
+};
+var validateSettings = function validateSettings() {
+  return fetch('/api/settings/validate').then(getJson);
+};
+var updateSettings = function updateSettings(settings) {
   return fetch('/api/settings', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(settings)
-  }).then(function (response) {
-    return response.json();
-  });
+  }).then(getJson);
 };
+
+// Products API:
+
+var getProducts = function getProducts() {
+  return fetch('/api/products').then(getJson);
+};
+var publishProducts = function publishProducts(products) {
+  return fetch('/api/products/*/publish', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(products)
+  }).then(getJson);
+};
+var publishAllProducts = function publishAllProducts() {
+  return fetch('/api/products/*/publish-all').then(getJson);
+};
+
+// Styling Utils //
+
 var getStyleCustomizations = function getStyleCustomizations() {
   var namespace = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'theme';
   var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
@@ -633,6 +614,166 @@ var combineStylesStr = function combineStylesStr(styleObj) {
     return "".concat(acc).concat(key, ":").concat(val, ";");
   }, '');
 };
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/PubCard.vue?vue&type=script&lang=js
+function PubCardvue_type_script_lang_js_typeof(obj) { "@babel/helpers - typeof"; return PubCardvue_type_script_lang_js_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, PubCardvue_type_script_lang_js_typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == PubCardvue_type_script_lang_js_typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+// import hljs from 'highlight.js/lib/core';
+// import jsonLang from 'highlight.js/lib/languages/json'; // Replace with the desired language
+// import 'highlight.js/styles/default.css'; // Replace with the desired stylesheet
+
+// hljs.registerLanguage('json', jsonLang);
+
+var simplestJSONLength = 9;
+/* harmony default export */ const PubCardvue_type_script_lang_js = ({
+  inject: ['$injector'],
+  props: {
+    accountInfo: String,
+    productTopic: String
+  },
+  data: function data() {
+    return {
+      saveBtnText: 'Save',
+      isDialogOpen: false,
+      loadedFileName: ''
+    };
+  },
+  computed: {
+    validAccountInfo: function validAccountInfo(vm) {
+      return isValidJSON(vm.accountInfo) && vm.accountInfo.length >= simplestJSONLength;
+    },
+    canSaveCreds: function canSaveCreds(vm) {
+      return vm.validAccountInfo && !!vm.productTopic;
+    }
+  },
+  methods: {
+    sendMsg: function sendMsg(msg) {
+      this.$injector.emit('snackbar:message', msg);
+    },
+    handleErr: function handleErr(err) {
+      this.$injector.emit('snackbar:error', err);
+    },
+    saveConfig: function saveConfig() {
+      var _this = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var account_info, product_topic;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _this.saveBtnText = 'Saving...';
+              _context.prev = 1;
+              // eslint-disable-next-line camelcase
+              account_info = JSON.parse(_this.accountInfo); // eslint-disable-next-line camelcase
+              product_topic = _this.productTopic;
+              _context.next = 6;
+              return updateSettings({
+                account_info: account_info,
+                product_topic: product_topic
+              });
+            case 6:
+              console.log('Success:');
+              _this.sendMsg('Settings saved');
+              _context.next = 14;
+              break;
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](1);
+              console.log('Got error:', _context.t0);
+              _this.handleErr(_context.t0);
+            case 14:
+              _this.saveBtnText = 'Save';
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[1, 10]]);
+      }))();
+    },
+    onAccountInfoUpdate: function onAccountInfoUpdate(e) {
+      this.$emit('account-info-update', e.target.value);
+    },
+    onTopicUpdate: function onTopicUpdate(e) {
+      this.$emit('product-topic-update', e.target.value);
+    },
+    onFileChange: function onFileChange(evt) {
+      var _this2 = this;
+      var file = evt.target.files[0];
+      this.loadedFileName = file.name.slice(0, 20) + '...' + file.name.slice(-20, file.name.length);
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        var fileContent = evt.target.result;
+        _this2.onAccountInfoUpdate({
+          target: {
+            value: fileContent
+          }
+        });
+      };
+      reader.readAsText(file);
+    }
+  }
+});
+;// CONCATENATED MODULE: ./ui/src/pages/PubCard.vue?vue&type=script&lang=js
+ 
+;// CONCATENATED MODULE: ./ui/src/pages/PubCard.vue
+
+
+
+
+;
+
+
+const PubCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(PubCardvue_type_script_lang_js, [['render',PubCardvue_type_template_id_666f37fe_scoped_true_render],['__scopeId',"data-v-666f37fe"]])
+
+/* harmony default export */ const PubCard = (PubCard_exports_);
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/ErrorCard.vue?vue&type=template&id=35bb4c74
+
+var ErrorCardvue_type_template_id_35bb4c74_hoisted_1 = {
+  "class": "ez-card hidden ez-card--error",
+  id: "error"
+};
+var ErrorCardvue_type_template_id_35bb4c74_hoisted_2 = /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("div", {
+  "class": "ez-card__header"
+}, [/*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("h2", {
+  "class": "ez-card__title"
+}, "Error")], -1 /* HOISTED */);
+var ErrorCardvue_type_template_id_35bb4c74_hoisted_3 = /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("div", {
+  "class": "error-message"
+}, [/*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */._)("p", {
+  id: "error-message"
+}, "Something went wrong. Please try to reload the page.")], -1 /* HOISTED */);
+var ErrorCardvue_type_template_id_35bb4c74_hoisted_4 = [ErrorCardvue_type_template_id_35bb4c74_hoisted_2, ErrorCardvue_type_template_id_35bb4c74_hoisted_3];
+function ErrorCardvue_type_template_id_35bb4c74_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,runtime_core_esm_bundler/* openBlock */.wg)(), (0,runtime_core_esm_bundler/* createElementBlock */.iD)("section", ErrorCardvue_type_template_id_35bb4c74_hoisted_1, ErrorCardvue_type_template_id_35bb4c74_hoisted_4);
+}
+;// CONCATENATED MODULE: ./ui/src/pages/ErrorCard.vue?vue&type=template&id=35bb4c74
+
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/ErrorCard.vue?vue&type=script&lang=js
+/* harmony default export */ const ErrorCardvue_type_script_lang_js = ({
+  props: {
+    title: String
+  },
+  data: function data() {
+    return {
+      hello: 'hello world!'
+    };
+  }
+});
+;// CONCATENATED MODULE: ./ui/src/pages/ErrorCard.vue?vue&type=script&lang=js
+ 
+;// CONCATENATED MODULE: ./ui/src/pages/ErrorCard.vue
+
+
+
+
+;
+const ErrorCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(ErrorCardvue_type_script_lang_js, [['render',ErrorCardvue_type_template_id_35bb4c74_render]])
+
+/* harmony default export */ const ErrorCard = (ErrorCard_exports_);
 ;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[9].use[0]!./ui/src/pages/App.vue?vue&type=script&lang=js
 function Appvue_type_script_lang_js_typeof(obj) { "@babel/helpers - typeof"; return Appvue_type_script_lang_js_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, Appvue_type_script_lang_js_typeof(obj); }
 function Appvue_type_script_lang_js_regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ Appvue_type_script_lang_js_regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == Appvue_type_script_lang_js_typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
@@ -642,13 +783,8 @@ function Appvue_type_script_lang_js_asyncToGenerator(fn) { return function () { 
 
 
 
-
-// const injector = inject('$injector');
-
-// const sendMsg = (msg) => injector.emit({ name: 'snackbar:message', value: msg });
-// const handleErr = (err) => injector.emit({ name: 'snackbar:error', value: err });
-
 /* harmony default export */ const Appvue_type_script_lang_js = ({
+  inject: ['$injector'],
   components: {
     SyncCard: SyncCard,
     PubCard: PubCard,
@@ -660,7 +796,7 @@ function Appvue_type_script_lang_js_asyncToGenerator(fn) { return function () { 
       showError: false,
       cssStyles: {},
       accountInfo: '',
-      productInfo: ''
+      productTopic: ''
     };
   },
   methods: {
@@ -681,7 +817,7 @@ function Appvue_type_script_lang_js_asyncToGenerator(fn) { return function () { 
               account_info = _yield$getSettings.account_info;
               product_topic = _yield$getSettings.product_topic;
               error = _yield$getSettings.error;
-              _this.accountInfo = account_info;
+              _this.accountInfo = JSON.stringify(account_info);
               _this.productTopic = product_topic;
               if (error) {
                 _this.showError = true;
@@ -696,11 +832,8 @@ function Appvue_type_script_lang_js_asyncToGenerator(fn) { return function () { 
   },
   mounted: function mounted() {
     var _this2 = this;
-    /* eslint-disable-next-line */
-    console.log('App component is mounted!');
     var styleCustomizations = getStyleCustomizations().computed.styleCustomizations;
     var stylesObj = styleCustomizations(); // NOTE: use argument for theming
-    // const cssStyleString = combineStylesStr(stylesObj);
 
     this.cssStyles = stylesObj;
     this.fetchSettings().then(function () {
@@ -718,7 +851,7 @@ function Appvue_type_script_lang_js_asyncToGenerator(fn) { return function () { 
 ;
 
 
-const App_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Appvue_type_script_lang_js, [['render',render],['__scopeId',"data-v-7ed3de4f"]])
+const App_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Appvue_type_script_lang_js, [['render',render],['__scopeId',"data-v-6c422db8"]])
 
 /* harmony default export */ const App = (App_exports_);
 ;// CONCATENATED MODULE: ./ui/src/pages/settings.js
@@ -729,34 +862,18 @@ All rights reserved.
 
 
 
-// import {
-//   settings,
-// } from '../pages';
-//
-//
-
-
-// import '../../styles/index.css';
-
-// import './app.css';
-
-// import Component from './app.js';
-// import Component from './App.vue';
 
 
 
-/* eslint-disable-next-line */
-console.log(App);
+
+
 (0,dist/* default */.ZP)({
   'settings-card': dist/* Card */.Zb
-  // 'app-root': App,
 }).then(function (connectBus) {
   var app = (0,runtime_dom_esm_bundler/* createApp */.ri)(App);
+  app.provide('$injector', connectBus);
   app.mount('#app');
-  app.$connectBus = connectBus;
 });
-
-// .then(settings);
 
 /***/ })
 
@@ -921,7 +1038,7 @@ console.log(App);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], () => (__webpack_require__(493)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], () => (__webpack_require__(227)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

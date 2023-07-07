@@ -19,8 +19,10 @@
     "@cloudblueconnect/connect-ui-toolkit": "^26",
     "@cloudblueconnect/material-svg": "^1.0.35",
     "@fontsource/roboto": "^4.5.8",
+    "@fontsource/roboto-mono": "^5.0.4",
     "color-convert": "^2.0.1",
     "css-minimizer-webpack-plugin": "^4.2.2",
+    "normalize.css": "^8.0.1",
     "ramda": "^0.29.0",
     "vue": "^3.3.4"
   },
