@@ -168,18 +168,33 @@ def products():
             'name': 'Test Cisco Product',
             'icon': '/media/VA-000-001/PRD-000-000-001/media/PRD-000-000-001-logo.png',
             'status': 'published',
+            'owner': {
+                'id': 'VA-000-000',
+                'name': 'CloudBlue ISV',
+                'icon': '/media/VA-674-253/media/icon_fobt0xS.png',
+            },
         },
         {
             'id': 'PRD-000-000-002',
             'name': 'A-R18-Dropbox-1',
             'icon': '/media/VA-000-001/PRD-000-000-002/media/PRD-000-000-002-logo.png',
             'status': 'published',
+            'owner': {
+                'id': 'VA-000-000',
+                'name': 'CloudBlue ISV',
+                'icon': '/media/VA-674-253/media/icon_fobt0xS.png',
+            },
         },
         {
             'id': 'PRD-000-000-003',
             'name': 'Product CB A1',
             'icon': '/media/VA-000-001/PRD-000-000-003/media/PRD-000-000-003-logo.png',
             'status': 'published',
+            'owner': {
+                'id': 'VA-000-000',
+                'name': 'CloudBlue ISV',
+                'icon': '/media/VA-674-253/media/icon_fobt0xS.png',
+            },
         },
     ]
 
