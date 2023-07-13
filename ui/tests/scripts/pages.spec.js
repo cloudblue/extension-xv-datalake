@@ -6,6 +6,7 @@ import {
   saveSettingsData,
   settings,
 } from '@/scripts/pages';
+
 import {
   getSettings,
   updateSettings,
@@ -14,6 +15,9 @@ import {
 import {
   disableButton,
   enableButton,
+  combineStylesStr,
+  getStyleCustomizations,
+  setAttrOnComponent,
   hideComponent,
   showComponent,
 } from '@/scripts/utils';
@@ -30,6 +34,20 @@ jest.mock('@/scripts/utils', () => ({
   enableButton: jest.fn(),
   addEventListener: jest.fn(),
   disableButton: jest.fn(),
+  getStyleCustomizations: jest.fn().mockReturnValue({
+    computed: {
+      styleCustomizations: () => ({
+        '--theme_primary': '#1565c0',
+        '--theme_primary_rgb': 'rgb(21, 101, 192)',
+        '--theme_accent': '#4797f2',
+        '--theme_accent_rgb': 'rgb(71, 151, 242)',
+        '--theme_contrast': '#ffffff',
+        '--theme_contrast_rgb': 'rgb(255, 255, 255)',
+      })
+    }
+  }),
+  combineStylesStr: jest.fn(),
+  setAttrOnComponent: jest.fn(),
 }));
 
 const app = {

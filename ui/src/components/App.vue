@@ -84,7 +84,6 @@ export default {
     this.fetchSettings().then(() => {
       this.showLoader = false;
     });
-
   },
 };
 </script>

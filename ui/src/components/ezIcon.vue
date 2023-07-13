@@ -1,4 +1,4 @@
-<template lang="pug">
+<template>
 <svg
   class="c-icon"
   v-no-translate
