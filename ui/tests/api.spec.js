@@ -5,7 +5,7 @@ All rights reserved.
 import {
   getSettings,
   updateSettings,
-} from '~scripts/api';
+} from '@/scripts/api';
 
 
 global.fetch = jest.fn(() => Promise.resolve({

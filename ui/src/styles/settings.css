@@ -116,6 +116,16 @@ All rights reserved.
   --nice-yellow: #F2C94C;
 }
 
+* {
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+}
+
+*, ::before, ::after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: var(--theme-font-family, "Roboto");
 }
@@ -495,7 +505,11 @@ form {
 }
 
 
-input {
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="email"] {
   background: none;
   font-size: 18px;
   padding: 10px 10px 10px 5px;
@@ -506,12 +520,20 @@ input {
   width: 610px;
 }
 
-input:focus {
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus {
   outline: none;
   border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
 }
 
-input:focus~label {
+input[type="text"]:focus~label,
+input[type="number"]:focus~label,
+input[type="password"]:focus~label,
+input[type="tel"]:focus~label,
+input[type="email"]:focus~label {
   top: -14px;
   font-size: 12px;
   color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
@@ -602,6 +624,10 @@ input[type="password"] {
   margin: 0;
 }
 
+.ez-card__alert {
+  margin-bottom: 24px;
+}
+
 /*******/
 /* btn */
 /*******/
@@ -656,6 +682,7 @@ input[type="password"] {
 
   border-radius: 2px;
   background-color: var(--light-blue, #2C98F0);
+  border-color: var(--light-blue, #2C98F0);
 
   color: white;
 }
@@ -663,5 +690,164 @@ input[type="password"] {
 .btn_default:disabled,
 .btn_default[disabled]{
   background-color: rgba(189, 189, 189, 0.20);
+  border-color: rgba(189, 189, 189, 0.20);
   color: var(--mid-grey, #BDBDBD);
+}
+
+
+/*-----------*/
+/* EZ-DIALOG */
+/*-----------*/
+
+.ez-dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+
+  background-color: rgba(255, 255, 255, 1);
+  z-index: 9999;
+  transition: opacity 0.3s ease-in;
+}
+
+.ez-dialog_open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ez-dialog__inner {
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  width: 580px;
+  max-height: 580px;
+  overflow-y: auto;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid var(--light-grey, #E0E0E0);
+  background-color: white;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease-in;
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ez-dialog_open > .ez-dialog__inner {
+  opacity: 1;
+}
+
+.ez-dialog__header {
+  color: var(--base-text-color, #212121);
+  font-family: var(--theme-font-family);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  text-transform: capitalize;
+
+  padding: 24px 24px 20px 24px;
+  background-color: var(--white-smoke, #F5F5F5);
+
+}
+.ez-dialog__header:not(:last-child) {
+  padding-bottom: 19px;
+  border-bottom: 1px solid var(--light-grey, #E0E0E0);
+}
+
+.ez-dialog__content {
+  position: relative;
+  padding: 24px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.ez-dialog__search {
+  margin-bottom: 12px;
+}
+
+.ez-dialog__form {
+  display: flex;
+  flex-flow: column nowrap;
+
+  width: auto;
+  margin: 0;
+}
+
+.ez-dialog__footer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 7px 16px 8px;
+  border-top: 1px solid var(--light-grey, #E0E0E0);
+}
+
+.ez-dialog__controls {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+}
+
+
+/*---------------*/
+/* EZ-TEXT_FIELD */
+/*---------------*/
+
+.ez-text-field {
+  color: var(--assistive-text-color, #707070);
+  /* Content/Body */
+  font-family: var(--theme-font-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+
+  display: flex;
+  height: 44px;
+  padding: 4px 12px;
+  align-items: center;
+  align-self: stretch;
+
+  border-radius: 2px;
+  border: 1px solid #D8D8D8;
+  background: #FBFBFB;
+
+  outline: none;
+}
+
+.ez-text-field__icon {
+  margin-right: 12px;
+}
+
+.ez-text-field__input {
+  color: var(--assistive-text-color, #707070);
+  /* Content/Body */
+  font-family: var(--theme-font-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+
+  align-self: stretch;
+
+  width: 100%;
+
+  background: #FBFBFB;
+  border-width: 0;
+
+  outline: none;
+}
+
+.ez-text-field__input:hover,
+.ez-text-field__input:focus,
+.ez-text-field__input:active {
+  outline: none;
 }

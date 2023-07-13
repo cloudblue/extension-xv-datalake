@@ -5,26 +5,26 @@ All rights reserved.
 import {
   saveSettingsData,
   settings,
-} from '~scripts/pages';
+} from '@/scripts/pages';
 import {
   getSettings,
   updateSettings,
-} from '~scripts/api';
+} from '@/scripts/api';
 
 import {
   disableButton,
   enableButton,
   hideComponent,
   showComponent,
-} from '~scripts/utils';
+} from '@/scripts/utils';
 
 
-jest.mock('~scripts/api', () => ({
+jest.mock('@/scripts/api', () => ({
   getSettings: jest.fn(() => Promise.resolve({ })),
   updateSettings: jest.fn(() => Promise.resolve({ })),
 }));
 
-jest.mock('~scripts/utils', () => ({
+jest.mock('@/scripts/utils', () => ({
   showComponent: jest.fn(),
   hideComponent: jest.fn(),
   enableButton: jest.fn(),

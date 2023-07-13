@@ -3,13 +3,15 @@
     <div class="loader" v-if="showLoader" @click="hide"></div>
 
     <div v-else>
-      <sync-card></sync-card>
+      <sync-card :enabled="syncEnabled"></sync-card>
 
       <pub-card
         :account-info="accountInfo"
         :product-topic="productTopic"
-        @account-info-update="evt => accountInfo = evt"
-        @product-topic-update="evt => productTopic = evt"
+        @account-info-update="onInfoUpdate"
+        @product-topic-update="onTopicUpdate"
+        @validation-success="() => syncEnabled = true"
+        @validation-error="() => syncEnabled = false"
       ></pub-card>
 
       <error-card v-if="showError"></error-card>
@@ -47,6 +49,7 @@ export default {
       cssStyles: {},
       accountInfo: '',
       productTopic: '',
+      syncEnabled: false,
     };
   },
   methods: {
@@ -63,6 +66,14 @@ export default {
         this.showError = true;
       }
     },
+    onInfoUpdate(evt) {
+      this.accountInfo = evt;
+      this.syncEnabled = false;
+    },
+    onTopicUpdate(evt) {
+      this.productTopic = evt;
+      this.syncEnabled = false;
+    },
   },
   mounted() {
     const { styleCustomizations } = getStyleCustomizations().computed;
@@ -73,16 +84,17 @@ export default {
     this.fetchSettings().then(() => {
       this.showLoader = false;
     });
+
   },
-}
+};
 </script>
 
 
 <style scoped>
 .app {
   box-sizing: border-box;
-  min-height: 700px;
-  padding: 48px 0;
+  min-height: 640px;
+  padding-top: 24px;
 }
 
 .loader {

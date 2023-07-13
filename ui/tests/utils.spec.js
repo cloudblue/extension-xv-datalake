@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2023, Rahul
+copyright (c) 2023, Rahul
 All rights reserved.
 */
 import {
@@ -8,7 +8,7 @@ import {
   enableButton,
   hideComponent,
   showComponent,
-} from '~scripts/utils';
+} from '@/scripts/utils';
 
 
 describe('utils.js', () => {

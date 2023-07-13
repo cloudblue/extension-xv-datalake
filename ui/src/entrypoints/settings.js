@@ -14,8 +14,11 @@ import {
 
 import 'normalize.css';
 import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/300.css';
 import '@fontsource/roboto-mono/400.css';
 import '~styles/settings.css';
+import '~styles/common.styl';
 
 import App from '~components/App.vue';
 

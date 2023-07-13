@@ -138,3 +138,4 @@ export const isValidJSON = (jsonString) => {
     return false;
   }
 };
+

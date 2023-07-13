@@ -3,10 +3,29 @@
     <header class="ez-card__header">
       <h2 class="ez-card__title">Settings</h2>
       <div class="ez-card__controls">
-        <button id="edit" class="btn" type="button" @click="isDialogOpen = true">Edit</button>
-        <button id="validate" class="btn" type="button" disabled>Validate</button>
+        <button class="btn" type="button" @click="isDialogOpen = true">Edit</button>
+        <button class="btn" type="button" :disabled="!canSaveCreds"
+          @click="validateConfig">{{ validateBtnText }}</button>
       </div>
     </header>
+
+    <c-alert
+      v-if="isValidationSuccess"
+      class="ez-card__alert"
+      message="Settings are valid"
+      type="success"
+      :fluid="true"
+      :icon="icons.googleCheckCircleBaseline"
+    ></c-alert>
+
+    <c-alert
+      v-else-if="isValidationError"
+      class="ez-card__alert"
+      :message="validationError || 'Settings invalid'"
+      type="error"
+      :fluid="true"
+      :icon="icons.googleWarningBaseline"
+    ></c-alert>
 
     <div class="group-set">
       <h4 class="label-text">Google Credentials JSON</h4>
@@ -23,7 +42,10 @@
         <header class="ez-dialog__header">Settings</header>
         <div class="ez-dialog__content">
           <div class="custom-file-input ez-dialog__controls">
-            <label for="file-input" class="custom-file-input__label">{{ loadedFileName || 'Load from file' }}</label>
+            <label for="file-input" class="custom-file-input__label">
+              <c-icon :icon="icons.googleUploadBaseline" size="16" class="custom-file-input__label-icon"></c-icon>
+              {{ loadedFileName || 'Load from file' }}
+            </label>
             <input type="file" id="file-input" class="custom-file-input__input" @change="onFileChange"/>
           </div>
 
@@ -47,16 +69,22 @@
 
 <script>
 import {
+  validateSettings,
   updateSettings,
 } from '~scripts/api';
 
 import {
   googleUploadBaseline,
+  googleWarningBaseline,
+  googleCheckCircleBaseline,
 } from '@cloudblueconnect/material-svg/baseline';
 
 import {
   isValidJSON,
 } from '~scripts/helpers';
+
+import cAlert from '~components/ezAlert.vue';
+import cIcon from '~components/ezIcon.vue';
 
 // import hljs from 'highlight.js/lib/core';
 // import jsonLang from 'highlight.js/lib/languages/json'; // Replace with the desired language
@@ -69,16 +97,29 @@ const simplestJSONLength = 9;
 
 export default {
   inject: ['$injector'],
-
   props: {
     accountInfo: String,
     productTopic: String,
   },
+
+  components: {
+    cAlert,
+    cIcon,
+  },
   data() {
     return {
       saveBtnText: 'Save',
+      validateBtnText: 'Validate',
       isDialogOpen: false,
+      isValidationSuccess: false,
+      isValidationError: false,
+      validationError: '',
       loadedFileName: '',
+      icons: {
+        googleUploadBaseline,
+        googleCheckCircleBaseline,
+        googleWarningBaseline,
+      },
     };
   },
 
@@ -104,19 +145,48 @@ export default {
         // eslint-disable-next-line camelcase
         const product_topic = this.productTopic;
 
-        await updateSettings({ account_info, product_topic });
+        const { error } = await updateSettings({ account_info, product_topic });
 
-        console.log('Success:');
-
-        this.sendMsg('Settings saved');
+        if (!error) {
+          this.sendMsg('Settings saved');
+        } else {
+          this.handleErr(error);
+        }
       } catch (err) {
-
-        console.log('Got error:', err);
-
         this.handleErr(err);
       }
 
       this.saveBtnText = 'Save';
+      this.isDialogOpen = false;
+    },
+
+    async validateConfig() {
+      this.validateBtnText = 'Validating...';
+
+      try {
+        const { account_info, product_topic } = await validateSettings();
+
+        this.isValidationSuccess = true;
+        this.validationMessage = 'valid';
+        this.validationError = '';
+
+        this.$emit('validation-success', this.validationMessage);
+        this.sendMsg('Settings validated');
+      } catch (err) {
+
+        this.isValidationError = true;
+        this.validationMessage = '';
+        this.validationError = err;
+
+        this.$emit('validation-error', this.err);
+        this.handleErr(err);
+      }
+
+      this.validateBtnText = 'Validate';
+
+      setTimeout(() => {
+        this.isValidationSuccess = false;
+      }, 10000);
     },
 
     onAccountInfoUpdate(e) {
@@ -128,12 +198,20 @@ export default {
 
     onFileChange(evt) {
       const file = evt.target.files[0];
-      this.loadedFileName = file.name.slice(0, 20) + '...' + file.name.slice(-20, file.name.length);
+      if (file.name.length < 40) {
+        this.loadedFileName = file.name;
+      } else {
+        this.loadedFileName = file.name.slice(0, 20) + '...' + file.name.slice(-20, file.name.length);
+      }
 
       const reader = new FileReader();
       reader.onload = (evt) => {
         const fileContent = evt.target.result;
-        this.onAccountInfoUpdate({ target: { value: fileContent }});
+        const fileContentObj = JSON.parse(fileContent);
+        const accountInfoContent = JSON.stringify(fileContentObj['account_info']);
+        const productTopicContent = fileContentObj['product_topic'];
+        this.onAccountInfoUpdate({ target: { value: accountInfoContent }});
+        this.onTopicUpdate({ target: { value: productTopicContent }});
       };
       reader.readAsText(file);
     }
@@ -194,99 +272,11 @@ textarea[materialize].code:not(:last-child) {
 }
 
 .account-info-area {
-  min-height: 372px;
+  min-height: 240px;
 }
 
 .topic-area {
   min-height: 84px;
-}
-
-
-/*-----------*/
-/* EZ-DIALOG */
-/*-----------*/
-
-.ez-dialog {
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0;
-
-  background-color: rgba(255, 255, 255, 1);
-  z-index: 9999;
-  transition: opacity 0.3s ease-in;
-}
-
-.ez-dialog_open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.ez-dialog__inner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 580px;
-  padding: 0;
-  border-radius: 4px;
-  border: 1px solid var(--light-grey, #E0E0E0);
-  background-color: white;
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease-in;
-  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.25);
-}
-
-.ez-dialog_open > .ez-dialog__inner {
-  opacity: 1;
-}
-
-.ez-dialog__header {
-  color: var(--base-text-color, #212121);
-  font-family: var(--theme-font-family);
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-  text-transform: capitalize;
-
-  padding: 24px 24px 20px 24px;
-  background-color: var(--white-smoke, #F5F5F5);
-}
-
-.ez-dialog__content {
-  position: relative;
-  padding: 24px;
-}
-
-.ez-dialog__form {
-  display: flex;
-  flex-flow: column nowrap;
-
-  width: auto;
-  margin: 0;
-}
-
-.ez-dialog__footer {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-end;
-  gap: 16px;
-  padding: 8px 16px;
-}
-
-.ez-dialog__controls {
-  position: absolute;
-  top: 20px;
-  right: 24px;
 }
 
 
@@ -295,7 +285,7 @@ textarea[materialize].code:not(:last-child) {
 /*********************/
 
 .custom-file-input {
-
+  color: var(--base-text-color, #212121);
 }
 
 .custom-file-input__label {
@@ -308,7 +298,8 @@ textarea[materialize].code:not(:last-child) {
   letter-spacing: 0.48px;
   text-transform: uppercase;
 
-  color: var(--base-text-color, #212121);
+  color: inherit;
+  cursor: default;
 
   display: flex;
   height: 28px;
@@ -317,7 +308,21 @@ textarea[materialize].code:not(:last-child) {
   align-items: center;
   gap: 4px;
 
+  transition: opacity 0.1s ease-in;
+}
+
+.custom-file-input__label:hover,
+.custom-file-input__label:focus {
+  opacity: 0.6;
   cursor: pointer;
+}
+
+.custom-file-input__label:active {
+  opacity: 0.8;
+}
+
+.custom-file-input__label-icon {
+  color: inherit;
 }
 
 .custom-file-input__input {

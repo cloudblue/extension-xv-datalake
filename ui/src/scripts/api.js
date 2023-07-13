@@ -38,7 +38,9 @@ export const publishProducts = (products) => fetch('/api/products/*/publish', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(products),
-}).then(getJson);
+});
+// .then(getJson);
 
-export const publishAllProducts = () => fetch('/api/products/*/publish-all').then(getJson);
+export const publishAllProducts = () => fetch('/api/products/*/publish-all');
+// .then(getJson);
 
