@@ -3,8 +3,8 @@
     <header class="ez-card__header">
       <h2 class="ez-card__title">Settings</h2>
       <div class="ez-card__controls">
-        <button class="btn" type="button" @click="isDialogOpen = true">Edit</button>
-        <button class="btn" type="button" :disabled="!canSaveCreds"
+        <button class="btn btn_outlined" type="button" @click="isDialogOpen = true">Edit</button>
+        <button class="btn btn_outlined" type="button" :disabled="!canSaveCreds"
           @click="validateConfig">{{ validateBtnText }}</button>
       </div>
     </header>
@@ -59,7 +59,7 @@
         </div>
         <footer class="ez-dialog__footer">
           <button type="button" class="btn btn_large" @click="isDialogOpen = false">Cancel</button>
-          <button @click="saveConfig" class="btn btn_large" :disabled="!canSaveCreds">{{ saveBtnText }}</button>
+          <button @click="saveConfig" class="btn btn_large btn_accent" :disabled="!canSaveCreds">{{ saveBtnText }}</button>
         </footer>
       </section>
     </div>
