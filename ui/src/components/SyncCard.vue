@@ -1,75 +1,99 @@
 <template>
 <section id="synchronisation-card" class="ez-card" title="Synchronisation">
 
-    <div class="ez-dialog" :class="{'ez-dialog_open': isSyncDialogOpen}">
-      <section class="ez-dialog__inner">
-        <header class="ez-dialog__header">Sync Products</header>
-        <div class="ez-dialog__content">
-          <form action="" class="ez-dialog__form">
-            <div class="ez-text-field ez-text-field_search ez-dialog__search">
-              <c-icon :icon="icons.googleSearchBaseline" size="24" class="ez-text-field__icon"></c-icon>
-              <input type="search" v-model="searchQuery" class="ez-text-field__input" placeholder="Search for product"/>
-            </div>
+  <div class="ez-dialog" :class="{'ez-dialog_open': isSyncDialogOpen}">
+    <section class="ez-dialog__inner">
+      <header class="ez-dialog__header">Sync Products</header>
+      <div class="ez-dialog__content">
+        <form action="" class="ez-dialog__form">
+          <div class="ez-text-field ez-text-field_search ez-dialog__search">
+            <c-icon :icon="icons.googleSearchBaseline" size="24" class="ez-text-field__icon"></c-icon>
+            <input type="search" v-model="searchQuery" class="ez-text-field__input" placeholder="Search for product"/>
+          </div>
 
-            <ul class="products-list" v-if="products.length">
-              <li class="products-list__item products-list__item_header products-item">
-                <div class="products-item__heading">Product</div>
-                <!-- <div class="products-item__heading">Vendor</div> -->
-              </li>
+          <ul class="products-list" v-if="products.length">
+            <li class="products-list__item products-list__item_header products-item">
+              <div class="products-item__heading">Product</div>
+              <div class="products-item__heading">Vendor</div>
+            </li>
 
-              <li class="products-list__item products-list__item_all products-item">
+            <li class="products-list__item products-list__item_all products-item">
+              <div class="products-item__part">
                 <label class="products-item__title" for="select-all">All</label>
+              </div>
+              <div class="products-item__part">
                 <input
                   id="select-all"
                   type="checkbox"
                   v-model="syncAll"
+                  class="products-item__checkbox"
                   @change="toggleAll($event)"
                 />
-              </li>
+              </div>
+            </li>
 
-              <li v-for="p in filteredProducts" :key="p.id" class="products-list__item products-item">
+            <li v-for="p in filteredProducts" :key="p.id" class="products-list__item products-item">
+              <div class="products-item__part">
                 <img v-if="p.icon" class="products-item__logo" :src="p.icon" alt=""/>
                 <label class="products-item__title" :for="p.id">
                   {{ p.name }}
                   <span class="products-item__assistive-text">{{ p.id }}</span>
                 </label>
+              </div>
+              <div class="products-item__part">
+                <img v-if="p.owner.icon" class="products-item__logo" :src="p.owner.icon" alt=""/>
+                <label class="products-item__title" :for="p.id">
+                  {{ p.owner.name }}
+                  <span class="products-item__assistive-text">{{ p.owner.id }}</span>
+                </label>
+              </div>
+              <div class="products-item__part">
                 <input
                   type="checkbox"
                   :id="p.id"
                   :checked="selectedProductsIds[p.id]"
+                  class="products-item__checkbox"
                   @change="toggle($event)"
                 />
-              </li>
-            </ul>
-          </form>
-        </div>
-        <footer class="ez-dialog__footer">
-          <button type="button" class="btn btn_large" @click="isSyncDialogOpen = false">Cancel</button>
-          <button @click="syncProducts" class="btn btn_large"
-            :disabled="isSyncing || !productsToSync.length">{{ syncBtnText }}</button>
-        </footer>
-      </section>
+              </div>
+            </li>
+          </ul>
+        </form>
+      </div>
+      <footer class="ez-dialog__footer">
+        <button type="button" class="btn btn_large" @click="isSyncDialogOpen = false">Cancel</button>
+        <button @click="syncProducts" class="btn btn_large btn_accent" :disabled="isSyncing || !productsToSync.length">
+          {{ syncBtnText }}
+        </button>
+      </footer>
+    </section>
+  </div>
+
+
+  <header class="ez-card__header">
+    <h2 class="ez-card__title">{{ title || 'Synchronisation' }}</h2>
+    <div class="ez-card__controls">
+      <button
+        id="sync"
+        class="btn btn_default"
+        type="button"
+        :disabled="!enabled"
+        @click="isSyncDialogOpen = true"
+      >
+        <c-icon :icon="icons.googleSyncBaseline" size="14"></c-icon>
+        Sync products
+      </button>
     </div>
+  </header>
 
-    <header class="ez-card__header">
-        <h2 class="ez-card__title">{{ title || 'Synchronisation' }}</h2>
-        <div class="ez-card__controls"><button
-            id="sync"
-            class="btn btn_default"
-            type="button"
-            :disabled="!enabled"
-            @click="isSyncDialogOpen = true"
-          >Sync products</button></div>
-    </header>
-
-    <c-alert
-      v-if="showValidation"
-      class="ez-card__alert"
-      type="success"
-      :message="syncedProductsMsg"
-      :fluid="true"
-      :icon="icons.googleCheckCircleBaseline"
-    ></c-alert>
+  <c-alert
+    v-if="showValidation"
+    class="ez-card__alert"
+    type="success"
+    :message="syncedProductsMsg"
+    :fluid="true"
+    :icon="icons.googleCheckCircleBaseline"
+  ></c-alert>
 </section>
 </template>
 
@@ -137,7 +161,7 @@ export default {
     filteredProducts() {
       if (!this.searchQuery) return this.products;
 
-      const fuse = new Fuse(this.products, { keys: ['name', 'id'] });
+      const fuse = new Fuse(this.products, { keys: ['name', 'id', 'owner.name', 'owner.id'] });
       const results = fuse.search(this.searchQuery);
       return results.map((result) => result.item);
     },
@@ -225,14 +249,33 @@ export default {
 
 .products-item {
   display: flex;
-  padding: 6px 8px;
+  justify-content: flex-start;
   flex-flow: row nowrap;
   align-items: center;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--light-grey, #E0E0E0);
 }
 
-.products-item:not(:last-of-type) {
-  padding-bottom: 5px;
-  border-bottom: 1px solid var(--light-grey, #E0E0E0);
+.products-item:last-of-type {
+  border-width: 0;
+}
+
+.products-item__part {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  width: calc((100% - 44px) / 2);
+}
+
+.products-item__part:nth-last-of-type(2) {
+  flex-grow: 1;
+}
+
+.products-item__part:last-child {
+  width: 44px;
+  padding: 15px 11px 15px 15px;
 }
 
 .products-item__heading {
@@ -244,6 +287,8 @@ export default {
   line-height: 20px;
   letter-spacing: 0.48px;
   text-transform: uppercase;
+
+  width: calc((100% - 44px) / 2);
 }
 
 .products-item__logo {
@@ -277,5 +322,10 @@ export default {
   font-weight: 400;
   line-height: 16px;
   color: var(--light-grey, #E0E0E0);
+}
+
+.products-item__checkbox {
+  width: 18px;
+  height: 18px;
 }
 </style>

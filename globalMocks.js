@@ -35,19 +35,19 @@ jest.mock('@cloudblueconnect/material-svg/round', () => mockIconProxy);
 jest.mock('@cloudblueconnect/material-svg/sharp', () => mockIconProxy);
 jest.mock('@cloudblueconnect/material-svg/twotone', () => mockIconProxy);
 
-jest.mock('@cloudblueconnect/country-flag-mapper', () => ({
-  localeFlags: new Proxy({}, {
-    get(obj, prop) {
-      if (prop === 'xx') return null;
+// jest.mock('@cloudblueconnect/country-flag-mapper', () => ({
+//   localeFlags: new Proxy({}, {
+//     get(obj, prop) {
+//       if (prop === 'xx') return null;
 
-      return {
-        id: prop,
-        viewBox: null,
-      };
-    },
-  }),
-  flags: mockIconProxy,
-}));
+//       return {
+//         id: prop,
+//         viewBox: null,
+//       };
+//     },
+//   }),
+//   flags: mockIconProxy,
+// }));
 
 
 global.VERSION = 4277742;

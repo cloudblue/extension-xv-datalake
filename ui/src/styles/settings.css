@@ -649,11 +649,19 @@ input[type="password"] {
   align-items: center;
   gap: 10px;
 
-  border: 1px solid var(--light-grey, #E0E0E0);
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 2px;
+  border: 1px solid #fff;
 
   color: var(--base-text-color);
+}
+
+.btn_outlined {
+  border: 1px solid var(--light-grey, #E0E0E0);
+}
+
+.btn_accent {
+  color: var(--accent, #2C98F0);
 }
 
 .btn_large {
