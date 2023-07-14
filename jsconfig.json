@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["ui/src/*"],
+      "~components/*": ["ui/src/components/*"],
+      "~entrypoints/*": ["ui/src/entrypoints/*"],
+      "~styles/*": ["ui/src/styles/*"],
+      "vue$": ["node_modules/vue/dist/vue.esm-bundler.js"]
+    }
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}

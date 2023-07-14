@@ -25,7 +25,7 @@ services:
     tty: true
     volumes:
       - .:/extension
-      - node_modules:/extension/node_modules
+      # - node_modules:/extension/node_modules
     env_file:
       - .extension_xv_datalake_dev.env
 
