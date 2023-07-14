@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 470:
+/***/ 841:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 
@@ -10,10 +10,10 @@
 var dist = __webpack_require__(164);
 // EXTERNAL MODULE: ./node_modules/vue/dist/vue.esm-bundler.js + 6 modules
 var vue_esm_bundler = __webpack_require__(166);
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/App.vue?vue&type=template&id=3c3130ee&scoped=true
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/App.vue?vue&type=template&id=c2661de0&scoped=true
 
 var _withScopeId = function _withScopeId(n) {
-  return _pushScopeId("data-v-3c3130ee"), n = n(), _popScopeId(), n;
+  return _pushScopeId("data-v-c2661de0"), n = n(), _popScopeId(), n;
 };
 var _hoisted_1 = {
   key: 1
@@ -48,7 +48,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0
   })) : (0,vue_esm_bundler/* createCommentVNode */.kq)("v-if", true)]))], 4 /* STYLE */);
 }
-;// CONCATENATED MODULE: ./ui/src/components/App.vue?vue&type=template&id=3c3130ee&scoped=true
+;// CONCATENATED MODULE: ./ui/src/components/App.vue?vue&type=template&id=c2661de0&scoped=true
 
 ;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/SyncCard.vue?vue&type=template&id=212af528&scoped=true
 
@@ -234,11 +234,11 @@ function ezAlertvue_type_template_id_56a9cb7c_render(_ctx, _cache, $props, $setu
 
 // EXTERNAL MODULE: ./node_modules/@cloudblueconnect/material-svg/icons/google/info/baseline.svg
 var info_baseline = __webpack_require__(232);
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/ezIcon.vue?vue&type=template&id=1fd9d1ac&lang=pug
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/ezIcon.vue?vue&type=template&id=3c161b4d
 
-var ezIconvue_type_template_id_1fd9d1ac_lang_pug_hoisted_1 = ["view-box"];
-var ezIconvue_type_template_id_1fd9d1ac_lang_pug_hoisted_2 = ["xlink:href"];
-function ezIconvue_type_template_id_1fd9d1ac_lang_pug_render(_ctx, _cache, $props, $setup, $data, $options) {
+var ezIconvue_type_template_id_3c161b4d_hoisted_1 = ["view-box"];
+var ezIconvue_type_template_id_3c161b4d_hoisted_2 = ["xlink:href"];
+function ezIconvue_type_template_id_3c161b4d_render(_ctx, _cache, $props, $setup, $data, $options) {
   var _directive_no_translate = (0,vue_esm_bundler/* resolveDirective */.Q2)("no-translate");
   return (0,vue_esm_bundler/* withDirectives */.wy)(((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("svg", {
     "class": (0,vue_esm_bundler/* normalizeClass */.C_)(["c-icon", $options.classes]),
@@ -249,9 +249,9 @@ function ezIconvue_type_template_id_1fd9d1ac_lang_pug_render(_ctx, _cache, $prop
     })
   }, [(0,vue_esm_bundler/* createElementVNode */._)("use", {
     "xlink:href": "#".concat($props.icon.id)
-  }, null, 8 /* PROPS */, ezIconvue_type_template_id_1fd9d1ac_lang_pug_hoisted_2)], 14 /* CLASS, STYLE, PROPS */, ezIconvue_type_template_id_1fd9d1ac_lang_pug_hoisted_1)), [[_directive_no_translate]]);
+  }, null, 8 /* PROPS */, ezIconvue_type_template_id_3c161b4d_hoisted_2)], 14 /* CLASS, STYLE, PROPS */, ezIconvue_type_template_id_3c161b4d_hoisted_1)), [[_directive_no_translate]]);
 }
-;// CONCATENATED MODULE: ./ui/src/components/ezIcon.vue?vue&type=template&id=1fd9d1ac&lang=pug
+;// CONCATENATED MODULE: ./ui/src/components/ezIcon.vue?vue&type=template&id=3c161b4d
 
 // EXTERNAL MODULE: ./node_modules/color-convert/index.js
 var color_convert = __webpack_require__(85);
@@ -780,7 +780,7 @@ var exportHelper = __webpack_require__(789);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(ezIconvue_type_script_lang_js, [['render',ezIconvue_type_template_id_1fd9d1ac_lang_pug_render]])
+const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(ezIconvue_type_script_lang_js, [['render',ezIconvue_type_template_id_3c161b4d_render]])
 
 /* harmony default export */ const ezIcon = (__exports__);
 ;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/ezAlert.vue?vue&type=script&lang=js
@@ -1084,80 +1084,80 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 const SyncCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(SyncCardvue_type_script_lang_js, [['render',SyncCardvue_type_template_id_212af528_scoped_true_render],['__scopeId',"data-v-212af528"]])
 
 /* harmony default export */ const SyncCard = (SyncCard_exports_);
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/PubCard.vue?vue&type=template&id=405db546&scoped=true
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/PubCard.vue?vue&type=template&id=181b5f1e&scoped=true
 
-var PubCardvue_type_template_id_405db546_scoped_true_withScopeId = function _withScopeId(n) {
-  return (0,vue_esm_bundler/* pushScopeId */.dD)("data-v-405db546"), n = n(), (0,vue_esm_bundler/* popScopeId */.Cn)(), n;
+var PubCardvue_type_template_id_181b5f1e_scoped_true_withScopeId = function _withScopeId(n) {
+  return (0,vue_esm_bundler/* pushScopeId */.dD)("data-v-181b5f1e"), n = n(), (0,vue_esm_bundler/* popScopeId */.Cn)(), n;
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_1 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_1 = {
   id: "publishing-card",
   "class": "ez-card",
   title: "Publishing"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_2 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_2 = {
   "class": "ez-card__header"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_3 = /*#__PURE__*/PubCardvue_type_template_id_405db546_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_3 = /*#__PURE__*/PubCardvue_type_template_id_181b5f1e_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("h2", {
     "class": "ez-card__title"
   }, "Settings", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_4 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_4 = {
   "class": "ez-card__controls"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_5 = ["disabled"];
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_6 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_5 = ["disabled"];
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_6 = {
   "class": "group-set"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_7 = /*#__PURE__*/PubCardvue_type_template_id_405db546_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_7 = /*#__PURE__*/PubCardvue_type_template_id_181b5f1e_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("h4", {
     "class": "label-text"
   }, "Google Credentials JSON", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_8 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_8 = {
   "class": "monospace-text"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_9 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_9 = {
   "class": "group-set"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_10 = /*#__PURE__*/PubCardvue_type_template_id_405db546_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_10 = /*#__PURE__*/PubCardvue_type_template_id_181b5f1e_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("h4", {
     "class": "label-text"
   }, "Pub/Sub Topic", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_11 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_11 = {
   "class": "monospace-text"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_12 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_12 = {
   "class": "ez-dialog__inner"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_13 = /*#__PURE__*/PubCardvue_type_template_id_405db546_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_13 = /*#__PURE__*/PubCardvue_type_template_id_181b5f1e_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("header", {
     "class": "ez-dialog__header"
   }, "Settings", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_14 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_14 = {
   "class": "ez-dialog__content"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_15 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_15 = {
   "class": "custom-file-input ez-dialog__controls"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_16 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_16 = {
   "for": "file-input",
   "class": "custom-file-input__label"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_17 = {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_17 = {
   action: "",
   "class": "ez-dialog__form"
 };
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_18 = /*#__PURE__*/PubCardvue_type_template_id_405db546_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_18 = /*#__PURE__*/PubCardvue_type_template_id_181b5f1e_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("label", {
     "for": "account_info",
     "class": "label-text"
   }, "Google Credentials JSON", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_19 = ["value"];
-var PubCardvue_type_template_id_405db546_scoped_true_hoisted_20 = /*#__PURE__*/PubCardvue_type_template_id_405db546_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_19 = ["value"];
+var PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_20 = /*#__PURE__*/PubCardvue_type_template_id_181b5f1e_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("label", {
     "for": "product_topic",
     "class": "label-text"
@@ -1168,10 +1168,10 @@ var _hoisted_22 = {
   "class": "ez-dialog__footer"
 };
 var _hoisted_23 = ["disabled"];
-function PubCardvue_type_template_id_405db546_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
+function PubCardvue_type_template_id_181b5f1e_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_c_alert = (0,vue_esm_bundler/* resolveComponent */.up)("c-alert");
   var _component_c_icon = (0,vue_esm_bundler/* resolveComponent */.up)("c-icon");
-  return (0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("section", PubCardvue_type_template_id_405db546_scoped_true_hoisted_1, [(0,vue_esm_bundler/* createElementVNode */._)("header", PubCardvue_type_template_id_405db546_scoped_true_hoisted_2, [PubCardvue_type_template_id_405db546_scoped_true_hoisted_3, (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_405db546_scoped_true_hoisted_4, [(0,vue_esm_bundler/* createElementVNode */._)("button", {
+  return (0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("section", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_1, [(0,vue_esm_bundler/* createElementVNode */._)("header", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_2, [PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_3, (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_4, [(0,vue_esm_bundler/* createElementVNode */._)("button", {
     "class": "btn",
     type: "button",
     onClick: _cache[0] || (_cache[0] = function ($event) {
@@ -1184,7 +1184,7 @@ function PubCardvue_type_template_id_405db546_scoped_true_render(_ctx, _cache, $
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.validateConfig && $options.validateConfig.apply($options, arguments);
     })
-  }, (0,vue_esm_bundler/* toDisplayString */.zw)($data.validateBtnText), 9 /* TEXT, PROPS */, PubCardvue_type_template_id_405db546_scoped_true_hoisted_5)])]), $data.isValidationSuccess ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createBlock */.j4)(_component_c_alert, {
+  }, (0,vue_esm_bundler/* toDisplayString */.zw)($data.validateBtnText), 9 /* TEXT, PROPS */, PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_5)])]), $data.isValidationSuccess ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createBlock */.j4)(_component_c_alert, {
     key: 0,
     "class": "ez-card__alert",
     message: "Settings are valid",
@@ -1198,11 +1198,11 @@ function PubCardvue_type_template_id_405db546_scoped_true_render(_ctx, _cache, $
     type: "error",
     fluid: true,
     icon: $data.icons.googleWarningBaseline
-  }, null, 8 /* PROPS */, ["message", "icon"])) : (0,vue_esm_bundler/* createCommentVNode */.kq)("v-if", true), (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_405db546_scoped_true_hoisted_6, [PubCardvue_type_template_id_405db546_scoped_true_hoisted_7, (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_405db546_scoped_true_hoisted_8, (0,vue_esm_bundler/* toDisplayString */.zw)($options.validAccountInfo ? '*********' : '—'), 1 /* TEXT */)]), (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_405db546_scoped_true_hoisted_9, [PubCardvue_type_template_id_405db546_scoped_true_hoisted_10, (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_405db546_scoped_true_hoisted_11, (0,vue_esm_bundler/* toDisplayString */.zw)($props.productTopic || '—'), 1 /* TEXT */)]), (0,vue_esm_bundler/* createElementVNode */._)("div", {
+  }, null, 8 /* PROPS */, ["message", "icon"])) : (0,vue_esm_bundler/* createCommentVNode */.kq)("v-if", true), (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_6, [PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_7, (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_8, (0,vue_esm_bundler/* toDisplayString */.zw)($options.validAccountInfo ? '*********' : '—'), 1 /* TEXT */)]), (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_9, [PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_10, (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_11, (0,vue_esm_bundler/* toDisplayString */.zw)($props.productTopic || '—'), 1 /* TEXT */)]), (0,vue_esm_bundler/* createElementVNode */._)("div", {
     "class": (0,vue_esm_bundler/* normalizeClass */.C_)(["ez-dialog", {
       'ez-dialog_open': $data.isDialogOpen
     }])
-  }, [(0,vue_esm_bundler/* createElementVNode */._)("section", PubCardvue_type_template_id_405db546_scoped_true_hoisted_12, [PubCardvue_type_template_id_405db546_scoped_true_hoisted_13, (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_405db546_scoped_true_hoisted_14, [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_405db546_scoped_true_hoisted_15, [(0,vue_esm_bundler/* createElementVNode */._)("label", PubCardvue_type_template_id_405db546_scoped_true_hoisted_16, [(0,vue_esm_bundler/* createVNode */.Wm)(_component_c_icon, {
+  }, [(0,vue_esm_bundler/* createElementVNode */._)("section", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_12, [PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_13, (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_14, [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_15, [(0,vue_esm_bundler/* createElementVNode */._)("label", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_16, [(0,vue_esm_bundler/* createVNode */.Wm)(_component_c_icon, {
     icon: $data.icons.googleUploadBaseline,
     size: "16",
     "class": "custom-file-input__label-icon"
@@ -1213,7 +1213,7 @@ function PubCardvue_type_template_id_405db546_scoped_true_render(_ctx, _cache, $
     onChange: _cache[2] || (_cache[2] = function () {
       return $options.onFileChange && $options.onFileChange.apply($options, arguments);
     })
-  }, null, 32 /* HYDRATE_EVENTS */)]), (0,vue_esm_bundler/* createElementVNode */._)("form", PubCardvue_type_template_id_405db546_scoped_true_hoisted_17, [PubCardvue_type_template_id_405db546_scoped_true_hoisted_18, (0,vue_esm_bundler/* createElementVNode */._)("textarea", {
+  }, null, 32 /* HYDRATE_EVENTS */)]), (0,vue_esm_bundler/* createElementVNode */._)("form", PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_17, [PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_18, (0,vue_esm_bundler/* createElementVNode */._)("textarea", {
     value: $props.accountInfo,
     "class": "code account-info-area",
     id: "account_info",
@@ -1222,7 +1222,7 @@ function PubCardvue_type_template_id_405db546_scoped_true_render(_ctx, _cache, $
     }),
     materialize: "",
     ref: "textarea-account-info"
-  }, null, 40 /* PROPS, HYDRATE_EVENTS */, PubCardvue_type_template_id_405db546_scoped_true_hoisted_19), PubCardvue_type_template_id_405db546_scoped_true_hoisted_20, (0,vue_esm_bundler/* createElementVNode */._)("textarea", {
+  }, null, 40 /* PROPS, HYDRATE_EVENTS */, PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_19), PubCardvue_type_template_id_181b5f1e_scoped_true_hoisted_20, (0,vue_esm_bundler/* createElementVNode */._)("textarea", {
     value: $props.productTopic,
     "class": "code topic-area",
     id: "product_topic",
@@ -1244,7 +1244,7 @@ function PubCardvue_type_template_id_405db546_scoped_true_render(_ctx, _cache, $
     disabled: !$options.canSaveCreds
   }, (0,vue_esm_bundler/* toDisplayString */.zw)($data.saveBtnText), 9 /* TEXT, PROPS */, _hoisted_23)])])], 2 /* CLASS */)]);
 }
-;// CONCATENATED MODULE: ./ui/src/components/PubCard.vue?vue&type=template&id=405db546&scoped=true
+;// CONCATENATED MODULE: ./ui/src/components/PubCard.vue?vue&type=template&id=181b5f1e&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/@cloudblueconnect/material-svg/icons/google/upload/baseline.svg
 var upload_baseline = __webpack_require__(390);
@@ -1259,13 +1259,6 @@ function PubCardvue_type_script_lang_js_asyncToGenerator(fn) { return function (
 
 
 
-
-
-// import hljs from 'highlight.js/lib/core';
-// import jsonLang from 'highlight.js/lib/languages/json'; // Replace with the desired language
-// import 'highlight.js/styles/default.css'; // Replace with the desired stylesheet
-
-// hljs.registerLanguage('json', jsonLang);
 
 var simplestJSONLength = 9;
 /* harmony default export */ const PubCardvue_type_script_lang_js = ({
@@ -1437,7 +1430,7 @@ var simplestJSONLength = 9;
 ;
 
 
-const PubCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(PubCardvue_type_script_lang_js, [['render',PubCardvue_type_template_id_405db546_scoped_true_render],['__scopeId',"data-v-405db546"]])
+const PubCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(PubCardvue_type_script_lang_js, [['render',PubCardvue_type_template_id_181b5f1e_scoped_true_render],['__scopeId',"data-v-181b5f1e"]])
 
 /* harmony default export */ const PubCard = (PubCard_exports_);
 ;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/ErrorCard.vue?vue&type=template&id=58156702
@@ -1571,7 +1564,7 @@ function Appvue_type_script_lang_js_asyncToGenerator(fn) { return function () { 
 ;
 
 
-const App_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Appvue_type_script_lang_js, [['render',render],['__scopeId',"data-v-3c3130ee"]])
+const App_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Appvue_type_script_lang_js, [['render',render],['__scopeId',"data-v-c2661de0"]])
 
 /* harmony default export */ const App = (App_exports_);
 ;// CONCATENATED MODULE: ./ui/src/entrypoints/settings.js
@@ -1772,7 +1765,7 @@ All rights reserved.
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], () => (__webpack_require__(470)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], () => (__webpack_require__(841)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

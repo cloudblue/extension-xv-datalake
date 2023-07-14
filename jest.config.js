@@ -14,9 +14,6 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     '^.+\\.js$': 'babel-jest',
     '^.+\\.vue$': '@vue/vue3-jest',
-    // '^.+\\.vue$': 'vue-jest',
-    // '^.+\\.jsx?$': 'babel-jest',
-    //819924
   },
 
   transformIgnorePatterns: [
@@ -28,11 +25,6 @@ module.exports = {
     '<rootDir>/ui/tests(**/*\\.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx))',
   ],
 
-  // testMatch: [
-  //   '<rootDir>/app/modules(**/*\\.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx))',
-  //   '<rootDir>/test/unit(**/*\\.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx))',
-  // ],
-
 
   collectCoverage: true,
 
@@ -42,7 +34,7 @@ module.exports = {
 
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/ui/src/$1',
-    '^@cloudblueconnect/(.*)$': '<rootDir>/emptyModuleMock.js',
+    // '^@cloudblueconnect/(.*)$': '<rootDir>/emptyModuleMock.js',
     // '^@cloudblueconnect/(.*)$': '<rootDir>/node_modules/@cloudblueconnect/material-svg/$1',
     '^~components/(.*)$': '<rootDir>/ui/src/components/$1',
     '^~scripts/(.*)$': '<rootDir>/ui/src/scripts/$1',
@@ -57,11 +49,6 @@ module.exports = {
     '<rootDir>/ui/src/images/',
     '<rootDir>/ui/src/styles/',
     '<rootDir>/node_modules/',
-    // '<rootDir>/app/constants/',
-    // '<rootDir>/app/store/init\\.js',
-    // '<rootDir>/.+\\.config\\.js$',
-    // '<rootDir>/app/app\\.js',
-    // '<rootDir>/test/',
   ],
 
   testEnvironment: 'jsdom',

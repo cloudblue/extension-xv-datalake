@@ -1,9 +1,5 @@
 import App from '~components/App.vue';
 
-// import {
-//   getSettings,
-//   updateSettings,
-// } from '@/scripts/api';
 
 jest.mock('@/scripts/api', () => ({
   getSettings: jest.fn(() => Promise.resolve({

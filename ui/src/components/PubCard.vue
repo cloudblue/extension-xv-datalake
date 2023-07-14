@@ -86,11 +86,6 @@ import {
 import cAlert from '~components/ezAlert.vue';
 import cIcon from '~components/ezIcon.vue';
 
-// import hljs from 'highlight.js/lib/core';
-// import jsonLang from 'highlight.js/lib/languages/json'; // Replace with the desired language
-// import 'highlight.js/styles/default.css'; // Replace with the desired stylesheet
-
-// hljs.registerLanguage('json', jsonLang);
 
 const simplestJSONLength = 9;
 
