@@ -40,6 +40,14 @@ def product():
 
 
 @pytest.fixture
+def product_with_published_at_property():
+    return {
+        'id': 'PRD-000-000-001',
+        'published_at': '2023-07-09T17:38:19+00:00',
+    }
+
+
+@pytest.fixture
 def parameters():
     return [
         {

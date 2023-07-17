@@ -135,13 +135,13 @@ def test_handle_product_changed(
     connect_client,
     client_mocker_factory,
     logger,
-    product,
+    product_with_published_at_property,
     parameters,
     installation,
 ):
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
 
-    client_mocker.products[product['id']].parameters.all().mock(
+    client_mocker.products[product_with_published_at_property['id']].parameters.all().mock(
         return_value=parameters,
     )
 
@@ -152,7 +152,7 @@ def test_handle_product_changed(
         installation_client=connect_client,
         installation=installation,
     )
-    result = ext.handle_product_changed(product)
+    result = ext.handle_product_changed(product_with_published_at_property)
     assert result.status == 'success'
 
 

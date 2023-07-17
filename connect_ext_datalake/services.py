@@ -3,7 +3,7 @@
 # Copyright (c) 2023, Ingram Micro - Rahul Mondal
 # All rights reserved.
 #
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from connect.client import ConnectClient, R
 from connect.eaas.core.inject.models import Context
@@ -29,10 +29,16 @@ def get_pubsub_client(installation):
     return client
 
 
-def remove_properties(dict: dict, properties: list):
+def remove_properties(obj: dict, properties: list):
     for prop in properties:
-        if prop in dict.keys():
-            dict.pop(prop)
+        if prop in obj.keys():
+            obj.pop(prop)
+
+
+def verify_property(obj: dict, properties: dict[str, str]):
+    for prop in properties.keys():
+        if prop not in obj.keys():
+            obj[prop] = properties[prop]
 
 
 def sanitize_product(product: dict):
@@ -47,6 +53,14 @@ def sanitize_product(product: dict):
             'stats',
             'extensions',
         ],
+    )
+    verify_property(
+        product,
+        {
+            'published_at': datetime.now(
+                tz=timezone(timedelta(hours=0)),
+            ).isoformat(timespec='seconds'),
+        },
     )
 
     return product
