@@ -16,6 +16,13 @@ from connect_ext_datalake.schemas import (
 from connect_ext_datalake.client import GooglePubsubClient
 
 
+TCR_UPDATE_TYPE_MAPPING = {
+    'setup': 'new',
+    'update': 'update',
+    'adjustment': 'update',
+}
+
+
 def get_pubsub_client(installation):
     client = GooglePubsubClient(
         Settings(
@@ -109,15 +116,85 @@ def prepare_product_data_from_product(client, product):
 
 
 def publish_product(
-        client: ConnectClient,
-        pubsub_client: GooglePubsubClient,
-        product,
-        logger,
+    client: ConnectClient,
+    pubsub_client: GooglePubsubClient,
+    product,
+    logger,
 ):
     payload = prepare_product_data_from_product(client, product)
     logger.info(f"Start publishing product {product['id']}. Payload: {payload}")
     pubsub_client.publish(payload)
     logger.info(f"Publish of product {product['id']} is successful. Payload: {payload}")
+
+
+def sanitize_tc(client, tc):
+    remove_properties(
+        tc,
+        [
+            'connection',
+            'events',
+            'template',
+            'open_request',
+        ],
+    )
+    parameter_names = [param['id'] for param in tc['params']]
+    parameters = client.products[tc['product']['id']].parameters.filter(
+        R().name.in_(parameter_names),
+    )
+    param_name_id_map = {param['name']: param['id'] for param in parameters}
+    for param in tc['params']:
+        sanitize_tc_param(param)
+        param['id'] = param_name_id_map[param['id']]
+    verify_property(
+        tc,
+        {
+            'published_at': datetime.now(
+                tz=timezone(timedelta(hours=0)),
+            ).isoformat(timespec='seconds'),
+        },
+    )
+    return tc
+
+
+def sanitize_tc_param(tc_param):
+    remove_properties(
+        tc_param,
+        [
+            'value_error',
+            'title',
+            'description',
+            'type',
+            'phase',
+            'constraints',
+        ],
+    )
+    return tc_param
+
+
+def prepare_tc_data_from_tcr(client, tcr):
+    tc_id = tcr['configuration']['id']
+    tcr_type = tcr['type']
+
+    tc = client('tier').configs[tc_id].get()
+
+    return {
+        'update_type': TCR_UPDATE_TYPE_MAPPING[tcr_type],
+        'tier_config': sanitize_tc(client, tc),
+    }
+
+
+def publish_tc(
+    client: ConnectClient,
+    pubsub_client: GooglePubsubClient,
+    tcr,
+    logger,
+):
+    payload = prepare_tc_data_from_tcr(client, tcr)
+    print(payload)
+    logger.info(f"Start publishing Tier Config {tcr['configuration']['id']}. Payload: {payload}")
+    pubsub_client.publish(payload)
+    logger.info(f"Publish of Tier Config {tcr['configuration']['id']}"
+                f' is successful. Payload: {payload}')
 
 
 def list_products(client: ConnectClient):

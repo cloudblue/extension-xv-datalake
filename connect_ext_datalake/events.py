@@ -17,6 +17,7 @@ from connect_ext_datalake.services import (
     get_pubsub_client,
     prepare_product_data_from_listing_request,
     publish_product,
+    publish_tc,
 )
 
 
@@ -68,6 +69,42 @@ class DatalakeExtensionEventsApplication(EventsApplicationBase):
             raise e
 
         return BackgroundResponse.done()
+
+    def __process_tcr_event(self, tcr):
+        self.logger.info(f"Obtained request with id {tcr['id']}")
+        try:
+            client = get_pubsub_client(self.installation)
+            publish_tc(
+                self.installation_client,
+                client,
+                tcr,
+                self.logger,
+            )
+        except Exception as e:
+            self.logger.info(f"Publish of product {tcr['id']} is failed.")
+            raise e
+        return BackgroundResponse.done()
+
+    @event(
+        'tier_config_change_request_processing',
+        statuses=['approved'],
+    )
+    def handle_tier_config_change_request_processing(self, tcr):
+        return self.__process_tcr_event(tcr)
+
+    @event(
+        'tier_config_adjustment_request_processing',
+        statuses=['approved'],
+    )
+    def handle_tier_config_adjustment_request_processing(self, tcr):
+        return self.__process_tcr_event(tcr)
+
+    @event(
+        'tier_config_setup_request_processing',
+        statuses=['approved'],
+    )
+    def handle_tier_config_setup_request_processing(self, tcr):
+        return self.__process_tcr_event(tcr)
 
     @schedulable(
         'Publish Products',

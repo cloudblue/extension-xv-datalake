@@ -1,0 +1,58 @@
+[
+  {
+    "id": "PRM-000-000-000-0001",
+    "name": "t1_param2",
+    "title": "T1 Param2",
+    "description": "T1 Param2",
+    "type": "text",
+    "scope": "tier1",
+    "phase": "ordering",
+    "constraints": {
+      "required": true,
+      "hidden": false,
+      "unique": false,
+      "readonly": false
+    },
+    "position": 30000,
+    "events": {
+      "created": {
+        "at": "2022-02-10T05:25:51+00:00",
+        "by": {
+          "id": "UR-000-000-000",
+          "name": "Rahul Mondal"
+        }
+      },
+      "updated": {
+        "at": "2022-02-10T05:25:51+00:00"
+      }
+    }
+  },
+  {
+    "id": "PRM-000-000-000-0002",
+    "name": "t1_param1",
+    "title": "T1 Param1",
+    "description": "T1 Param1",
+    "type": "text",
+    "scope": "tier1",
+    "phase": "ordering",
+    "constraints": {
+      "required": true,
+      "hidden": false,
+      "unique": false,
+      "readonly": false
+    },
+    "position": 40000,
+    "events": {
+      "created": {
+        "at": "2022-02-10T05:26:46+00:00",
+        "by": {
+          "id": "UR-000-000-000",
+          "name": "Rahul Mondal"
+        }
+      },
+      "updated": {
+        "at": "2022-02-10T05:26:46+00:00"
+      }
+    }
+  }
+]
