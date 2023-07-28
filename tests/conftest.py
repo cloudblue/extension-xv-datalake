@@ -3,6 +3,7 @@
 # Copyright (c) 2023, Ingram Micro - Rahul Mondal
 # All rights reserved.
 #
+import json
 from datetime import datetime
 
 import pytest
@@ -213,6 +214,7 @@ def settings():
         {
             'account_info': {},
             'product_topic': '',
+            'tier_config_topic': '',
         },
     )
 
@@ -254,3 +256,26 @@ def schedule(
             'date': datetime.utcnow().isoformat(),
         },
     }
+
+
+@pytest.fixture
+def tcr():
+    return {
+        'id': 'TCR-000-000-000-001',
+        'type': 'setup',
+        'status': 'approved',
+        'configuration': {
+            'id': 'TC-000-000-000',
+            'name': 'Configuration of TA-0000-0000-0000',
+        },
+    }
+
+
+@pytest.fixture
+def tc():
+    return json.load(open('./tests/fixtures/tc.json'))
+
+
+@pytest.fixture
+def tc_params():
+    return json.load(open('./tests/fixtures/tc_params.json'))
