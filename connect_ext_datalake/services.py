@@ -87,6 +87,7 @@ def prepare_product_data_from_listing_request(client, listing_request):
     product_id = listing_request['product']['id']
 
     data = {
+        'table_name': 'cmp_connect_product',
         'update_type': listing_request['type'],
         'product': listing_request['product'],
     }
@@ -104,6 +105,7 @@ def prepare_product_data_from_product(client, product):
     product_id = product['id']
 
     data = {
+        'table_name': 'cmp_connect_product',
         'update_type': 'update',
         'product': sanitize_product(product),
     }
@@ -178,6 +180,7 @@ def prepare_tc_data_from_tcr(client, tcr):
     tc = client('tier').configs[tc_id].get()
 
     return {
+        'table_name': 'cmp_connect_tier_config',
         'update_type': TCR_UPDATE_TYPE_MAPPING[tcr_type],
         'tier_config': sanitize_tc(client, tc),
     }
