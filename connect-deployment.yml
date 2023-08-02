@@ -1,0 +1,9 @@
+env: production
+type: multiaccount
+package_id: com.cloudblue.datalake.xvs
+name: CloudBlue XV Datalake Extension
+description: XV Datalake Extension
+overview: overview.md
+website: https://connect.cloudblue.com
+icon: icon.png
+category: Integration
