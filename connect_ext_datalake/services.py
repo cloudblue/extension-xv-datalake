@@ -180,7 +180,7 @@ def prepare_tc_data_from_tcr(client, tcr):
     tc = client('tier').configs[tc_id].get()
 
     return {
-        'table_name': 'cmp_connect_tier_config',
+        'table_name': 'cmp_connect_tierconfig',
         'update_type': TCR_UPDATE_TYPE_MAPPING[tcr_type],
         'tier_config': sanitize_tc(client, tc),
     }
