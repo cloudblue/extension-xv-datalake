@@ -146,6 +146,7 @@ def sanitize_tc(client, tc):
     param_name_id_map = {param['name']: param['id'] for param in parameters}
     for param in tc['params']:
         sanitize_tc_param(param)
+        param['name'] = param['id']
         param['id'] = param_name_id_map[param['id']]
     verify_property(
         tc,
@@ -161,14 +162,7 @@ def sanitize_tc(client, tc):
 def sanitize_tc_param(tc_param):
     remove_properties(
         tc_param,
-        [
-            'value_error',
-            'title',
-            'description',
-            'type',
-            'phase',
-            'constraints',
-        ],
+        ['value_error'],
     )
     return tc_param
 
