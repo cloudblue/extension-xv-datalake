@@ -157,17 +157,22 @@ class DatalakeExtensionEventsApplication(EventsApplicationBase):
             installation = schedule['parameter']['installation']
             installation_client = self.get_installation_admin_client(installation['id'])
 
-            tcs = list(installation_client('tier').configs.all())
+            count = installation_client('tier').configs.all().count()
+            self.logger.info(f'Total number of Tier Configs: {count}')
+            tcs = installation_client('tier').configs.all()
             pubsub_client = get_pubsub_client(installation)
+            counter = 1
 
             for tc in tcs:
                 try:
+                    self.logger.info(f'Processing TC in {counter} position')
                     publish_tc(
                         installation_client,
                         pubsub_client,
                         tc,
                         self.logger,
                     )
+                    counter += 1
                 except (ClientError, GoogleAPIError):
                     self.logger.exception(f"Problem in while publishing Tier Config {tc['id']}.")
         except (ClientError, GoogleAPIError) as e:
