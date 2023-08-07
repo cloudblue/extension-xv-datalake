@@ -28,7 +28,9 @@ from connect_ext_datalake.schemas import Product, ProductInput, Settings
 from connect_ext_datalake.services import (
     create_task_publish_product,
     create_task_publish_tc,
-    list_products, publish_tc, get_pubsub_client,
+    get_pubsub_client,
+    list_products,
+    publish_tc,
 )
 
 
@@ -187,7 +189,7 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
         '/tier/configs/{tc_id}/publish',
         summary='Publish All Tier Configs Info',
     )
-    def publish_all_tc_info(
+    def publish_tc_info(
             self,
             tc_id: str,
             client: ConnectClient = Depends(get_extension_client),
