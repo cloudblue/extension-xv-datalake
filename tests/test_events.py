@@ -435,6 +435,7 @@ def test_publish_tcs_success(
     # Mocking
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
     client_mocker('tier').configs.all().mock(return_value=tcs)
+    client_mocker('tier').configs.all().count(return_value=2)
     client_mocker('tier').config_requests[tc_processing['open_request']['id']].get(
         return_value=tcr)
     client_mocker('tier').config_requests[tc_processing_update['open_request']['id']].get(
@@ -481,7 +482,7 @@ def test_publish_tcs_failed(
 
     # Mocking
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
-    client_mocker('tier').configs.all().mock(status_code=400)
+    client_mocker('tier').configs.all().count(return_value=400)
 
     # Execute Test code
     ext = DatalakeExtensionEventsApplication(
@@ -521,6 +522,7 @@ def test_publish_tcs_individual_failed(
     # Mocking
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
     client_mocker('tier').configs.all().mock(return_value=[tc_processing])
+    client_mocker('tier').configs.all().count(return_value=1)
     client_mocker('tier').config_requests[tc_processing['open_request']['id']].get(
         status_code=400,
     )
