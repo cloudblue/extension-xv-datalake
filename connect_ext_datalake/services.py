@@ -147,7 +147,8 @@ def sanitize_tc(client, tc):
     for param in tc['params']:
         sanitize_tc_param(param)
         param['name'] = param['id']
-        param['id'] = param_name_id_map[param['id']]
+        if param['id'] in param_name_id_map.keys():
+            param['id'] = param_name_id_map[param['id']]
     verify_property(
         tc,
         {
@@ -214,6 +215,7 @@ def publish_tc(
     tc,
     logger,
 ):
+    logger.info(f"Start publishing Tier Config {tc['id']}.")
     payload = prepare_tc_data(client, tc)
     if not payload:
         logger.info(f"Spiking Tier Config {tc['id']} as the setup request is not approved yet.")
