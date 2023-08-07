@@ -180,18 +180,47 @@ def prepare_tc_data_from_tcr(client, tcr):
     }
 
 
-def publish_tc(
+def prepare_tc_data(client, tc):
+
+    if tc['status'] == 'processing' and 'open_request' in tc.keys():
+        pending_tcr = client('tier').config_requests[tc['open_request']['id']].get()
+
+        if pending_tcr['type'] == 'setup':
+            return
+
+    return {
+        'table_name': 'cmp_connect_tierconfig',
+        'update_type': 'update',
+        'tier_config': sanitize_tc(client, tc),
+    }
+
+
+def publish_tc_from_tcr(
     client: ConnectClient,
     pubsub_client: GooglePubsubClient,
     tcr,
     logger,
 ):
     payload = prepare_tc_data_from_tcr(client, tcr)
-    print(payload)
     logger.info(f"Start publishing Tier Config {tcr['configuration']['id']}. Payload: {payload}")
     pubsub_client.publish(payload)
     logger.info(f"Publish of Tier Config {tcr['configuration']['id']}"
                 f' is successful. Payload: {payload}')
+
+
+def publish_tc(
+    client: ConnectClient,
+    pubsub_client: GooglePubsubClient,
+    tc,
+    logger,
+):
+    payload = prepare_tc_data(client, tc)
+    if not payload:
+        logger.info(f"Spiking Tier Config {tc['id']} as the setup request is not approved yet.")
+    else:
+        logger.info(f"Start publishing Tier Config {tc['id']}. Payload: {payload}")
+        pubsub_client.publish(payload)
+        logger.info(f"Publish of Tier Config {tc['id']} is successful. Payload: {payload}")
 
 
 def list_products(client: ConnectClient):
@@ -227,6 +256,29 @@ def create_task_publish_product(
         products_ids = ','.join([product.id for product in products])
         description = f'Publish {products_ids} products to Xvantage Goggle PubSub Topic.'
         payload['description'] = description
+
+    logger.info(f'Creating dynamic one time schedule method with payload: {payload}')
+
+    client('devops').services[context.extension_id].environments[
+        context.environment_id].schedules.create(payload=payload)
+
+
+def create_task_publish_tc(
+    logger,
+    client: ConnectClient,
+    context: Context,
+    installation: dict,
+):
+    payload = {
+        'method': 'publish_tcs',
+        'name': f'Publish Tier Configs - {context.account_id}',
+        'description': 'Publish all Tier Configs to Xvantage Goggle PubSub Topic.',
+        'parameter': {'installation': installation},
+        'trigger': {
+            'type': 'onetime',
+            'date': (datetime.utcnow() + timedelta(0, 70)).isoformat(),
+        },
+    }
 
     logger.info(f'Creating dynamic one time schedule method with payload: {payload}')
 

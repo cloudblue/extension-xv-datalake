@@ -18,6 +18,7 @@ from connect_ext_datalake.services import (
     prepare_product_data_from_listing_request,
     publish_product,
     publish_tc,
+    publish_tc_from_tcr,
 )
 
 
@@ -42,7 +43,7 @@ class DatalakeExtensionEventsApplication(EventsApplicationBase):
                 f'is successful. Payload: {payload}',
             )
         except Exception as e:
-            self.logger.info(
+            self.logger.exception(
                 f"Publish of product {request['product']['id']} "
                 f'is failed. Payload: {payload}',
             )
@@ -65,7 +66,7 @@ class DatalakeExtensionEventsApplication(EventsApplicationBase):
                 self.logger,
             )
         except Exception as e:
-            self.logger.info(f"Publish of product {product['id']} is failed.")
+            self.logger.exception(f"Publish of product {product['id']} is failed.")
             raise e
 
         return BackgroundResponse.done()
@@ -74,14 +75,14 @@ class DatalakeExtensionEventsApplication(EventsApplicationBase):
         self.logger.info(f"Obtained request with id {tcr['id']}")
         try:
             client = get_pubsub_client(self.installation)
-            publish_tc(
+            publish_tc_from_tcr(
                 self.installation_client,
                 client,
                 tcr,
                 self.logger,
             )
         except Exception as e:
-            self.logger.info(f"Publish of product {tcr['id']} is failed.")
+            self.logger.exception(f"Publish of product {tcr['id']} is failed.")
             raise e
         return BackgroundResponse.done()
 
@@ -130,12 +131,45 @@ class DatalakeExtensionEventsApplication(EventsApplicationBase):
             pubsub_client = get_pubsub_client(installation)
 
             for product in products:
-                publish_product(
-                    installation_client,
-                    pubsub_client,
-                    product,
-                    self.logger,
-                )
+                try:
+                    publish_product(
+                        installation_client,
+                        pubsub_client,
+                        product,
+                        self.logger,
+                    )
+                except (ClientError, GoogleAPIError):
+                    self.logger.exception(f"Problem in while publishing Product {product['id']}.")
+        except (ClientError, GoogleAPIError) as e:
+            self.logger.exception('Problem in calling Connect or Google APIs.')
+            raise e
+
+        return ScheduledExecutionResponse.done()
+
+    @schedulable(
+        'Publish TCs',
+        'Publish TCs to Xvantage Goggle PubSub Topic.',
+    )
+    def publish_tcs(self, schedule):
+        self.logger.info(f"Start of execution for schedule {schedule['id']} "
+                         f'for publishing all TCs')
+        try:
+            installation = schedule['parameter']['installation']
+            installation_client = self.get_installation_admin_client(installation['id'])
+
+            tcs = list(installation_client('tier').configs.all())
+            pubsub_client = get_pubsub_client(installation)
+
+            for tc in tcs:
+                try:
+                    publish_tc(
+                        installation_client,
+                        pubsub_client,
+                        tc,
+                        self.logger,
+                    )
+                except (ClientError, GoogleAPIError):
+                    self.logger.exception(f"Problem in while publishing Tier Config {tc['id']}.")
         except (ClientError, GoogleAPIError) as e:
             self.logger.exception('Problem in calling Connect or Google APIs.')
             raise e

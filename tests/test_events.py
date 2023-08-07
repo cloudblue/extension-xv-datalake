@@ -316,20 +316,20 @@ def test_handle_tier_config_request(
     client_mocker_factory,
     logger,
     tcr,
-    tc,
+    tc_processing,
     tc_params,
     installation,
     tcr_type,
 ):
     modified_tcr = deepcopy(tcr)
     modified_tcr['type'] = tcr_type
-    parameter_names = [param['id'] for param in tc['params']]
+    parameter_names = [param['id'] for param in tc_processing['params']]
 
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
     client_mocker('tier').configs[modified_tcr['configuration']['id']].get(
-        return_value=tc,
+        return_value=tc_processing,
     )
-    client_mocker.products[tc['product']['id']].parameters.filter(
+    client_mocker.products[tc_processing['product']['id']].parameters.filter(
         R().name.in_(parameter_names),
     ).mock(
         return_value=tc_params,
@@ -367,20 +367,20 @@ def test_handle_tier_config_request_failed(
     client_mocker_factory,
     logger,
     tcr,
-    tc,
+    tc_processing,
     tc_params,
     installation,
     tcr_type,
 ):
     modified_tcr = deepcopy(tcr)
     modified_tcr['type'] = tcr_type
-    parameter_names = [param['id'] for param in tc['params']]
+    parameter_names = [param['id'] for param in tc_processing['params']]
 
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
     client_mocker('tier').configs[modified_tcr['configuration']['id']].get(
-        return_value=tc,
+        return_value=tc_processing,
     )
-    client_mocker.products[tc['product']['id']].parameters.filter(
+    client_mocker.products[tc_processing['product']['id']].parameters.filter(
         R().name.in_(parameter_names),
     ).mock(
         return_value=tc_params,
@@ -401,3 +401,186 @@ def test_handle_tier_config_request_failed(
 
     with pytest.raises(PermissionDenied):
         method_map[tcr_type](modified_tcr)
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_publish_tcs_success(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    connect_client,
+    client_mocker_factory,
+    logger,
+    installation,
+    schedule,
+    context,
+    tcs,
+    tc_processing,
+    tcr,
+    tc_params,
+):
+    # Prepare test data
+    test_schedule = deepcopy(schedule)
+    test_schedule['method'] = 'publish_tcs'
+    test_schedule['parameter'].pop('products')
+    parameter_names = [param['id'] for param in tc_processing['params']]
+    tc_processing_update = deepcopy(tc_processing)
+    tc_processing_update['open_request']['id'] = 'TCR-000-000-000-001'
+    update_tcr = deepcopy(tcr)
+    update_tcr['type'] = 'update'
+    tcs.append(tc_processing_update)
+
+    # Mocking
+    client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
+    client_mocker('tier').configs.all().mock(return_value=tcs)
+    client_mocker('tier').config_requests[tc_processing['open_request']['id']].get(
+        return_value=tcr)
+    client_mocker('tier').config_requests[tc_processing_update['open_request']['id']].get(
+        return_value=update_tcr)
+    client_mocker.products[tc_processing['product']['id']].parameters.filter(
+        R().name.in_(parameter_names),
+    ).mock(return_value=tc_params)
+
+    # Execute Test code
+    ext = DatalakeExtensionEventsApplication(
+        connect_client,
+        logger,
+        config={},
+        installation_client=connect_client,
+        installation=installation,
+        context=Context(**context),
+    )
+    ext.get_installation_admin_client = lambda self: connect_client
+
+    result = ext.publish_tcs(test_schedule)
+
+    # Assert result
+    assert result.status == 'success'
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_publish_tcs_failed(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    connect_client,
+    client_mocker_factory,
+    logger,
+    installation,
+    schedule,
+    context,
+):
+    # Prepare test data
+    test_schedule = deepcopy(schedule)
+    test_schedule['method'] = 'publish_tcs'
+    test_schedule['parameter'].pop('products')
+
+    # Mocking
+    client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
+    client_mocker('tier').configs.all().mock(status_code=400)
+
+    # Execute Test code
+    ext = DatalakeExtensionEventsApplication(
+        connect_client,
+        logger,
+        config={},
+        installation_client=connect_client,
+        installation=installation,
+        context=Context(**context),
+    )
+    ext.get_installation_admin_client = lambda self: connect_client
+
+    with pytest.raises(ClientError):
+        ext.publish_tcs(test_schedule)
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_publish_tcs_individual_failed(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    connect_client,
+    client_mocker_factory,
+    logger,
+    installation,
+    schedule,
+    context,
+    tc_processing,
+):
+    # Prepare test data
+    test_schedule = deepcopy(schedule)
+    test_schedule['method'] = 'publish_tcs'
+    test_schedule['parameter'].pop('products')
+
+    # Mocking
+    client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
+    client_mocker('tier').configs.all().mock(return_value=[tc_processing])
+    client_mocker('tier').config_requests[tc_processing['open_request']['id']].get(
+        status_code=400,
+    )
+
+    # Execute Test code
+    ext = DatalakeExtensionEventsApplication(
+        connect_client,
+        logger,
+        config={},
+        installation_client=connect_client,
+        installation=installation,
+        context=Context(**context),
+    )
+    ext.get_installation_admin_client = lambda self: connect_client
+
+    result = ext.publish_tcs(test_schedule)
+
+    # Assert result
+    assert result.status == 'success'
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_publish_products_all_products_individual_failed(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    connect_client,
+    client_mocker_factory,
+    logger,
+    product,
+    parameters,
+    installation,
+    schedule,
+    context,
+):
+    test_schedule = deepcopy(schedule)
+    test_schedule['parameter']['products'] = []
+
+    client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
+
+    client_mocker.products.filter(
+        R().visibility.listing.eq(True) or R().visibility.syndication.eq(True),
+    ).all().mock(return_value=[product])
+
+    client_mocker.products[product['id']].parameters.all().mock(
+        status_code=400,
+    )
+
+    ext = DatalakeExtensionEventsApplication(
+        connect_client,
+        logger,
+        config={},
+        installation_client=connect_client,
+        installation=installation,
+        context=Context(**context),
+    )
+    ext.get_installation_admin_client = lambda self: connect_client
+
+    result = ext.publish_products(test_schedule)
+
+    assert result.status == 'success'
