@@ -27,6 +27,7 @@ from connect_ext_datalake.client import GooglePubsubClient
 from connect_ext_datalake.schemas import Product, ProductInput, Settings
 from connect_ext_datalake.services import (
     create_task_publish_product,
+    create_task_publish_tc,
     list_products,
 )
 
@@ -140,7 +141,7 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
 
     @router.post(
         '/products/*/publish-all',
-        summary='Publish Products Info',
+        summary='Publish All Products Info',
     )
     def publish_all_product_info(
             self,
@@ -151,6 +152,28 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
     ):
         try:
             create_task_publish_product(
+                logger,
+                client,
+                context,
+                installation,
+            )
+            return HTMLResponse(status_code=202)
+        except ClientError as e:
+            return self.get_error_response(e)
+
+    @router.post(
+        '/tier/configs/*/publish-all',
+        summary='Publish All Tier Configs Info',
+    )
+    def publish_all_tc_info(
+            self,
+            context: Context = Depends(get_call_context),
+            client: ConnectClient = Depends(get_extension_client),
+            installation: dict = Depends(get_installation),
+            logger: LoggerAdapter = Depends(get_logger),
+    ):
+        try:
+            create_task_publish_tc(
                 logger,
                 client,
                 context,

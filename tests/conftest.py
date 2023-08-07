@@ -272,10 +272,20 @@ def tcr():
 
 
 @pytest.fixture
-def tc():
-    return json.load(open('./tests/fixtures/tc.json'))
+def tc_processing():
+    return json.load(open('./tests/fixtures/tc_processing.json'))
 
 
 @pytest.fixture
 def tc_params():
     return json.load(open('./tests/fixtures/tc_params.json'))
+
+
+@pytest.fixture
+def tc_active():
+    return json.load(open('./tests/fixtures/tc_active.json'))
+
+
+@pytest.fixture
+def tcs(tc_processing, tc_active):
+    return [tc_processing, tc_active]
