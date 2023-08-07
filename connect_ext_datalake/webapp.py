@@ -28,7 +28,7 @@ from connect_ext_datalake.schemas import Product, ProductInput, Settings
 from connect_ext_datalake.services import (
     create_task_publish_product,
     create_task_publish_tc,
-    list_products,
+    list_products, publish_tc, get_pubsub_client,
 )
 
 
@@ -180,5 +180,29 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
                 installation,
             )
             return HTMLResponse(status_code=202)
+        except ClientError as e:
+            return self.get_error_response(e)
+
+    @router.post(
+        '/tier/configs/{tc_id}/publish',
+        summary='Publish All Tier Configs Info',
+    )
+    def publish_all_tc_info(
+            self,
+            tc_id: str,
+            client: ConnectClient = Depends(get_extension_client),
+            installation: dict = Depends(get_installation),
+            logger: LoggerAdapter = Depends(get_logger),
+    ):
+        try:
+            pubsub_client = get_pubsub_client(installation)
+            tc = client('tier').configs[tc_id].get()
+            publish_tc(
+                client,
+                pubsub_client,
+                tc,
+                logger,
+            )
+            return HTMLResponse(status_code=200)
         except ClientError as e:
             return self.get_error_response(e)
