@@ -156,6 +156,7 @@ class DatalakeExtensionEventsApplication(EventsApplicationBase):
         try:
             installation = schedule['parameter']['installation']
             installation_client = self.get_installation_admin_client(installation['id'])
+            installation_client.resourceset_append = False
 
             count = installation_client('tier').configs.all().count()
             self.logger.info(f'Total number of Tier Configs: {count}')
