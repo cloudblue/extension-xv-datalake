@@ -129,16 +129,20 @@ def publish_product(
     logger.info(f"Publish of product {product['id']} is successful. Payload: {payload}")
 
 
-def sanitize_tc(client, tc):
+def clear_gdpr_data(tc):
     remove_properties(
-        tc,
-        [
-            'connection',
-            'events',
-            'template',
-            'open_request',
-        ],
+        tc['account'],
+        ['contact_info'],
     )
+
+    if 'tiers' in tc.keys():
+        if 'tier1' in tc['tiers'].keys():
+            remove_properties(tc['tiers']['tier1'], ['contact_info'])
+        if 'tier2' in tc['tiers'].keys():
+            remove_properties(tc['tiers']['tier2'], ['contact_info'])
+
+
+def fix_param_id_and_name(client, tc):
     parameter_names = [param['id'] for param in tc['params']]
     parameters = client.products[tc['product']['id']].parameters.filter(
         R().name.in_(parameter_names),
@@ -149,6 +153,20 @@ def sanitize_tc(client, tc):
         param['name'] = param['id']
         if param['id'] in param_name_id_map.keys():
             param['id'] = param_name_id_map[param['id']]
+
+
+def sanitize_tc(client, tc):
+    remove_properties(
+        tc,
+        [
+            'connection',
+            'events',
+            'template',
+            'open_request',
+        ],
+    )
+    clear_gdpr_data(tc)
+    fix_param_id_and_name(client, tc)
     verify_property(
         tc,
         {
