@@ -1,0 +1,235 @@
+[
+    {
+        "id": "PRM-814-505-018-0005",
+        "name": "tenant_preference",
+        "title": "Please select the desired option for the CSP account",
+        "description": "Please select the desired option for the CSP account",
+        "type": "choice",
+        "scope": "asset",
+        "phase": "ordering",
+        "constraints": {
+            "required": false,
+            "hidden": false,
+            "unique": false,
+            "readonly": false,
+            "choices": [
+                {
+                    "default": true,
+                    "label": "Create new Microsoft CSP end customer account",
+                    "value": "new"
+                },
+                {
+                    "label": "Use an existing Microsoft CSP end customer account",
+                    "value": "existing"
+                }
+            ]
+        },
+        "position": 40000
+    },
+    {
+        "id": "PRM-814-505-018-0004",
+        "name": "microsoft_domain",
+        "title": "Microsoft Domain Name",
+        "description": "Please provide an onmicrosoft.com domain. For example: mycompanyDomain.onmicrosoft.com",
+        "type": "subdomain",
+        "scope": "asset",
+        "phase": "ordering",
+        "hint": "Up to 27 characters long",
+        "constraints": {
+            "required": false,
+            "hidden": true,
+            "unique": false,
+            "readonly": false,
+            "dependency": {
+                "id": "PRM-814-505-018-0005",
+                "name": "tenant_preference",
+                "value": [
+                    "new",
+                    "existing"
+                ],
+                "hidden": false
+            },
+            "choices": [
+                {
+                    "default": true,
+                    "label": "onmicrosoft.com",
+                    "value": "onmicrosoft.com"
+                }
+            ]
+        },
+        "position": 50000
+    },
+    {
+        "id": "PRM-814-505-018-0012",
+        "name": "mca_acceptance",
+        "title": "MCA Acceptance",
+        "description": "MCA Acceptance.",
+        "type": "dropdown",
+        "scope": "asset",
+        "phase": "ordering",
+        "constraints": {
+            "required": false,
+            "hidden": true,
+            "unique": false,
+            "readonly": false,
+            "dependency": {
+                "id": "PRM-814-505-018-0005",
+                "name": "tenant_preference",
+                "value": [
+                    "new"
+                ],
+                "hidden": false
+            },
+            "choices": [
+                {
+                    "label": "Yes",
+                    "value": "yes"
+                },
+                {
+                    "label": "No",
+                    "value": "no"
+                }
+            ]
+        },
+        "position": 120000
+    },
+    {
+        "id": "PRM-814-505-018-0014",
+        "name": "last_name_agreement",
+        "title": "Customer last name",
+        "description": "Customer's last name.",
+        "type": "text",
+        "scope": "asset",
+        "phase": "ordering",
+        "constraints": {
+            "required": false,
+            "hidden": true,
+            "unique": false,
+            "readonly": false,
+            "dependency": {
+                "id": "PRM-814-505-018-0005",
+                "name": "tenant_preference",
+                "value": [
+                    "new"
+                ],
+                "hidden": false
+            }
+        },
+        "position": 140000
+    },
+    {
+        "id": "PRM-814-505-018-0015",
+        "name": "email_address_agreement",
+        "title": "Email Address",
+        "description": "Email Address.",
+        "type": "email",
+        "scope": "asset",
+        "phase": "ordering",
+        "constraints": {
+            "required": false,
+            "hidden": true,
+            "unique": false,
+            "readonly": false,
+            "dependency": {
+                "id": "PRM-814-505-018-0005",
+                "name": "tenant_preference",
+                "value": [
+                    "new"
+                ],
+                "hidden": false
+            }
+        },
+        "position": 150000
+    },
+    {
+        "id": "PRM-814-505-018-0016",
+        "name": "agreement_date",
+        "title": "Microsoft Customer Agreement Date",
+        "description": "Please add the date when the Microsoft Customer Agreement was accepted.",
+        "type": "text",
+        "scope": "asset",
+        "phase": "ordering",
+        "hint": "Please add the date when the Microsoft Customer Agreement was accepted. (MM-DD-YYYY)",
+        "constraints": {
+            "required": false,
+            "hidden": true,
+            "unique": false,
+            "readonly": false,
+            "dependency": {
+                "id": "PRM-814-505-018-0005",
+                "name": "tenant_preference",
+                "value": [
+                    "new"
+                ],
+                "hidden": false
+            }
+        },
+        "position": 160000
+    },
+    {
+        "id": "PRM-814-505-018-0087",
+        "name": "partner_on_record_attestation_accepted",
+        "title": "Partner on Record Attestation",
+        "description": "For new orders it is required to provide partner on record attestation.",
+        "type": "checkbox",
+        "scope": "asset",
+        "phase": "ordering",
+        "constraints": {
+            "required": false,
+            "hidden": true,
+            "unique": false,
+            "readonly": false,
+            "dependency": {
+                "id": "PRM-814-505-018-0005",
+                "name": "tenant_preference",
+                "value": [
+                    "new",
+                    "existing"
+                ],
+                "hidden": false
+            },
+            "choices": [
+                {
+                    "label": "I confirm that my organization is acting as an Indirect Partner when choosing a Reseller and as a Direct Partner in the absence of selecting a reseller.",
+                    "value": "attestation_accepted"
+                }
+            ]
+        },
+        "position": 870000
+    },
+    {
+        "id": "PRM-814-505-018-0096",
+        "name": "special_qualifications",
+        "title": "State Owned Entity Attestation",
+        "description": "Please choose the customer's eligible qualification.",
+        "type": "dropdown",
+        "scope": "asset",
+        "phase": "ordering",
+        "hint": "Please choose the customer's eligible qualification.",
+        "constraints": {
+            "required": false,
+            "hidden": true,
+            "unique": false,
+            "readonly": false,
+            "dependency": {
+                "id": "PRM-814-505-018-0005",
+                "name": "tenant_preference",
+                "value": [
+                    "new"
+                ],
+                "hidden": false
+            },
+            "choices": [
+                {
+                    "label": "I declare that the user of this license is not a State Owned Entity.",
+                    "value": "None"
+                },
+                {
+                    "label": "I declare that the user of this license will be utilizing it on behalf of a State Owned Entity.",
+                    "value": "StateOwnedEntity"
+                }
+            ]
+        },
+        "position": 960000
+    }
+]

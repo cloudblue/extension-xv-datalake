@@ -48,6 +48,27 @@ def verify_property(obj: dict, properties: dict[str, str]):
             obj[prop] = properties[prop]
 
 
+def populate_dependents(parameters: list):
+    dependency_map = {}
+
+    for param in parameters:
+        if 'constraints' in param.keys() and 'dependency' in param['constraints'].keys():
+            parent_param_id = param['constraints']['dependency']['id']
+            dependent_object = param['constraints'].pop('dependency')
+            dependent_object['id'] = param['id']
+            dependent_object['name'] = param['name']
+
+            if parent_param_id not in dependency_map.keys():
+                dependency_map[parent_param_id] = []
+
+            dependency_map[parent_param_id].append(dependent_object)
+
+    if dependency_map:
+        for param in parameters:
+            if param['id'] in dependency_map.keys():
+                param['constraints']['dependents'] = dependency_map[param['id']]
+
+
 def sanitize_product(product: dict):
     remove_properties(
         product,
@@ -74,6 +95,7 @@ def sanitize_product(product: dict):
 
 
 def sanitize_parameters(parameters: list):
+    populate_dependents(parameters)
     for parameter in parameters:
         remove_properties(
             parameter,
@@ -96,6 +118,15 @@ def prepare_product_data_from_listing_request(client, listing_request):
         data['product'] = sanitize_product(client.products[product_id].get())
         data['product']['parameters'] = sanitize_parameters(
             list(client.products[product_id].parameters.all()),
+        )
+    else:
+        verify_property(
+            listing_request['product'],
+            {
+                'published_at': datetime.now(
+                    tz=timezone(timedelta(hours=0)),
+                ).isoformat(timespec='seconds'),
+            },
         )
 
     return data
