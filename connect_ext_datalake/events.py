@@ -88,21 +88,36 @@ class DatalakeExtensionEventsApplication(EventsApplicationBase):
 
     @event(
         'tier_config_change_request_processing',
-        statuses=['approved'],
+        statuses=[
+            'pending',
+            'approved',
+            'failed',
+            'inquiring',
+        ],
     )
     def handle_tier_config_change_request_processing(self, tcr):
         return self.__process_tcr_event(tcr)
 
     @event(
         'tier_config_adjustment_request_processing',
-        statuses=['approved'],
+        statuses=[
+            'pending',
+            'approved',
+            'failed',
+            'inquiring',
+        ],
     )
     def handle_tier_config_adjustment_request_processing(self, tcr):
         return self.__process_tcr_event(tcr)
 
     @event(
         'tier_config_setup_request_processing',
-        statuses=['approved'],
+        statuses=[
+            'pending',
+            'approved',
+            'failed',
+            'inquiring',
+        ],
     )
     def handle_tier_config_setup_request_processing(self, tcr):
         return self.__process_tcr_event(tcr)

@@ -186,6 +186,30 @@ def fix_param_id_and_name(client, tc):
             param['id'] = param_name_id_map[param['id']]
 
 
+def sanitize_tcr(tcr):
+    remove_properties(
+        tcr,
+        [
+            'parent_configuration',
+            'events',
+            'previous_approved_request',
+            'assignee',
+        ],
+    )
+
+
+def include_last_tcr_request(client, tc):
+    last_tcr = client('tier').config_requests.filter(
+        R().configuration.id.eq(tc['id']),
+    ).select(
+        '-tiers',
+        '-configuration',
+    ).order_by('-created').first()
+
+    sanitize_tcr(last_tcr)
+    tc['last_request'] = last_tcr
+
+
 def sanitize_tc(client, tc):
     remove_properties(
         tc,
@@ -222,6 +246,7 @@ def prepare_tc_data_from_tcr(client, tcr):
     tcr_type = tcr['type']
 
     tc = client('tier').configs[tc_id].get()
+    include_last_tcr_request(client, tc)
 
     return {
         'table_name': 'cmp_connect_tierconfig',
@@ -231,6 +256,7 @@ def prepare_tc_data_from_tcr(client, tcr):
 
 
 def prepare_tc_data(client, tc):
+    include_last_tcr_request(client, tc)
 
     if tc['status'] == 'processing' and 'open_request' in tc.keys():
         pending_tcr = client('tier').config_requests[tc['open_request']['id']].get()

@@ -320,6 +320,7 @@ def test_handle_tier_config_request(
     tc_params,
     installation,
     tcr_type,
+    tcr_list,
 ):
     modified_tcr = deepcopy(tcr)
     modified_tcr['type'] = tcr_type
@@ -333,6 +334,11 @@ def test_handle_tier_config_request(
         R().name.in_(parameter_names),
     ).mock(
         return_value=tc_params,
+    )
+    client_mocker('tier').config_requests.filter(
+        R().configuration.id.eq(modified_tcr['configuration']['id']),
+    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+        return_value=tcr_list,
     )
 
     ext = DatalakeExtensionEventsApplication(
@@ -371,6 +377,7 @@ def test_handle_tier_config_request_failed(
     tc_params,
     installation,
     tcr_type,
+    tcr_list,
 ):
     modified_tcr = deepcopy(tcr)
     modified_tcr['type'] = tcr_type
@@ -384,6 +391,11 @@ def test_handle_tier_config_request_failed(
         R().name.in_(parameter_names),
     ).mock(
         return_value=tc_params,
+    )
+    client_mocker('tier').config_requests.filter(
+        R().configuration.id.eq(modified_tcr['configuration']['id']),
+    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+        return_value=tcr_list,
     )
 
     ext = DatalakeExtensionEventsApplication(
@@ -420,6 +432,7 @@ def test_publish_tcs_success(
     tc_processing,
     tcr,
     tc_params,
+    tcr_list,
 ):
     # Prepare test data
     test_schedule = deepcopy(schedule)
@@ -443,6 +456,11 @@ def test_publish_tcs_success(
     client_mocker.products[tc_processing['product']['id']].parameters.filter(
         R().name.in_(parameter_names),
     ).mock(return_value=tc_params)
+    client_mocker('tier').config_requests.filter(
+        R().configuration.id.eq(update_tcr['configuration']['id']),
+    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+        return_value=tcr_list,
+    )
 
     # Execute Test code
     ext = DatalakeExtensionEventsApplication(
@@ -513,6 +531,8 @@ def test_publish_tcs_individual_failed(
     schedule,
     context,
     tc_processing,
+    tcr,
+    tcr_list,
 ):
     # Prepare test data
     test_schedule = deepcopy(schedule)
@@ -525,6 +545,11 @@ def test_publish_tcs_individual_failed(
     client_mocker('tier').configs.all().count(return_value=1)
     client_mocker('tier').config_requests[tc_processing['open_request']['id']].get(
         status_code=400,
+    )
+    client_mocker('tier').config_requests.filter(
+        R().configuration.id.eq(tc_processing['id']),
+    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+        return_value=tcr_list,
     )
 
     # Execute Test code

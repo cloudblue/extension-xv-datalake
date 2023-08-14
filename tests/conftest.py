@@ -282,6 +282,11 @@ def tcr():
 
 
 @pytest.fixture
+def tcr_list():
+    return json.load(open('./tests/fixtures/tcr_list.json'))
+
+
+@pytest.fixture
 def tc_processing():
     return json.load(open('./tests/fixtures/tc_processing.json'))
 
