@@ -170,6 +170,16 @@ def parameters():
 
 
 @pytest.fixture
+def parameter_with_dependencies():
+    return json.load(open('./tests/fixtures/product_params.json'))
+
+
+@pytest.fixture
+def parameter_with_dependents():
+    return json.load(open('./tests/fixtures/product_params_expected.json'))
+
+
+@pytest.fixture
 def products():
     return [
         {
