@@ -8,9 +8,19 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class Settings(BaseModel):
+class Hub(BaseModel):
+    id: str
+    name: str
+    icon: str | None = None
+
+
+class SettingInput(BaseModel):
     account_info: dict
     product_topic: str
+
+
+class Setting(SettingInput):
+    hub: Hub | None = None
 
 
 class Account(BaseModel):

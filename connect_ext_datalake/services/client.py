@@ -8,11 +8,11 @@ import json
 from google.auth.jwt import Credentials
 from google.cloud.pubsub_v1 import PublisherClient
 
-from connect_ext_datalake.schemas import Settings
+from connect_ext_datalake.schemas import Setting
 
 
 class GooglePubsubClient:
-    def __init__(self, settings: Settings):
+    def __init__(self, settings: Setting):
         self.account = settings.account_info
         self.topic = settings.product_topic
 

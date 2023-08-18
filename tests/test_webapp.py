@@ -8,15 +8,15 @@ from unittest.mock import patch
 from connect.client import R
 from google.api_core.exceptions import PermissionDenied
 
-from connect_ext_datalake.client import GooglePubsubClient
-from connect_ext_datalake.schemas import Settings
+from connect_ext_datalake.schemas import SettingInput
+from connect_ext_datalake.services.client import GooglePubsubClient
 from connect_ext_datalake.webapp import DatalakeExtensionWebApplication
 
 
 def test_retrieve_settings_empty(test_client_factory):
     installation = {
         'id': 'EIN-000',
-        'settings': {},
+        'settings': [],
     }
 
     client = test_client_factory(DatalakeExtensionWebApplication)
@@ -25,17 +25,14 @@ def test_retrieve_settings_empty(test_client_factory):
     assert response.status_code == 200
 
     data = response.json()
-    assert data == {'account_info': {}, 'product_topic': ''}
+    assert data == []
 
 
-def test_retrieve_settings(test_client_factory):
+def test_retrieve_settings(test_client_factory, setting):
 
     installation = {
         'id': 'EIN-000',
-        'settings': {
-            'account_info': {'account_id': 'acc008787827'},
-            'product_topic': 'projects/acc008787827/topics/connect-products-topic ',
-        },
+        'settings': [setting.dict()],
     }
 
     client = test_client_factory(DatalakeExtensionWebApplication)
@@ -43,10 +40,9 @@ def test_retrieve_settings(test_client_factory):
     response = client.get('/api/settings', installation=installation)
     assert response.status_code == 200
 
-    data = response.json()
-    assert 'account_id' in data['account_info']
-    assert data['account_info']['account_id'] == 'acc008787827'
-    assert data['product_topic'] == 'projects/acc008787827/topics/connect-products-topic '
+    data = response.json()[0]
+    assert data['account_info'] == {}
+    assert data['product_topic'] == ''
 
 
 @patch.object(GooglePubsubClient, 'validate', return_value=True)
@@ -57,32 +53,35 @@ def test_save_settings_validation_success(
     test_client_factory,
     client_mocker_factory,
     context,
+    hub,
+    installation,
 ):
-    settings = Settings(
+    setting = SettingInput(
         account_info={'account_id': 'acc008787827'},
         product_topic='projects/acc008787827/topics/connect-products-topic ',
     )
 
     client_mocker = client_mocker_factory()
-
+    client_mocker.hubs[hub['id']].get(
+        return_value=hub,
+    )
     client_mocker('devops').installations['EIN-000'].update(
         return_value={},
-        match_body={
-            'settings': settings.dict(),
-        },
     )
 
     client = test_client_factory(DatalakeExtensionWebApplication)
 
     response = client.post(
-        '/api/settings',
-        json=settings.dict(),
+        '/api/settings/HB-0000-0000',
+        json=setting.dict(),
         context=context,
+        installation=installation,
     )
     assert response.status_code == 200
 
     data = response.json()
-    assert data == settings.dict()
+    assert data['account_info'] == setting.dict()['account_info']
+    assert data['product_topic'] == setting.dict()['product_topic']
 
 
 @patch.object(
@@ -95,8 +94,9 @@ def test_save_settings_validation_failed(
     mock_client_init,
     mock_validate,
     test_client_factory,
+    installation,
 ):
-    settings = Settings(
+    setting = SettingInput(
         account_info={'account_id': 'acc008787827'},
         product_topic='projects/acc008787827/topics/connect-products-topic ',
     )
@@ -104,9 +104,10 @@ def test_save_settings_validation_failed(
     client = test_client_factory(DatalakeExtensionWebApplication)
 
     response = client.post(
-        '/api/settings',
-        json=settings.dict(),
+        '/api/settings/HB-0000-0000',
+        json=setting.dict(),
         context={'installation_id': 'EIN-000'},
+        installation=installation,
     )
     assert response.status_code == 400
 
@@ -129,7 +130,7 @@ def test_settings_validation_failed(
     client = test_client_factory(DatalakeExtensionWebApplication)
 
     response = client.get(
-        '/api/settings/validate',
+        '/api/settings/HB-0000-0000/validate',
         installation=installation,
     )
     assert response.status_code == 400
@@ -145,17 +146,19 @@ def test_settings_validation_pass(
     mock_validate,
     test_client_factory,
     installation,
+    hub,
 ):
     client = test_client_factory(DatalakeExtensionWebApplication)
 
     response = client.get(
-        '/api/settings/validate',
+        '/api/settings/HB-0000-0000/validate',
         installation=installation,
     )
     assert response.status_code == 200
 
     data = response.json()
-    assert data == {'account_info': {}, 'product_topic': ''}
+    assert data['account_info'] == {}
+    assert data['product_topic'] == ''
 
 
 def test_list_products(
@@ -308,6 +311,77 @@ def test_publish_all_tc_info_failed(
 
     response = client.post(
         '/api/tier/configs/*/publish-all',
+        installation=installation,
+        context=context,
+    )
+
+    assert response.status_code == 400
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_publish_tc_info_success(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    client_mocker_factory,
+    test_client_factory,
+    installation,
+    context,
+    tc_active,
+    tc_params,
+    tcr_list,
+):
+    parameter_names = [param['id'] for param in tc_active['params']]
+
+    client_mocker = client_mocker_factory()
+    client_mocker('tier').configs[tc_active['id']].get(
+        return_value=tc_active,
+    )
+    client_mocker.products[tc_active['product']['id']].parameters.filter(
+        R().name.in_(parameter_names),
+    ).mock(return_value=tc_params)
+    client_mocker('tier').config_requests.filter(
+        R().configuration.id.eq(tc_active['id']),
+    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+        return_value=tcr_list,
+    )
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.post(
+        f"/api/tier/configs/{tc_active['id']}/publish",
+        installation=installation,
+        context=context,
+    )
+
+    assert response.status_code == 200
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_publish_tc_info_failed(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    client_mocker_factory,
+    test_client_factory,
+    installation,
+    context,
+    tc_active,
+):
+
+    client_mocker = client_mocker_factory()
+    client_mocker('tier').configs[tc_active['id']].get(
+        status_code=400,
+    )
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.post(
+        f"/api/tier/configs/{tc_active['id']}/publish",
         installation=installation,
         context=context,
     )

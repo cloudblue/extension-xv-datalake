@@ -6,14 +6,6 @@
 from datetime import datetime, timedelta, timezone
 
 from connect.client import ConnectClient, R
-from connect.eaas.core.inject.models import Context
-
-from connect_ext_datalake.schemas import (
-    Product,
-    ProductInput,
-    Settings,
-)
-from connect_ext_datalake.client import GooglePubsubClient
 
 
 TCR_UPDATE_TYPE_MAPPING = {
@@ -21,19 +13,6 @@ TCR_UPDATE_TYPE_MAPPING = {
     'update': 'update',
     'adjustment': 'update',
 }
-
-
-def get_pubsub_client(installation):
-    client = GooglePubsubClient(
-        Settings(
-            account_info=installation['settings'].get('account_info', {}),
-            product_topic=installation['settings'].get('product_topic', ''),
-        ),
-    )
-
-    client.validate()
-
-    return client
 
 
 def remove_properties(obj: dict, properties: list):
@@ -105,7 +84,10 @@ def sanitize_parameters(parameters: list):
     return parameters
 
 
-def prepare_product_data_from_listing_request(client, listing_request):
+def prepare_product_data_from_listing_request(
+    client: ConnectClient,
+    listing_request: dict,
+):
     product_id = listing_request['product']['id']
 
     data = {
@@ -132,7 +114,10 @@ def prepare_product_data_from_listing_request(client, listing_request):
     return data
 
 
-def prepare_product_data_from_product(client, product):
+def prepare_product_data_from_product(
+    client: ConnectClient,
+    product: dict,
+):
     product_id = product['id']
 
     data = {
@@ -148,19 +133,7 @@ def prepare_product_data_from_product(client, product):
     return data
 
 
-def publish_product(
-    client: ConnectClient,
-    pubsub_client: GooglePubsubClient,
-    product,
-    logger,
-):
-    payload = prepare_product_data_from_product(client, product)
-    logger.info(f"Start publishing product {product['id']}. Payload: {payload}")
-    pubsub_client.publish(payload)
-    logger.info(f"Publish of product {product['id']} is successful. Payload: {payload}")
-
-
-def clear_gdpr_data(tc):
+def clear_gdpr_data(tc: dict):
     remove_properties(
         tc['account'],
         ['contact_info'],
@@ -173,7 +146,7 @@ def clear_gdpr_data(tc):
             remove_properties(tc['tiers']['tier2'], ['contact_info'])
 
 
-def fix_param_id_and_name(client, tc):
+def fix_param_id_and_name(client: ConnectClient, tc: dict):
     parameter_names = [param['id'] for param in tc['params']]
     parameters = client.products[tc['product']['id']].parameters.filter(
         R().name.in_(parameter_names),
@@ -186,7 +159,7 @@ def fix_param_id_and_name(client, tc):
             param['id'] = param_name_id_map[param['id']]
 
 
-def sanitize_tcr(tcr):
+def sanitize_tcr(tcr: dict):
     remove_properties(
         tcr,
         [
@@ -198,7 +171,7 @@ def sanitize_tcr(tcr):
     )
 
 
-def include_last_tcr_request(client, tc):
+def include_last_tcr_request(client: ConnectClient, tc: dict):
     last_tcr = client('tier').config_requests.filter(
         R().configuration.id.eq(tc['id']),
     ).select(
@@ -210,7 +183,7 @@ def include_last_tcr_request(client, tc):
     tc['last_request'] = last_tcr
 
 
-def sanitize_tc(client, tc):
+def sanitize_tc(client: ConnectClient, tc: dict):
     remove_properties(
         tc,
         [
@@ -233,7 +206,7 @@ def sanitize_tc(client, tc):
     return tc
 
 
-def sanitize_tc_param(tc_param):
+def sanitize_tc_param(tc_param: dict):
     remove_properties(
         tc_param,
         ['value_error'],
@@ -241,7 +214,7 @@ def sanitize_tc_param(tc_param):
     return tc_param
 
 
-def prepare_tc_data_from_tcr(client, tcr):
+def prepare_tc_data_from_tcr(client: ConnectClient, tcr: dict):
     tc_id = tcr['configuration']['id']
     tcr_type = tcr['type']
 
@@ -255,109 +228,11 @@ def prepare_tc_data_from_tcr(client, tcr):
     }
 
 
-def prepare_tc_data(client, tc):
+def prepare_tc_data(client: ConnectClient, tc: dict):
     include_last_tcr_request(client, tc)
-
-    if tc['status'] == 'processing' and 'open_request' in tc.keys():
-        pending_tcr = client('tier').config_requests[tc['open_request']['id']].get()
-
-        if pending_tcr['type'] == 'setup':
-            return
 
     return {
         'table_name': 'cmp_connect_tierconfig',
         'update_type': 'update',
         'tier_config': sanitize_tc(client, tc),
     }
-
-
-def publish_tc_from_tcr(
-    client: ConnectClient,
-    pubsub_client: GooglePubsubClient,
-    tcr,
-    logger,
-):
-    payload = prepare_tc_data_from_tcr(client, tcr)
-    logger.info(f"Start publishing Tier Config {tcr['configuration']['id']}. Payload: {payload}")
-    pubsub_client.publish(payload)
-    logger.info(f"Publish of Tier Config {tcr['configuration']['id']}"
-                f' is successful. Payload: {payload}')
-
-
-def publish_tc(
-    client: ConnectClient,
-    pubsub_client: GooglePubsubClient,
-    tc,
-    logger,
-):
-    logger.info(f"Start publishing Tier Config {tc['id']}.")
-    payload = prepare_tc_data(client, tc)
-    if not payload:
-        logger.info(f"Spiking Tier Config {tc['id']} as the setup request is not approved yet.")
-    else:
-        logger.info(f"Start publishing Tier Config {tc['id']}. Payload: {payload}")
-        pubsub_client.publish(payload)
-        logger.info(f"Publish of Tier Config {tc['id']} is successful. Payload: {payload}")
-
-
-def list_products(client: ConnectClient):
-    connect_products = client.products.filter(
-        R().visibility.listing.eq(True) or R().visibility.syndication.eq(True),
-    ).all()
-
-    return list(map(Product.parse_obj, connect_products))
-
-
-def create_task_publish_product(
-    logger,
-    client: ConnectClient,
-    context: Context,
-    installation: dict,
-    products: list[ProductInput] | None = None,
-):
-    payload = {
-        'method': 'publish_products',
-        'name': f'Publish Products - {context.account_id}',
-        'description': 'Publish products to Xvantage Goggle PubSub Topic. Products - All',
-        'parameter': {
-            'installation': installation,
-            'products': [product.dict() for product in products] if products else None,
-        },
-        'trigger': {
-            'type': 'onetime',
-            'date': (datetime.utcnow() + timedelta(0, 70)).isoformat(),
-        },
-    }
-
-    if products:
-        products_ids = ','.join([product.id for product in products])
-        description = f'Publish {products_ids} products to Xvantage Goggle PubSub Topic.'
-        payload['description'] = description
-
-    logger.info(f'Creating dynamic one time schedule method with payload: {payload}')
-
-    client('devops').services[context.extension_id].environments[
-        context.environment_id].schedules.create(payload=payload)
-
-
-def create_task_publish_tc(
-    logger,
-    client: ConnectClient,
-    context: Context,
-    installation: dict,
-):
-    payload = {
-        'method': 'publish_tcs',
-        'name': f'Publish Tier Configs - {context.account_id}',
-        'description': 'Publish all Tier Configs to Xvantage Goggle PubSub Topic.',
-        'parameter': {'installation': installation},
-        'trigger': {
-            'type': 'onetime',
-            'date': (datetime.utcnow() + timedelta(0, 70)).isoformat(),
-        },
-    }
-
-    logger.info(f'Creating dynamic one time schedule method with payload: {payload}')
-
-    client('devops').services[context.extension_id].environments[
-        context.environment_id].schedules.create(payload=payload)

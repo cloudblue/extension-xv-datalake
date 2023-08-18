@@ -1,0 +1,87 @@
+{
+  "id": "MP-00000",
+  "name": "Another Market",
+  "description": "This marketplace will help you to sell more products faster.",
+  "owner": {
+    "id": "PA-000-000",
+    "name": "Connect Labs",
+    "icon": "/media/PA-000-000/media/icon.jpg"
+  },
+  "icon": "/media/PA-000-000/marketplaces/MP-00000/icon_QPVWU8r.png",
+  "zone": "NA",
+  "hubs": [
+    {
+      "hub": {
+        "id": "HB-0000-0000",
+        "name": "CB Stage"
+      },
+      "external_id": "000000001"
+    },
+    {
+      "hub": {
+        "id": "HB-0000-0001",
+        "name": "CB Prod"
+      },
+      "external_id": "000000002"
+    }
+  ],
+  "active_contracts": 4,
+  "countries": [
+    {
+      "id": "FR",
+      "name": "France"
+    },
+    {
+      "id": "DE",
+      "name": "Germany"
+    },
+    {
+      "id": "IT",
+      "name": "Italy"
+    }
+  ],
+  "currency": "EUR",
+  "attributes": [
+    {
+      "name": "Price",
+      "id": "price",
+      "description": "Wholesale price of an item from a Vendor to a Provider, i.e. Provider's cost."
+    },
+    {
+      "name": "Suggested T0 Price",
+      "id": "st0p",
+      "description": "Vendor's (manufacturer's) suggested Retail Customer (Tier-0) price, also known as MSRP."
+    },
+    {
+      "name": "Suggested T1 Price",
+      "id": "st1p",
+      "description": "Vendor's (manufacturer's) suggested Direct Reseller (Tier-1) price."
+    },
+    {
+      "name": "Suggested T2 Price",
+      "id": "st2p",
+      "description": "Vendor's (manufacturer's) suggested Reseller of a Reseller (Tier-2) price."
+    },
+    {
+      "name": "v. base_cost",
+      "description": "Basic Cost",
+      "id": "v.custom_1"
+    }
+  ],
+  "stats": {
+    "hubs": 2,
+    "contracts": 4
+  },
+  "events": {
+    "created": {
+      "at": "2021-11-30T06:28:21+00:00"
+    },
+    "updated": {
+      "at": "2023-01-20T17:24:48+00:00",
+      "by": {
+        "id": "UR-000-000-000",
+        "name": "Rahul Mondal"
+      }
+    }
+  }
+}

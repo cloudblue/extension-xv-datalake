@@ -6,9 +6,9 @@ from connect.eaas.core.inject.models import Context
 from google.api_core.exceptions import PermissionDenied
 import pytest
 
-from connect_ext_datalake.client import GooglePubsubClient
+from connect_ext_datalake.services.client import GooglePubsubClient
 from connect_ext_datalake.events import DatalakeExtensionEventsApplication
-from connect_ext_datalake.services import TCR_UPDATE_TYPE_MAPPING
+from connect_ext_datalake.services.payloads import TCR_UPDATE_TYPE_MAPPING
 
 
 @patch.object(GooglePubsubClient, 'validate', return_value=True)
@@ -24,23 +24,23 @@ def test_handle_listing_request_processing_new_listing(
     product,
     parameters,
     installation,
+    listing_request,
+    marketplace,
 ):
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
 
-    client_mocker.products[product['id']].get(
+    client_mocker.products[listing_request['listing']['product']['id']].get(
         return_value=product,
     )
-    client_mocker.products[product['id']].parameters.all().mock(
+    client_mocker.products[listing_request['listing']['product']['id']].parameters.all().mock(
         return_value=parameters,
     )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing_request['listing']['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
+    )
 
-    request = {
-        'id': 1,
-        'product': {
-            'id': 'PRD-000-000-001',
-        },
-        'type': 'new',
-    }
     ext = DatalakeExtensionEventsApplication(
         connect_client,
         logger,
@@ -48,7 +48,7 @@ def test_handle_listing_request_processing_new_listing(
         installation_client=connect_client,
         installation=installation,
     )
-    result = ext.handle_listing_request_processing(request)
+    result = ext.handle_listing_request_processing(listing_request)
     assert result.status == 'success'
 
 
@@ -69,23 +69,23 @@ def test_handle_listing_request_processing_failed(
     product,
     parameters,
     installation,
+    listing_request,
+    marketplace,
 ):
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
 
-    client_mocker.products[product['id']].get(
+    client_mocker.products[listing_request['listing']['product']['id']].get(
         return_value=product,
     )
-    client_mocker.products[product['id']].parameters.all().mock(
+    client_mocker.products[listing_request['listing']['product']['id']].parameters.all().mock(
         return_value=parameters,
     )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing_request['listing']['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
+    )
 
-    request = {
-        'id': 1,
-        'product': {
-            'id': 'PRD-000-000-001',
-        },
-        'type': 'new',
-    }
     ext = DatalakeExtensionEventsApplication(
         connect_client,
         logger,
@@ -94,8 +94,8 @@ def test_handle_listing_request_processing_failed(
         installation=installation,
     )
 
-    with pytest.raises(PermissionDenied):
-        ext.handle_listing_request_processing(request)
+    result = ext.handle_listing_request_processing(listing_request)
+    assert result.status == 'success'
 
 
 @patch.object(GooglePubsubClient, 'validate', return_value=True)
@@ -106,23 +106,30 @@ def test_handle_listing_request_processing_remove_listing(
     mock_publish,
     mock_validate,
     connect_client,
+    client_mocker_factory,
     logger,
+    product,
     installation,
+    listing_request,
+    marketplace,
 ):
-    request = {
-        'id': 1,
-        'product': {
-            'id': 'PRD-000-000-001',
-        },
-        'type': 'remove',
-    }
+    remove_listing_request = deepcopy(listing_request)
+    remove_listing_request['type'] = 'remove'
+    client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing_request['listing']['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
+    )
+
     ext = DatalakeExtensionEventsApplication(
         connect_client,
         logger,
         config={},
+        installation_client=connect_client,
         installation=installation,
     )
-    result = ext.handle_listing_request_processing(request)
+    result = ext.handle_listing_request_processing(remove_listing_request)
     assert result.status == 'success'
 
 
@@ -139,11 +146,23 @@ def test_handle_product_changed(
     product_with_published_at_property,
     parameters,
     installation,
+    listing,
+    marketplace,
 ):
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
 
-    client_mocker.products[product_with_published_at_property['id']].parameters.all().mock(
+    client_mocker.products[listing['product']['id']].parameters.all().mock(
         return_value=parameters,
+    )
+    client_mocker.listings.filter(
+        R().product.id.in_([listing['product']['id']]),
+    ).mock(
+        return_value=[listing],
+    )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
     )
 
     ext = DatalakeExtensionEventsApplication(
@@ -171,14 +190,26 @@ def test_handle_product_changed_failed(
     connect_client,
     client_mocker_factory,
     logger,
-    product,
+    product_with_published_at_property,
     parameters,
     installation,
+    listing,
+    marketplace,
 ):
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
 
-    client_mocker.products[product['id']].parameters.all().mock(
+    client_mocker.products[listing['product']['id']].parameters.all().mock(
         return_value=parameters,
+    )
+    client_mocker.listings.filter(
+        R().product.id.in_([listing['product']['id']]),
+    ).mock(
+        return_value=[listing],
+    )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
     )
 
     ext = DatalakeExtensionEventsApplication(
@@ -188,9 +219,8 @@ def test_handle_product_changed_failed(
         installation_client=connect_client,
         installation=installation,
     )
-
-    with pytest.raises(PermissionDenied):
-        ext.handle_product_changed(product)
+    result = ext.handle_product_changed(product_with_published_at_property)
+    assert result.status == 'success'
 
 
 @patch.object(GooglePubsubClient, 'validate', return_value=True)
@@ -208,6 +238,8 @@ def test_publish_products__specific_products_success(
     installation,
     schedule,
     context,
+    listing,
+    marketplace,
 ):
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
     client_mocker.products.filter(id__in=[product['id']]).mock(
@@ -215,6 +247,19 @@ def test_publish_products__specific_products_success(
     )
     client_mocker.products[product['id']].parameters.all().mock(
         return_value=parameters,
+    )
+    client_mocker.listings.filter(
+        R().product.id.in_([listing['product']['id']]),
+    ).mock(
+        return_value=[listing],
+    )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
+    )
+    client_mocker('devops').installations[installation['id']].get(
+        return_value=installation,
     )
 
     ext = DatalakeExtensionEventsApplication(
@@ -247,6 +292,8 @@ def test_publish_products_all_products_success(
     installation,
     schedule,
     context,
+    listing,
+    marketplace,
 ):
     test_schedule = deepcopy(schedule)
     test_schedule['parameter']['products'] = []
@@ -259,6 +306,19 @@ def test_publish_products_all_products_success(
 
     client_mocker.products[product['id']].parameters.all().mock(
         return_value=parameters,
+    )
+    client_mocker.listings.filter(
+        R().product.id.in_([listing['product']['id']]),
+    ).mock(
+        return_value=[listing],
+    )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
+    )
+    client_mocker('devops').installations[installation['id']].get(
+        return_value=installation,
     )
 
     ext = DatalakeExtensionEventsApplication(
@@ -315,14 +375,13 @@ def test_handle_tier_config_request(
     connect_client,
     client_mocker_factory,
     logger,
-    tcr,
     tc_processing,
     tc_params,
     installation,
     tcr_type,
     tcr_list,
 ):
-    modified_tcr = deepcopy(tcr)
+    modified_tcr = deepcopy(tcr_list[0])
     modified_tcr['type'] = tcr_type
     parameter_names = [param['id'] for param in tc_processing['params']]
 
@@ -372,14 +431,13 @@ def test_handle_tier_config_request_failed(
     connect_client,
     client_mocker_factory,
     logger,
-    tcr,
     tc_processing,
     tc_params,
     installation,
     tcr_type,
     tcr_list,
 ):
-    modified_tcr = deepcopy(tcr)
+    modified_tcr = deepcopy(tcr_list[0])
     modified_tcr['type'] = tcr_type
     parameter_names = [param['id'] for param in tc_processing['params']]
 
@@ -439,27 +497,26 @@ def test_publish_tcs_success(
     test_schedule['method'] = 'publish_tcs'
     test_schedule['parameter'].pop('products')
     parameter_names = [param['id'] for param in tc_processing['params']]
-    tc_processing_update = deepcopy(tc_processing)
-    tc_processing_update['open_request']['id'] = 'TCR-000-000-000-001'
-    update_tcr = deepcopy(tcr)
-    update_tcr['type'] = 'update'
-    tcs.append(tc_processing_update)
 
     # Mocking
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
     client_mocker('tier').configs.all().mock(return_value=tcs)
     client_mocker('tier').configs.all().count(return_value=2)
-    client_mocker('tier').config_requests[tc_processing['open_request']['id']].get(
-        return_value=tcr)
-    client_mocker('tier').config_requests[tc_processing_update['open_request']['id']].get(
-        return_value=update_tcr)
     client_mocker.products[tc_processing['product']['id']].parameters.filter(
         R().name.in_(parameter_names),
     ).mock(return_value=tc_params)
     client_mocker('tier').config_requests.filter(
-        R().configuration.id.eq(update_tcr['configuration']['id']),
+        R().configuration.id.eq(tcs[0]['id']),
     ).select('-tiers', '-configuration').order_by('-created').first().mock(
         return_value=tcr_list,
+    )
+    client_mocker('tier').config_requests.filter(
+        R().configuration.id.eq(tcs[1]['id']),
+    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+        return_value=tcr_list,
+    )
+    client_mocker('devops').installations[installation['id']].get(
+        return_value=installation,
     )
 
     # Execute Test code
@@ -500,6 +557,9 @@ def test_publish_tcs_failed(
 
     # Mocking
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
+    client_mocker('devops').installations[installation['id']].get(
+        return_value=installation,
+    )
     client_mocker('tier').configs.all().count(return_value=400)
 
     # Execute Test code
@@ -543,13 +603,13 @@ def test_publish_tcs_individual_failed(
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
     client_mocker('tier').configs.all().mock(return_value=[tc_processing])
     client_mocker('tier').configs.all().count(return_value=1)
-    client_mocker('tier').config_requests[tc_processing['open_request']['id']].get(
-        status_code=400,
+    client_mocker('devops').installations[installation['id']].get(
+        return_value=installation,
     )
     client_mocker('tier').config_requests.filter(
         R().configuration.id.eq(tc_processing['id']),
     ).select('-tiers', '-configuration').order_by('-created').first().mock(
-        return_value=tcr_list,
+        status_code=400,
     )
 
     # Execute Test code
@@ -584,6 +644,8 @@ def test_publish_products_all_products_individual_failed(
     installation,
     schedule,
     context,
+    listing,
+    marketplace,
 ):
     test_schedule = deepcopy(schedule)
     test_schedule['parameter']['products'] = []
@@ -593,6 +655,19 @@ def test_publish_products_all_products_individual_failed(
     client_mocker.products.filter(
         R().visibility.listing.eq(True) or R().visibility.syndication.eq(True),
     ).all().mock(return_value=[product])
+    client_mocker('devops').installations[installation['id']].get(
+        return_value=installation,
+    )
+    client_mocker.listings.filter(
+        R().product.id.in_([listing['product']['id']]),
+    ).mock(
+        return_value=[listing],
+    )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
+    )
 
     client_mocker.products[product['id']].parameters.all().mock(
         status_code=400,
