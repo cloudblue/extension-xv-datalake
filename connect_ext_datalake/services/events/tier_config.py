@@ -30,7 +30,7 @@ class TierConfigEventsMixin:
                 )
             else:
                 self.logger.info(f"Publish of TCR {tcr['id']} is not processed"
-                                 f" as settings not available for respective hub.")
+                                 f" as settings not available for respective hub {hub_id}.")
         except Exception as e:
             self.logger.exception(f"Publish of TCR {tcr['id']} is failed.")
             raise e
@@ -39,6 +39,7 @@ class TierConfigEventsMixin:
     @event(
         'tier_config_change_request_processing',
         statuses=[
+            'draft',
             'pending',
             'approved',
             'failed',
@@ -51,6 +52,7 @@ class TierConfigEventsMixin:
     @event(
         'tier_config_adjustment_request_processing',
         statuses=[
+            'draft',
             'pending',
             'approved',
             'failed',
@@ -63,6 +65,7 @@ class TierConfigEventsMixin:
     @event(
         'tier_config_setup_request_processing',
         statuses=[
+            'draft',
             'pending',
             'approved',
             'failed',

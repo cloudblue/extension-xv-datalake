@@ -32,18 +32,6 @@ def get_pubsub_client(setting):
     return client
 
 
-def publish_product(
-    client: ConnectClient,
-    pubsub_client: GooglePubsubClient,
-    product,
-    logger,
-):
-    payload = prepare_product_data_from_product(client, product)
-    logger.info(f"Start publishing product {product['id']}. Payload: {payload}")
-    pubsub_client.publish(payload)
-    logger.info(f"Publish of product {product['id']} is successful. Payload: {payload}")
-
-
 def publish_tc_from_tcr(
     client: ConnectClient,
     pubsub_client: GooglePubsubClient,
@@ -54,7 +42,7 @@ def publish_tc_from_tcr(
     logger.info(f"Start publishing Tier Config {tcr['configuration']['id']}. Payload: {payload}")
     pubsub_client.publish(payload)
     logger.info(f"Publish of Tier Config {tcr['configuration']['id']}"
-                f' is successful. Payload: {payload}')
+                f' is successful.')
 
 
 def publish_tc(
@@ -83,29 +71,36 @@ def list_products(client: ConnectClient):
 
 def publish_product_list(products, product_settings_map, client, logger):
     for product in products:
-        settings = product_settings_map[product['id']]
+        payload = prepare_product_data_from_product(client, product)
+        settings = product_settings_map.get(product['id'], [])
         if settings:
             for setting in settings:
                 try:
                     pubsub_client = GooglePubsubClient(setting)
-                    publish_product(
-                        client,
-                        pubsub_client,
-                        product,
-                        logger,
-                    )
+                    logger.info(f"Start publishing product {product['id']} "
+                                f"for Hub {setting.hub.id}. Payload: {payload}")
+                    pubsub_client.publish(payload)
+                    logger.info(f"Product {product['id']} is published for Hub {setting.hub.id}.")
                 except (ClientError, GoogleAPIError):
                     logger.exception(
                         f"Problem in while publishing Product {product['id']} "
                         f'and hub {setting.hub.id}.')
+        else:
+            logger.info(f"No settings found for Product {product['id']}")
 
 
 def publish_payload(payload, settings, logger):
+    logger.info(f"Start publish data for product "
+                f"{payload['product']['id']} with payload {payload}")
     if settings:
         for setting in settings:
             try:
                 pubsub_client = GooglePubsubClient(setting)
                 pubsub_client.publish(payload)
+                logger.info(
+                    f"Publish of product {payload['product']['id']}"
+                    f'is successful for hub {setting.hub.id}',
+                )
             except (ClientError, GoogleAPIError):
                 logger.exception(f'Problem in while publishing payload {payload} '
                                  f'for hub {setting.hub.id}')
