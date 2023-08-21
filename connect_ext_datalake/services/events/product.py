@@ -39,10 +39,6 @@ class ProductEventsMixin:
                 request,
             )
             publish_payload(payload, settings, self.logger)
-            self.logger.info(
-                f"Publish of product {request['product']['id']} "
-                f'is successful. Payload: {payload}',
-            )
         except Exception as e:
             self.logger.exception(
                 f"Publish of product {request['product']['id']} "

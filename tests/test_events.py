@@ -683,6 +683,5 @@ def test_publish_products_all_products_individual_failed(
     )
     ext.get_installation_admin_client = lambda self: connect_client
 
-    result = ext.publish_products(test_schedule)
-
-    assert result.status == 'success'
+    with pytest.raises(ClientError):
+        ext.publish_products(test_schedule)

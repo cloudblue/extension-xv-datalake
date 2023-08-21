@@ -84,7 +84,7 @@ def prepare_marketplace_hub_map(client: ConnectClient, marketplace_ids: list):
     ))
     return {
         marketplace['id']: [
-            hub['hub']['id'] for hub in marketplace['hubs']
+            hub['hub']['id'] for hub in marketplace.get('hubs', [])
         ] for marketplace in marketplaces
     }
 

@@ -74,7 +74,6 @@ def sanitize_product(product: dict):
 
 
 def sanitize_parameters(parameters: list):
-    populate_dependents(parameters)
     for parameter in parameters:
         remove_properties(
             parameter,
