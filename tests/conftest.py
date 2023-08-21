@@ -9,7 +9,7 @@ from datetime import datetime
 import pytest
 from connect.client import AsyncConnectClient, ConnectClient
 
-from connect_ext_datalake.schemas import Settings
+from connect_ext_datalake.schemas import Hub, Setting
 
 
 @pytest.fixture
@@ -36,14 +36,14 @@ def logger(mocker):
 @pytest.fixture
 def product():
     return {
-        'id': 'PRD-000-000-001',
+        'id': 'PRD-000-000-000',
     }
 
 
 @pytest.fixture
 def product_with_published_at_property():
     return {
-        'id': 'PRD-000-000-001',
+        'id': 'PRD-000-000-000',
         'published_at': '2023-07-09T17:38:19+00:00',
     }
 
@@ -183,9 +183,9 @@ def parameter_with_dependents():
 def products():
     return [
         {
-            'id': 'PRD-000-000-001',
+            'id': 'PRD-000-000-000',
             'name': 'Test Cisco Product',
-            'icon': '/media/VA-000-001/PRD-000-000-001/media/PRD-000-000-001-logo.png',
+            'icon': '/media/VA-000-001/PRD-000-000-000/media/PRD-000-000-000-logo.png',
             'status': 'published',
             'owner': {
                 'id': 'VA-000-000',
@@ -219,26 +219,34 @@ def products():
 
 
 @pytest.fixture
-def settings():
-    return Settings.parse_obj(
+def hub():
+    return {
+        'id': 'HB-0000-0000',
+        'name': 'CB Stage',
+    }
+
+
+@pytest.fixture
+def setting(hub):
+    return Setting.parse_obj(
         {
             'account_info': {},
             'product_topic': '',
-            'tier_config_topic': '',
+            'hub': Hub.parse_obj(hub),
         },
     )
 
 
 @pytest.fixture
-def installation(settings):
+def installation(setting):
     return {
         'id': 'EIN-000',
-        'settings': settings.dict(),
+        'settings': [setting.dict()],
     }
 
 
 @pytest.fixture
-def context(settings):
+def context():
     return {
         'installation_id': 'EIN-000',
         'account_id': 'PA-000-000',
@@ -258,7 +266,7 @@ def schedule(
         'name': 'Publish Products',
         'description': 'Publish products to Xvantage Goggle PubSub Topic.',
         'parameter': {
-            'installation': installation,
+            'installation_id': installation['id'],
             'products': [product],
         },
         'trigger': {
@@ -284,6 +292,21 @@ def tcr():
 @pytest.fixture
 def tcr_list():
     return json.load(open('./tests/fixtures/tcr_list.json'))
+
+
+@pytest.fixture
+def listing():
+    return json.load(open('./tests/fixtures/listing.json'))
+
+
+@pytest.fixture
+def listing_request():
+    return json.load(open('./tests/fixtures/listing_request.json'))
+
+
+@pytest.fixture
+def marketplace():
+    return json.load(open('./tests/fixtures/marketplaces.json'))
 
 
 @pytest.fixture

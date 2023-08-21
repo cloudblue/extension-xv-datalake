@@ -23,14 +23,20 @@ from connect.eaas.core.inject.synchronous import (
 from fastapi import Depends
 from fastapi.responses import HTMLResponse, JSONResponse
 
-from connect_ext_datalake.client import GooglePubsubClient
-from connect_ext_datalake.schemas import Product, ProductInput, Settings
-from connect_ext_datalake.services import (
-    create_task_publish_product,
-    create_task_publish_tc,
-    get_pubsub_client,
+from connect_ext_datalake.services.client import GooglePubsubClient
+from connect_ext_datalake.schemas import Product, ProductInput, Setting, SettingInput
+from connect_ext_datalake.services.publish import (
     list_products,
     publish_tc,
+)
+from connect_ext_datalake.services.tasks import (
+    create_task_publish_product,
+    create_task_publish_tc,
+)
+from connect_ext_datalake.services.settings import (
+    get_all_settings,
+    get_settings,
+    update_settings,
 )
 
 
@@ -49,31 +55,26 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
     @router.get(
         '/settings',
         summary='Retrieve Datalake Pubsub Settings',
-        response_model=Settings,
+        response_model=list[Setting],
     )
     def retrieve_settings(
         self,
         installation: dict = Depends(get_installation),
     ):
-        return Settings(
-            account_info=installation['settings'].get('account_info', {}),
-            product_topic=installation['settings'].get('product_topic', ''),
-        )
+        return get_all_settings(installation)
 
     @router.get(
-        '/settings/validate',
+        '/settings/{hub_id}/validate',
         summary='Validate Datalake Pubsub Settings',
-        response_model=Settings,
+        response_model=Setting,
     )
     def validate_settings(
             self,
+            hub_id: str,
             installation: dict = Depends(get_installation),
     ):
         try:
-            settings = Settings(
-                account_info=installation['settings'].get('account_info', {}),
-                product_topic=installation['settings'].get('product_topic', ''),
-            )
+            settings = get_settings(installation, hub_id)
 
             pubsub_client = GooglePubsubClient(settings)
             pubsub_client.validate()
@@ -83,27 +84,30 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
             return self.get_error_response(e)
 
     @router.post(
-        '/settings',
+        '/settings/{hub_id}',
         summary='Save Datalake Pubsub Settings',
-        response_model=Settings,
+        response_model=Setting,
     )
     def save_settings(
         self,
-        settings: Settings,
-        context: Context = Depends(get_call_context),
+        hub_id: str,
+        setting: SettingInput,
+        installation: dict = Depends(get_installation),
         client: ConnectClient = Depends(get_installation_client),
+        logger: LoggerAdapter = Depends(get_logger),
     ):
         try:
-            pubsub_client = GooglePubsubClient(settings)
+            pubsub_client = GooglePubsubClient(setting)
             pubsub_client.validate()
 
-            client('devops').installations[context.installation_id].update(
-                payload={
-                    'settings': settings.dict(),
-                },
+            return update_settings(
+                client,
+                installation,
+                hub_id,
+                setting,
             )
-            return settings
         except Exception as e:
+            logger.exception(f'Error during saving of setting for hub {hub_id}')
             return self.get_error_response(e)
 
     @router.get(
@@ -197,14 +201,20 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
             logger: LoggerAdapter = Depends(get_logger),
     ):
         try:
-            pubsub_client = get_pubsub_client(installation)
             tc = client('tier').configs[tc_id].get()
-            publish_tc(
-                client,
-                pubsub_client,
-                tc,
-                logger,
-            )
+            hub_id = tc['connection']['hub']['id']
+            setting = get_settings(installation, hub_id)
+            if setting:
+                pubsub_client = GooglePubsubClient(setting)
+                publish_tc(
+                    client,
+                    pubsub_client,
+                    tc,
+                    logger,
+                )
+            else:
+                logger.info(f"Publish of TC {tc['id']} is not processed"
+                            f' as settings not available for respective hub.')
             return HTMLResponse(status_code=200)
         except ClientError as e:
             return self.get_error_response(e)

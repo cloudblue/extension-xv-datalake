@@ -1,0 +1,61 @@
+{
+  "id": "LSTR-000-000-000-001",
+  "type": "new",
+  "state": "completed",
+  "product": {
+    "id": "PRD-000-000-000",
+    "icon": "/media/VA-000-000/PRD-000-000-000/media/PRD-000-000-000-logo.png",
+    "name": "TestTCRSetupEvent",
+    "version": 1
+  },
+  "listing": {
+    "id": "LST-000-000-000",
+    "status": "listed",
+    "contract": {
+      "id": "CRD-00000-00000-00000",
+      "type": "distribution",
+      "name": "Contract of Neeladri Distribution Agreement 1",
+      "marketplace": {
+        "id": "MP-00000",
+        "name": "Another Market",
+        "icon": "/media/PA-000-000/marketplaces/MP-00000/icon_QPVWU8r.png"
+      }
+    },
+    "product": {
+      "id": "PRD-000-000-000",
+      "icon": "/media/VA-000-000/PRD-000-000-000/media/PRD-000-000-000-logo.png",
+      "name": "TestTCRSetupEvent",
+      "status": "published"
+    },
+    "created": "2023-08-03T10:44:14+00:00",
+    "updated": "2023-08-03T10:48:18+00:00",
+    "vendor": {
+      "id": "VA-000-000",
+      "name": "CloudBlue ISV",
+      "icon": "/media/VA-000-000/media/icon_fobt0xS.png"
+    },
+    "provider": {
+      "id": "PA-000-000",
+      "name": "Connect Labs",
+      "icon": "/media/PA-000-000/media/icon.jpg"
+    }
+  },
+  "creator": {
+    "id": "UR-000-000-000",
+    "name": "Francesco"
+  },
+  "created": "2023-08-03T10:44:14+00:00",
+  "updated": "2023-08-03T10:48:18+00:00",
+  "events": {
+    "created": {
+      "at": "2023-08-03T10:44:14+00:00",
+      "by": {
+        "id": "UR-000-000-000",
+        "name": "Francesco"
+      }
+    },
+    "updated": {
+      "at": "2023-08-03T10:48:18+00:00"
+    }
+  }
+}

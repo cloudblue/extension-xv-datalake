@@ -5,7 +5,8 @@ from unittest.mock import patch
 from google.cloud.pubsub_v1 import PublisherClient
 import pytest
 
-from connect_ext_datalake.services import get_pubsub_client, populate_dependents
+from connect_ext_datalake.services.payloads import populate_dependents
+from connect_ext_datalake.services.publish import get_pubsub_client
 
 
 @patch('google.auth.jwt.Credentials.from_service_account_info', return_value={})
