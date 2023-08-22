@@ -92,12 +92,20 @@ class TierConfigTasksMixin:
             installation = installation_client('devops').installations[installation_id].get()
             count = installation_client('tier').configs.all().count()
             self.logger.info(f'Total number of Tier Configs: {count}')
-            tcs = installation_client('tier').configs.all()
+            tcs = installation_client('tier').configs.all().select(
+                '-account',
+                '-product',
+                '-connection',
+                '-params',
+                '-contract',
+                '-marketplace',
+            )
             counter = 1
 
             for tc in tcs:
                 try:
-                    hub_id = tc['connection']['hub']['id']
+                    tc_full = installation_client('tier').configs[tc['id']].get()
+                    hub_id = tc_full['connection']['hub']['id']
 
                     setting = get_settings(installation, hub_id)
                     if setting:
@@ -106,7 +114,7 @@ class TierConfigTasksMixin:
                         publish_tc(
                             installation_client,
                             pubsub_client,
-                            tc,
+                            tc_full,
                             self.logger,
                         )
                     else:

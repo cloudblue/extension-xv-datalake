@@ -500,7 +500,16 @@ def test_publish_tcs_success(
 
     # Mocking
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
-    client_mocker('tier').configs.all().mock(return_value=tcs)
+    client_mocker('tier').configs.all().select(
+        '-account',
+        '-product',
+        '-connection',
+        '-params',
+        '-contract',
+        '-marketplace',
+    ).mock(return_value=tcs)
+    client_mocker('tier').configs[tcs[0]['id']].get(return_value=tcs[0])
+    client_mocker('tier').configs[tcs[1]['id']].get(return_value=tcs[1])
     client_mocker('tier').configs.all().count(return_value=2)
     client_mocker.products[tc_processing['product']['id']].parameters.filter(
         R().name.in_(parameter_names),
@@ -601,7 +610,15 @@ def test_publish_tcs_individual_failed(
 
     # Mocking
     client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
-    client_mocker('tier').configs.all().mock(return_value=[tc_processing])
+    client_mocker('tier').configs.all().select(
+        '-account',
+        '-product',
+        '-connection',
+        '-params',
+        '-contract',
+        '-marketplace',
+    ).mock(return_value=[tc_processing])
+    client_mocker('tier').configs[tc_processing['id']].get(return_value=tc_processing)
     client_mocker('tier').configs.all().count(return_value=1)
     client_mocker('devops').installations[installation['id']].get(
         return_value=installation,
