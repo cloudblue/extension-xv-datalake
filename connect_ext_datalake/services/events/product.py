@@ -32,13 +32,14 @@ class ProductEventsMixin:
                 self.installation,
                 self.installation_client,
             )
+            product_id = request['product']['id']
 
-            settings = product_settings_map.get(request['product']['id'], [])
+            settings = product_settings_map.get(product_id, [])
             payload = prepare_product_data_from_listing_request(
                 self.installation_client,
                 request,
             )
-            publish_payload(payload, settings, self.logger)
+            publish_payload('Product', product_id, payload, settings, self.logger)
         except Exception as e:
             self.logger.exception(
                 f"Publish of product {request['product']['id']} "

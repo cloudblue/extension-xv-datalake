@@ -325,5 +325,15 @@ def tc_active():
 
 
 @pytest.fixture
+def translation():
+    return json.load(open('./tests/fixtures/translation.json'))
+
+
+@pytest.fixture
+def translation_attributes():
+    return json.load(open('./tests/fixtures/translation_attributes.json'))
+
+
+@pytest.fixture
 def tcs(tc_processing, tc_active):
     return [tc_processing, tc_active]
