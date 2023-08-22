@@ -89,16 +89,16 @@ def publish_product_list(products, product_settings_map, client, logger):
             logger.info(f"No settings found for Product {product['id']}")
 
 
-def publish_payload(payload, settings, logger):
-    logger.info(f"Start publish data for product "
-                f"{payload['product']['id']} with payload {payload}")
+def publish_payload(object_type, object_id, payload, settings, logger):
+    logger.info(f'Start publish data for {object_type} '
+                f'{object_id} with payload {payload}')
     if settings:
         for setting in settings:
             try:
                 pubsub_client = GooglePubsubClient(setting)
                 pubsub_client.publish(payload)
                 logger.info(
-                    f"Publish of product {payload['product']['id']}"
+                    f'Publish of {object_type} {object_id}'
                     f'is successful for hub {setting.hub.id}',
                 )
             except (ClientError, GoogleAPIError):

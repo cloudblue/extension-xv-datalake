@@ -1,0 +1,847 @@
+[
+    {
+        "key": "product.PRD-000-000-000.actions.goofy-wolfs-tthm.description",
+        "value": "Sign in into the service by clicking at this button",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T06:51:19+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T06:51:19+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.actions.goofy-wolfs-tthm.name",
+        "value": "Sign In",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T06:51:19+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T06:51:19+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.description",
+        "value": "We are happy to provide you the Cloud Service - an ultimate solution for your company. Stop using the legacy on-premises solution on your computer. Move to the cloud with our help.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T06:46:21+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T06:46:21+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.documents.0.title",
+        "value": "Admin Manual",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.documents.0.url",
+        "value": "https://example.com/manual/admin",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.download_links.0.title",
+        "value": "Windows",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.download_links.0.url",
+        "value": "https://example.com/download/windows",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.download_links.1.title",
+        "value": "macOS",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.download_links.1.url",
+        "value": "https://example.com/download/macos",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.download_links.2.title",
+        "value": "iPhone",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.download_links.2.url",
+        "value": "https://example.com/download/iphone",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.download_links.3.title",
+        "value": "Android",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.download_links.3.url",
+        "value": "https://example.com/download/android",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-21T11:04:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-21T11:04:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.getting_started",
+        "value": "You are now ready to use the Cloud Service and migrate the files from your local computer and mobile devices to the cloud. Download apps for Windows Desktop, Windows Phone, Mac OS or Android following one of the links below, or access the service web interface directly.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T06:46:21+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T06:46:21+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.customer_ui_settings.provisioning_message",
+        "value": "Please wait while your request is being fulfilled.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T06:46:21+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T06:46:21+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.description",
+        "value": "The service directly enables service providers to add new revenue streams. This offering is a comprehensive solution that enables service providers to expand their market share, automate, grow recurring revenue, and increase customer stickiness.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T06:46:21+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T06:46:21+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.detailed_overview",
+        "value": "# Overview\nThe service gives companies a majority of the same benefits that on-premises deployments provide. By integrating with the cloud service, companies can expand their market share, automate and grow recurring revenue, increase customer satisfaction, and cut operational costs at the same time.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T06:46:21+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T06:46:21+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0001.description",
+        "value": "PREMIUM_SKU",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T08:56:42+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T08:56:42+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0001.name",
+        "value": "Premium Service",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T08:56:42+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T08:56:42+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0002.description",
+        "value": "Regular service item",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:05:30+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:05:30+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0002.name",
+        "value": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:05:30+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:05:30+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0003.description",
+        "value": "PPU Item 1 Description",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:16:07+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:16:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0003.name",
+        "value": "PPU Item 1",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:16:07+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:16:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0004.description",
+        "value": "PPU Item 2 Description",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:18:03+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:18:03+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0004.name",
+        "value": "PPU Item 2",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:18:03+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:18:03+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0005.description",
+        "value": "PPU Item 3 Description",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:19:42+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:19:42+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0005.name",
+        "value": "PPU Item 3",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:19:42+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:19:42+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0006.description",
+        "value": "PPU Item 4 Description",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:21:24+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:21:24+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0006.name",
+        "value": "PPU Item 4",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:21:24+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:21:24+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0007.description",
+        "value": "PPU Item 5 Description",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:22:45+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:22:45+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0007.name",
+        "value": "PPU Item 5",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:22:45+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:22:45+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0008.description",
+        "value": "One More Item Description",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:02:25+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:02:25+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.items.PRD-000-000-000-0008.name",
+        "value": "One More Item",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T09:02:25+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T09:02:25+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.name",
+        "value": "Alpha Product",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-19T06:46:21+00:00"
+            },
+            "created": {
+                "at": "2022-04-19T06:46:21+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0003.description",
+        "value": "This is your account codee",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T08:18:10+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T08:18:10+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0003.hint",
+        "value": "",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T08:18:10+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T08:18:10+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0003.placeholder",
+        "value": "",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T08:18:10+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T08:18:10+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0003.title",
+        "value": "Account Code",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T08:18:10+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T08:18:10+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0004.description",
+        "value": "Ordering Parameter 1",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:03:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:03:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0004.hint",
+        "value": "I am the hint text",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:03:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:03:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0004.placeholder",
+        "value": "I am the placeholder text",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:03:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:03:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0004.title",
+        "value": "Ordering Parameter 1",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:03:52+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:03:52+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0007.description",
+        "value": "test_address",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T08:07:46+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T08:07:46+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0007.title",
+        "value": "test_address",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T08:07:46+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T08:07:46+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0008.description",
+        "value": "API Key Description",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:51:07+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:51:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0008.hint",
+        "value": "I am the hint text",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:51:07+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:51:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0008.placeholder",
+        "value": "I am the placeholder text",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:51:07+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:51:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0008.title",
+        "value": "API Key",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:51:07+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:51:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0009.description",
+        "value": "t1",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:59:55+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:59:55+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0009.hint",
+        "value": "I am the hint text",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:59:55+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:59:55+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0009.placeholder",
+        "value": "I am the placeholder text",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:59:55+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:59:55+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0009.title",
+        "value": "t1",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-04-20T07:59:55+00:00"
+            },
+            "created": {
+                "at": "2022-04-20T07:59:55+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0010.description",
+        "value": "Devops ball activity domination the along further runway low generated.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-05-19T17:56:07+00:00"
+            },
+            "created": {
+                "at": "2022-05-19T17:56:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0010.hint",
+        "value": "Hint text",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-05-19T17:56:07+00:00"
+            },
+            "created": {
+                "at": "2022-05-19T17:56:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0010.placeholder",
+        "value": "Placeholder text",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-05-19T17:56:07+00:00"
+            },
+            "created": {
+                "at": "2022-05-19T17:56:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.parameters.PRM-000-000-000-0010.title",
+        "value": "Is cross that Title",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-05-19T17:56:07+00:00"
+            },
+            "created": {
+                "at": "2022-05-19T17:56:07+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-147-418-098.body",
+        "value": "Please wait while your request is being fulfilled.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-11-29T13:23:55+00:00"
+            },
+            "created": {
+                "at": "2022-11-29T13:23:55+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-287-681-377.body",
+        "value": "Please complete our **[Activation Form]({{ activation_form_url }})** to resume processing of your request",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-11-21T11:13:29+00:00"
+            },
+            "created": {
+                "at": "2022-11-21T11:13:29+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-294-626-288.body",
+        "value": "Please complete our **[Activation Form]({{ activation_form_url }})** to resume processing of your request",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2023-07-17T15:18:02+00:00"
+            },
+            "created": {
+                "at": "2023-07-17T15:18:02+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-352-307-228.body",
+        "value": "# Welcome to Algar Connectivity!\n\nYour account has just beeen **successfuly** activated.\n\nYour account code os {{ account_code }}. \n\nFollow the login to access your service.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-11-21T11:13:32+00:00"
+            },
+            "created": {
+                "at": "2022-11-21T11:13:32+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-435-290-724.body",
+        "value": "Please wait while your request is being fulfilled.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-11-29T13:34:19+00:00"
+            },
+            "created": {
+                "at": "2022-11-29T13:34:19+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-456-975-299.body",
+        "value": "# Sample Template For Setup of Tier 2\n\nThis template is used to share details of the **successful** setup configuration of reseller of 2nd level.\n\nThis template uses **[Markdown](https://en.wikipedia.org/wiki/Markdown)** syntax and allows to use Parameters of the product which have scope 'Tier 2'.\n\n### Formatting\n\nMarkdown allows you to control various aspects of the document:\n\n1. Text formatting like **bold** or *italic*\n2. Images embedding\n3. Lists\n4. and more\n\n### Parameters\n\nYou can refer to the Parameters using their ID, like in the following example:\n\n* The value of **param_a** is **{{ param_a }}**\n* The value of **param_b** is **{{ param_b }}**\n\nYou can also embed pictures like the one below:\n\n![logo](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ringworld_Waiting.jpg/270px-Ringworld_Waiting.jpg)",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-11-21T11:19:49+00:00"
+            },
+            "created": {
+                "at": "2022-11-21T11:19:49+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-573-128-616.body",
+        "value": "Please complete our **[Activation Form]({{ activation_form_url }})** to resume processing of your request",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2023-07-17T15:32:05+00:00"
+            },
+            "created": {
+                "at": "2023-07-17T15:32:05+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-759-795-152.body",
+        "value": "# Sample Template For Setup of Tier 1\n\nThis template is used to share details of the **successful** setup configuration of reseller of 1st level.\n\nThis template uses **[Markdown](https://en.wikipedia.org/wiki/Markdown)** syntax and allows to use Parameters of the product which have scope 'Tier 1'.\n\n### Formatting\n\nMarkdown allows you to control various aspects of the document:\n\n1. Text formatting like **bold** or *italic*\n2. Images embedding\n3. Lists\n4. and more\n\n### Parameters\n\nYou can refer to the Parameters using their ID, like in the following example:\n\n* The value of **param_a** is **{{ param_a }}**\n* The value of **param_b** is **{{ param_b }}**\n\nYou can also embed pictures like the one below:\n\n![logo](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Ringworld_Waiting.jpg/270px-Ringworld_Waiting.jpg)",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-11-21T11:31:54+00:00"
+            },
+            "created": {
+                "at": "2022-11-21T11:31:54+00:00"
+            }
+        }
+    },
+    {
+        "key": "product.PRD-000-000-000.templates.TL-783-484-001.body",
+        "value": "Please wait while your request is being fulfilled.",
+        "auto_translated": false,
+        "events": {
+            "updated": {
+                "at": "2022-11-29T13:46:30+00:00"
+            },
+            "created": {
+                "at": "2022-11-29T13:46:30+00:00"
+            }
+        }
+    }
+]

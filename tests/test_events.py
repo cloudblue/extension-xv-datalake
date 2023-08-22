@@ -685,3 +685,102 @@ def test_publish_products_all_products_individual_failed(
 
     with pytest.raises(ClientError):
         ext.publish_products(test_schedule)
+
+
+@patch.object(GooglePubsubClient, 'validate', return_value=True)
+@patch.object(GooglePubsubClient, 'publish', return_value=True)
+@patch.object(GooglePubsubClient, '__init__', return_value=None)
+def test_handle_translation_change_success(
+    mock_client_init,
+    mock_publish,
+    mock_validate,
+    connect_client,
+    client_mocker_factory,
+    logger,
+    translation,
+    translation_attributes,
+    installation,
+    listing,
+    marketplace,
+):
+    client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
+    client_mocker.listings.filter(
+        R().product.id.in_([translation['context']['instance_id']]),
+    ).mock(
+        return_value=[listing],
+    )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
+    )
+    client_mocker('localization').translations[translation['id']].attributes.all().mock(
+        return_value=translation_attributes,
+    )
+
+    ext = DatalakeExtensionEventsApplication(
+        connect_client,
+        logger,
+        config={},
+        installation_client=connect_client,
+        installation=installation,
+    )
+    result = ext.handle_translation_change(translation)
+    assert result.status == 'success'
+
+
+def test_handle_translation_change_failed(
+    connect_client,
+    client_mocker_factory,
+    logger,
+    translation,
+    installation,
+    listing,
+    marketplace,
+):
+    client_mocker = client_mocker_factory(base_url=connect_client.endpoint)
+    client_mocker.listings.filter(
+        R().product.id.in_([translation['context']['instance_id']]),
+    ).mock(
+        return_value=[listing],
+    )
+    client_mocker.marketplaces.filter(
+        R().id.in_([listing['contract']['marketplace']['id']]),
+    ).mock(
+        return_value=[marketplace],
+    )
+    client_mocker('localization').translations[translation['id']].attributes.all().mock(
+        status_code=400,
+    )
+
+    ext = DatalakeExtensionEventsApplication(
+        connect_client,
+        logger,
+        config={},
+        installation_client=connect_client,
+        installation=installation,
+    )
+
+    with pytest.raises(ClientError):
+        ext.handle_translation_change(translation)
+
+
+def test_handle_translation_change_not_product(
+    connect_client,
+    logger,
+    translation,
+    installation,
+):
+    updated_translation = deepcopy(translation)
+    updated_translation['context']['type'] = 'non-product'
+
+    ext = DatalakeExtensionEventsApplication(
+        connect_client,
+        logger,
+        config={},
+        installation_client=connect_client,
+        installation=installation,
+    )
+
+    result = ext.handle_translation_change(updated_translation)
+    assert result.status == 'success'

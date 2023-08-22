@@ -235,3 +235,44 @@ def prepare_tc_data(client: ConnectClient, tc: dict):
         'update_type': 'update',
         'tier_config': sanitize_tc(client, tc),
     }
+
+
+def sanitize_translation(translation: dict):
+    remove_properties(
+        translation,
+        [
+            'events',
+            'comment',
+        ],
+    )
+
+    return translation
+
+
+def sanitize_translation_attribute(attribute: dict):
+    remove_properties(
+        attribute,
+        [
+            'events',
+            'auto_translated',
+        ],
+    )
+
+    return attribute
+
+
+def include_translation_attributes(client: ConnectClient, translation: dict):
+    translation['attributes'] = []
+    attributes = client('localization').translations[translation['id']].attributes.all()
+    for attribute in attributes:
+        translation['attributes'].append(sanitize_translation_attribute(attribute))
+
+
+def prepare_translation_data(client: ConnectClient, translation: dict):
+    include_translation_attributes(client, translation)
+
+    return {
+        'table_name': 'cmp_connect_translation',
+        'update_type': 'update',
+        'translation': sanitize_translation(translation),
+    }
