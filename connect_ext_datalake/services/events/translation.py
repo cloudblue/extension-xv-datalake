@@ -51,6 +51,12 @@ class TranslationEventsMixin:
 
 
 class TranslationTaskMixin:
+    def get_translation_qs(self, installation_client):
+        return installation_client('localization').translations.filter(
+            R().context.type.eq('product'),
+            R().status.eq('active'),
+        )
+
     @schedulable(
         'Publish Product Translations',
         'Publish Product Translations to Xvantage Goggle PubSub Topic.',
@@ -65,17 +71,13 @@ class TranslationTaskMixin:
             installation_client.resourceset_append = False
             installation = installation_client('devops').installations[installation_id].get()
 
-            translations = installation_client('localization').translations.filter(
-                R().context.type.eq('product'),
-                R().status.eq('active'),
-            )
-            count = translations.count()
+            count = self.get_translation_qs(installation_client).count()
             self.logger.info(f'Total number of Tier Configs: {count}')
             counter = 1
 
             products = []
 
-            for translation in translations:
+            for translation in self.get_translation_qs(installation_client):
                 products.append({
                     'id': translation['context']['instance_id'],
                 })
@@ -86,7 +88,7 @@ class TranslationTaskMixin:
                 installation_client,
             )
 
-            for translation in translations:
+            for translation in self.get_translation_qs(installation_client):
                 try:
                     product_id = translation['context']['instance_id']
                     settings = product_settings_map.get(product_id, [])
