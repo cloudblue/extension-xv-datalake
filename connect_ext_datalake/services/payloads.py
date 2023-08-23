@@ -245,6 +245,14 @@ def sanitize_translation(translation: dict):
             'comment',
         ],
     )
+    verify_property(
+        translation,
+        {
+            'published_at': datetime.now(
+                tz=timezone(timedelta(hours=0)),
+            ).isoformat(timespec='seconds'),
+        },
+    )
 
     return translation
 
