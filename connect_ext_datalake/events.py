@@ -13,7 +13,10 @@ from connect_ext_datalake.services.events.tier_config import (
     TierConfigEventsMixin,
     TierConfigTasksMixin,
 )
-from connect_ext_datalake.services.events.translation import TranslationEventsMixin
+from connect_ext_datalake.services.events.translation import (
+    TranslationEventsMixin,
+    TranslationTaskMixin,
+)
 
 
 class DatalakeExtensionEventsApplication(
@@ -23,5 +26,6 @@ class DatalakeExtensionEventsApplication(
     ProductTasksMixin,
     TierConfigTasksMixin,
     TranslationEventsMixin,
+    TranslationTaskMixin,
 ):
     pass

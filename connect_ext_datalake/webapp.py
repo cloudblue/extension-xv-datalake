@@ -23,8 +23,14 @@ from connect.eaas.core.inject.synchronous import (
 from fastapi import Depends
 from fastapi.responses import HTMLResponse, JSONResponse
 
+from connect_ext_datalake.apis.translation import TranslationWebAppMixin
 from connect_ext_datalake.services.client import GooglePubsubClient
-from connect_ext_datalake.schemas import Product, ProductInput, Setting, SettingInput
+from connect_ext_datalake.schemas import (
+    Product,
+    ProductInput,
+    Setting,
+    SettingInput,
+)
 from connect_ext_datalake.services.publish import (
     list_products,
     publish_tc,
@@ -42,7 +48,10 @@ from connect_ext_datalake.services.settings import (
 
 @web_app(router)
 @account_settings_page('Datalake Pubsub Settings', '/static/settings.html')
-class DatalakeExtensionWebApplication(WebApplicationBase):
+class DatalakeExtensionWebApplication(
+    WebApplicationBase,
+    TranslationWebAppMixin,
+):
 
     def get_error_response(self, e: Exception):
         return JSONResponse(
@@ -130,7 +139,7 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
         products: list[ProductInput],
         context: Context = Depends(get_call_context),
         installation: dict = Depends(get_installation),
-        client: ConnectClient = Depends(get_installation_client),
+        client: ConnectClient = Depends(get_extension_client),
         logger: LoggerAdapter = Depends(get_logger),
     ):
         try:
@@ -196,7 +205,7 @@ class DatalakeExtensionWebApplication(WebApplicationBase):
     def publish_tc_info(
             self,
             tc_id: str,
-            client: ConnectClient = Depends(get_extension_client),
+            client: ConnectClient = Depends(get_installation_client),
             installation: dict = Depends(get_installation),
             logger: LoggerAdapter = Depends(get_logger),
     ):
