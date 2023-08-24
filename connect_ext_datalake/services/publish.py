@@ -8,6 +8,7 @@ from connect.client.exceptions import ClientError
 from google.api_core.exceptions import GoogleAPIError
 
 from connect_ext_datalake.schemas import (
+    Hub,
     Product,
     Setting,
 )
@@ -67,6 +68,12 @@ def list_products(client: ConnectClient):
     ).all()
 
     return list(map(Product.parse_obj, connect_products))
+
+
+def list_hubs(client: ConnectClient):
+    connect_hubs = client.hubs.all()
+
+    return list(map(Hub.parse_obj, connect_hubs))
 
 
 def publish_product_list(products, product_settings_map, client, logger):

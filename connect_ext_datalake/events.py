@@ -9,11 +9,9 @@ from connect_ext_datalake.services.events.product import (
     ProductEventsMixin,
     ProductTasksMixin,
 )
-from connect_ext_datalake.services.events.tier_config import (
+from connect_ext_datalake.services.events import (
     TierConfigEventsMixin,
     TierConfigTasksMixin,
-)
-from connect_ext_datalake.services.events.translation import (
     TranslationEventsMixin,
     TranslationTaskMixin,
 )
