@@ -253,6 +253,8 @@ def sanitize_translation(translation: dict):
             ).isoformat(timespec='seconds'),
         },
     )
+    translation['product_id'] = translation['context']['instance_id']
+    translation['locale_id'] = translation['locale']['id']
 
     return translation
 
