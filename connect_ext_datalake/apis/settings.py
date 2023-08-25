@@ -22,6 +22,7 @@ from connect_ext_datalake.schemas import (
 )
 from connect_ext_datalake.services.publish import list_hubs
 from connect_ext_datalake.services.settings import (
+    delete_settings,
     get_all_settings,
     get_settings,
     update_settings,
@@ -83,6 +84,27 @@ class SettingsWebAppMixin:
                 installation,
                 hub_id,
                 setting,
+            )
+        except Exception as e:
+            logger.exception(f'Error during saving of setting for hub {hub_id}')
+            return self.get_error_response(e)
+
+    @router.delete(
+        '/settings/{hub_id}',
+        summary='Clear Datalake Pubsub Settings',
+    )
+    def remove_settings(
+            self,
+            hub_id: str,
+            installation: dict = Depends(get_installation),
+            client: ConnectClient = Depends(get_installation_client),
+            logger: LoggerAdapter = Depends(get_logger),
+    ):
+        try:
+            delete_settings(
+                client,
+                installation,
+                hub_id,
             )
         except Exception as e:
             logger.exception(f'Error during saving of setting for hub {hub_id}')

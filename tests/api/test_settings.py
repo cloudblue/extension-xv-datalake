@@ -3,6 +3,7 @@
 # Copyright (c) 2023, Rahul
 # All rights reserved.
 #
+from copy import deepcopy
 from unittest.mock import patch
 
 from google.api_core.exceptions import PermissionDenied
@@ -178,3 +179,51 @@ def test_list_hubs(
     data = response.json()
     assert data[0]['id'] == hub['id']
     assert data[0]['name'] == hub['name']
+
+
+def test_remove_settings_validation_success(
+    test_client_factory,
+    client_mocker_factory,
+    context,
+    hub,
+    installation,
+):
+    client_mocker = client_mocker_factory()
+    client_mocker('devops').installations['EIN-000'].update(
+        return_value={},
+    )
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.delete(
+        '/api/settings/HB-0000-0000',
+        context=context,
+        installation=installation,
+    )
+
+    assert response.status_code == 200
+
+
+def test_remove_settings_validation_success_no_settings(
+    test_client_factory,
+    client_mocker_factory,
+    context,
+    hub,
+    installation,
+):
+    cloned_installation = deepcopy(installation)
+    cloned_installation['settings'] = {}
+    client_mocker = client_mocker_factory()
+    client_mocker('devops').installations['EIN-000'].update(
+        return_value={},
+    )
+
+    client = test_client_factory(DatalakeExtensionWebApplication)
+
+    response = client.delete(
+        '/api/settings/HB-0000-0000',
+        context=context,
+        installation=cloned_installation,
+    )
+
+    assert response.status_code == 200

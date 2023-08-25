@@ -65,6 +65,25 @@ def update_settings(
     return existing_setting
 
 
+def delete_settings(
+    client: ConnectClient,
+    installation: dict,
+    hub_id: str,
+):
+    if 'settings' in installation.keys() and isinstance(installation['settings'], list):
+        installation['settings'] = [
+            setting for setting in installation['settings'] if hub_id != setting['hub']['id']
+        ]
+    else:
+        installation['settings'] = []
+
+    client('devops').installations[installation['id']].update(
+        payload={
+            'settings': installation['settings'],
+        },
+    )
+
+
 def prepare_product_marketplace_map(listings: list):
     product_marketplace_map = {}
     for listing in listings:
