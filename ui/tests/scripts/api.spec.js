@@ -20,6 +20,7 @@ describe('api.js API calls', () => {
         json: () => Promise.resolve({ someKey: 'someValue' }),
       }));
       const result = await getSettings();
+
       expect(result).toEqual({ someKey: 'someValue' });
     });
 
@@ -36,8 +37,9 @@ describe('api.js API calls', () => {
       fetch.mockImplementationOnce(() => Promise.resolve({
         json: () => Promise.resolve({ someKey: 'someValue' }),
       }));
-      const result = await updateSettings({ someKey: 'someValue' });
-      expect(fetch).toHaveBeenCalledWith('/api/settings', {
+      const result = await updateSettings('HB-001', { someKey: 'someValue' });
+
+      expect(fetch).toHaveBeenCalledWith('/api/settings/HB-001', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ someKey: 'someValue' }),
@@ -47,7 +49,7 @@ describe('api.js API calls', () => {
 
     test('returns error', async () => {
       fetch.mockImplementationOnce(() => Promise.reject(new Error('error')));
-      try { await updateSettings({ someKey: 'someValue' }); } catch (e) {
+      try { await updateSettings('HB-001', { someKey: 'someValue' }); } catch (e) {
         expect(e.message).toBe('error');
       }
     });

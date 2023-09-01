@@ -16,12 +16,16 @@ describe('utils.js', () => {
     beforeEach(() => {
       document.body.innerHTML = '<button id="button" disabled></button>';
     });
+
     test('enables a button', () => {
       enableButton('button');
+
       expect(document.getElementById('button').disabled).toBe(false);
     });
+
     test('enables a button with a custom message', () => {
       enableButton('button', 'custom message');
+
       expect(document.getElementById('button').disabled).toBe(false);
       expect(document.getElementById('button').innerText).toBe('custom message');
     });
@@ -31,12 +35,16 @@ describe('utils.js', () => {
     beforeEach(() => {
       document.body.innerHTML = '<button id="button"></button>';
     });
+
     test('disables a button', () => {
       disableButton('button');
+
       expect(document.getElementById('button').disabled).toBe(true);
     });
+
     test('disables a button with a custom message', () => {
       disableButton('button', 'custom message');
+
       expect(document.getElementById('button').disabled).toBe(true);
       expect(document.getElementById('button').innerText).toBe('custom message');
     });
@@ -48,6 +56,7 @@ describe('utils.js', () => {
       const callback = jest.fn();
       addEventListener('button', 'click', callback);
       document.getElementById('button').click();
+
       expect(callback).toBeCalled();
     });
   });
@@ -57,6 +66,7 @@ describe('utils.js', () => {
       document.body.innerHTML = '<div id="loader" class="hidden"></div>';
       showComponent('loader');
     });
+
     it('shows a loader', () => {
       expect(document.getElementById('loader').classList.contains('hidden')).toBe(false);
     });
@@ -67,6 +77,7 @@ describe('utils.js', () => {
       document.body.innerHTML = '<div id="component" class="hidden"></div>';
       showComponent();
     });
+
     it('does not show a component', () => {
       expect(document.getElementById('component').classList.contains('hidden')).toBe(true);
     });
@@ -77,6 +88,7 @@ describe('utils.js', () => {
       document.body.innerHTML = '<div id="loader"></div>';
       hideComponent('loader');
     });
+
     it('hides a loader', () => {
       expect(document.getElementById('loader').classList.contains('hidden')).toBe(true);
     });
@@ -87,6 +99,7 @@ describe('utils.js', () => {
       document.body.innerHTML = '<div id="component"></div>';
       hideComponent();
     });
+
     it('does not hide a component', () => {
       expect(document.getElementById('component').classList.contains('hidden')).toBe(false);
     });

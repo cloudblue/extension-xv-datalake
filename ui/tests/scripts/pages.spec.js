@@ -9,15 +9,10 @@ import {
 
 import {
   getSettings,
-  updateSettings,
 } from '@/scripts/api';
 
 import {
   disableButton,
-  enableButton,
-  combineStylesStr,
-  getStyleCustomizations,
-  setAttrOnComponent,
   hideComponent,
   showComponent,
 } from '@/scripts/utils';
@@ -43,8 +38,8 @@ jest.mock('@/scripts/utils', () => ({
         '--theme_accent_rgb': 'rgb(71, 151, 242)',
         '--theme_contrast': '#ffffff',
         '--theme_contrast_rgb': 'rgb(255, 255, 255)',
-      })
-    }
+      }),
+    },
   }),
   combineStylesStr: jest.fn(),
   setAttrOnComponent: jest.fn(),
@@ -67,24 +62,30 @@ describe('pages.js', () => {
         </main-card>
     </div>`;
     });
+
     describe('app is not passed', () => {
       beforeEach(async () => {
         await settings();
       });
+
       test('does not execute', () => {
         expect(showComponent).not.toHaveBeenCalled();
       });
     });
+
     describe('on success', () => {
       beforeEach(async () => {
         await settings(app);
       });
+
       test('calls showLoader', () => {
         expect(showComponent).toHaveBeenCalledWith('loader');
       });
+
       test('calls getSettings', () => {
         expect(getSettings).toHaveBeenCalled();
       });
+
       test('calls hideLoader', () => {
         expect(hideComponent).toHaveBeenCalledWith('loader');
       });
@@ -96,6 +97,7 @@ describe('pages.js', () => {
       beforeEach(async () => {
         await saveSettingsData();
       });
+
       test('does not execute', () => {
         expect(disableButton).not.toHaveBeenCalled();
       });
