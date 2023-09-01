@@ -19,19 +19,30 @@ Some test text
 -->
 
 <template>
-<div class="c-alert-holder">
-  <div class="c-alert" :class="classSettings">
-    <div class="c-alert__icon">
-      <c-icon :icon="icon" size="16"></c-icon>
-    </div>
-    <div class="c-alert__text">
-      <slot name="message">{{ message }}</slot>
-    </div>
-    <div class="c-alert__actions" v-if="this.$slots.actions">
-      <slot name="actions"></slot>
+  <div class="c-alert-holder">
+    <div
+      class="c-alert"
+      :class="classSettings"
+    >
+      <div class="c-alert__icon">
+        <c-icon
+          :icon="icon"
+          size="16"
+        />
+      </div>
+      <div class="c-alert__text">
+        <slot name="message">
+          {{ message }}
+        </slot>
+      </div>
+      <div
+        v-if="$slots.actions"
+        class="c-alert__actions"
+      >
+        <slot name="actions" />
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 

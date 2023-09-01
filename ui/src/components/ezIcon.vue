@@ -1,31 +1,19 @@
 <template>
-<svg
-  class="c-icon"
-  v-no-translate
-  :class="classes"
-  :view-box="icon.viewBox"
-  :style="styles"
-  @click="$emit('click', $event)"
->
-  <use :xlink:href="`#${icon.id}`"></use>
-</svg>
+  <svg
+    class="c-icon"
+    :class="classes"
+    :view-box="icon.viewBox"
+    :style="styles"
+    @click="$emit('click', $event)"
+  >
+    <use :xlink:href="`#${icon.id}`" />
+  </svg>
 </template>
 
 <script>
 import {
-  pathOr,
-} from 'ramda';
-
-
-import {
   addUnits,
 } from '~scripts/helpers';
-
-import {
-  pathOrPath,
-  pathTo,
-  template,
-} from '~scripts/utils';
 
 
 export default {
@@ -35,27 +23,32 @@ export default {
       required: true,
     },
 
-    color: String,
+    color: {
+      type: String,
+      default: '',
+    },
 
     disabled: Boolean,
-    size: [Number, String],
+    size: {
+      type: [Number, String],
+      default: '',
+    },
   },
 
+  emits: ['click'],
+
   computed: {
-    classes: template({
-      'c-icon_disabled': ['disabled'],
-      'c-icon_link': pathOrPath(['$listeners', 'click'], ['$listeners', '!click']),
+    classes: vm => ({
+      'c-icon_disabled': vm.disabled,
     }),
 
-    actualColor: ({ $vuetify, color }) => pathOr(color, ['theme', color], $vuetify),
-
-    styles: template({
-      color: ['actualColor'],
-      height: ['actualSize'],
-      width: ['actualSize'],
+    styles: vm => ({
+      color: vm.color,
+      height: vm.actualSize,
+      width: vm.actualSize,
     }),
 
-    actualSize: pathTo(['size'], addUnits),
+    actualSize: vm => addUnits(vm.size),
   },
 };
 </script>

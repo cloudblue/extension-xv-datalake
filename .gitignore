@@ -5,3 +5,4 @@ coverage.xml
 .extension_xv_datalake_dev.env
 node_modules
 ui/tests/coverage
+.idea

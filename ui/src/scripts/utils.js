@@ -9,17 +9,21 @@ import {
   all,
   anyPass,
   applyTo,
+  complement,
   cond,
   curry,
   equals,
   identity,
   is,
   isEmpty,
+  isNil,
   map,
   objOf,
   or,
   path,
   pipe,
+  prop,
+  props,
   type,
 } from 'ramda';
 
@@ -238,3 +242,98 @@ export const template = curry((tpl, src) => {
 
   return processTpl(tpl);
 });
+
+/**
+ * Returns `true` if value is empty, `null` or `undefined`, otherwise `false`.
+ *
+ * @function
+ * @param {*} value
+ * @returns {boolean}
+ *
+ * @example
+ * isNilOrEmpty({}) //=> true
+ * isNilOrEmpty([1]) //=> false
+ */
+export const isNilOrEmpty = anyPass([isEmpty, isNil]);
+
+/**
+ * Returns `true` if value is not empty and not `null`/`undefined`, otherwise `false`.
+ *
+ * @function
+ * @param {*} value
+ * @returns {boolean}
+ */
+export const isNotNilOrEmpty = complement(isNilOrEmpty);
+
+/**
+ * Checks truthiness of a property.
+ * Returns true if property value is falsy.
+ *
+ * @function
+ * @param {string} prop
+ * @param {object}
+ * @returns {boolean}
+ *
+ * @example
+ * notProp('country', { country: '' }) //=> true
+ * notProp('country', { country: 'France' }) //=> false
+ */
+export const notProp = complement(prop);
+
+/**
+ * Returns new empty object.
+ *
+ * @function
+ * @returns {object}
+ */
+export const obj = () => ({});
+
+/**
+ * Returns value based on condition.
+ * If truthy returns first, otherwise second.
+ * Condition could be function, in this case returns a function that after call
+ * invokes condition function with actual arguments and apply to `alt`.
+ *
+ * @function
+ * @param {*} a Value if condition is true
+ * @param {*} b Value if condition is false
+ * @param {*} cond Condition
+ * @returns {*}
+ */
+export const alt = curry((t, f, c) => {
+  if (is(Function, c)) {
+    return (...v) => alt(t, f, c(...v));
+  }
+
+  return c ? t : f;
+});
+
+/**
+ * If value is truthy at given path return `t` value, `f` otherwise.
+ *
+ * @function
+ * @param {array} path
+ * @param {*} t Value returned if path value is truthy
+ * @param {*} f Value returned if path value is falsy
+ * @param {object} target Target object
+ * @returns {*}
+ *
+ * @example
+ * pathAlt(['a', 'b'], true, false, {}) //=> false
+ * pathAlt(['a', 'b'], 'pass', 'fail', { a: { b: 42 } }) //=> 'pass'
+ */
+export const pathAlt = curry((p, t, f) => pathTo(p, alt(t, f)));
+
+/**
+ * Calls `fn` with `props` values as first argument and returns result of that call.
+ *
+ * @function
+ * @param {array} props
+ * @param {function} fn
+ * @param {object} source
+ * @returns {*}
+ *
+ * @example
+ * propsTo(['a', 'b'], (props) => props, { a: 1, b: 2 }) //=> [1, 2]
+ */
+export const propsTo = curry((p, cb, source) => pipe(props(p), cb)(source));

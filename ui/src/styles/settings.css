@@ -800,8 +800,8 @@ input[type="password"] {
 
 .ez-dialog__controls {
   position: absolute;
-  top: 20px;
-  right: 24px;
+  top: -6px;
+  right: 0px;
 }
 
 

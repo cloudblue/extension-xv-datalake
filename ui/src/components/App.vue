@@ -1,21 +1,10 @@
 <template>
-  <section class="app" :style="cssStyles">
-    <div class="loader" v-if="showLoader" @click="hide"></div>
-
-    <div v-else>
-      <sync-card :enabled="syncEnabled"></sync-card>
-
-      <pub-card
-        :account-info="accountInfo"
-        :product-topic="productTopic"
-        @account-info-update="onInfoUpdate"
-        @product-topic-update="onTopicUpdate"
-        @validation-success="() => syncEnabled = true"
-        @validation-error="() => syncEnabled = false"
-      ></pub-card>
-
-      <error-card v-if="showError"></error-card>
-    </div>
+  <section
+    class="app"
+    :style="cssStyles"
+  >
+    <sync-card :enabled="syncEnabled" />
+    <pub-card @can-sync="syncEnabled = $event" />
   </section>
 </template>
 
@@ -24,11 +13,6 @@
 <script>
 import SyncCard from '~components/SyncCard.vue';
 import PubCard from '~components/PubCard.vue';
-import ErrorCard from '~components/ErrorCard.vue';
-
-import {
-  getSettings,
-} from '~scripts/api';
 
 import {
   getStyleCustomizations,
@@ -37,53 +21,22 @@ import {
 
 export default {
   inject: ['$injector'],
+
   components: {
     SyncCard,
     PubCard,
-    ErrorCard,
   },
+
   data() {
     return {
-      showLoader: true,
-      showError: false,
       cssStyles: {},
-      accountInfo: '',
-      productTopic: '',
       syncEnabled: false,
     };
   },
-  methods: {
-    hide(){
-      this.showLoader = false;
-    },
-    async fetchSettings() {
-      const { account_info, product_topic, error } = await getSettings();
 
-      this.accountInfo = JSON.stringify(account_info);
-      this.productTopic = product_topic;
-
-      if (error) {
-        this.showError = true;
-      }
-    },
-    onInfoUpdate(evt) {
-      this.accountInfo = evt;
-      this.syncEnabled = false;
-    },
-    onTopicUpdate(evt) {
-      this.productTopic = evt;
-      this.syncEnabled = false;
-    },
-  },
   mounted() {
     const { styleCustomizations } = getStyleCustomizations().computed;
-    const stylesObj = styleCustomizations(); // NOTE: use argument for theming
-
-    this.cssStyles = stylesObj;
-
-    this.fetchSettings().then(() => {
-      this.showLoader = false;
-    });
+    this.cssStyles = styleCustomizations();
   },
 };
 </script>
