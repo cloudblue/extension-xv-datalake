@@ -22,12 +22,18 @@ const getJson = r => r.json();
 
 export const getSettings = () => fetch('/api/settings').then(getJson);
 
-export const validateSettings = () => fetch('/api/settings/validate').then(getJson);
+export const getHubs = () => fetch('/api/hubs').then(getJson);
 
-export const updateSettings = (settings) => fetch('/api/settings', {
+export const validateSettings = (hubId) => fetch(`/api/settings/validate/${hubId}`).then(getJson);
+
+export const updateSettings = (hubId, settings) => fetch(`/api/settings/${hubId}`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(settings),
+}).then(getJson);
+
+export const deleteSettings = (hubId) => fetch(`/api/settings/${hubId}`, {
+  method: 'DELETE',
 }).then(getJson);
 
 // Products API:

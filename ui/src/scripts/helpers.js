@@ -48,10 +48,26 @@ export const hexToRGB = hex => convert.hex.rgb(hex);
  * @example
  * hexToStyleVar('color', '#00FF00') //=> { --color: '0, 255, 0' }
  */
-export const hexToStyleVar = curry((key, hex) => pipe(
-  hexToRGB,
+export const rgbToStyleVar = curry((key, rgb) => pipe(
   join(', '),
   objOf(`--${key}`),
+)(rgb));
+
+/**
+ * Returns a object with a given key as property in format `--{key}` and
+ * RGB components with comma delimiter as value.
+ *
+ * @function
+ * @param {string} key
+ * @param {string} hexVal
+ * @returns {object}
+ *
+ * @example
+ * hexToStyleVar('color', '#00FF00') //=> { --color: '0, 255, 0' }
+ */
+export const hexToStyleVar = curry((key, hex) => pipe(
+  hexToRGB,
+  rgbToStyleVar(key),
 )(hex));
 
 /**
