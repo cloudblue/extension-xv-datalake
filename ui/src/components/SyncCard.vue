@@ -132,17 +132,34 @@
         {{ title || 'Synchronisation' }}
       </h2>
       <div class="ez-card__controls">
-        <c-button
-          id="sync"
-          :disabled="!enabled"
-          :icon="icons.googleSyncBaseline"
-          :size="14"
-          color="light blue"
-          label="Sync products"
-          mode="solid"
-          small
-          @click="isSyncDialogOpen = true"
-        />
+        <c-menu>
+          <template #trigger="">
+            <c-button
+              :icon-right="icons.googleArrowDropDownBaseline"
+              color="light blue"
+              label="Sync..."
+              mode="solid"
+              small
+            />
+          </template>
+          <div class="menu-items">
+            <c-button
+              :disabled="!enabled"
+              :icon="icons.googleSyncBaseline"
+              :size="18"
+              :upper-case="false"
+              label="Sync Products"
+              @click="isSyncDialogOpen = true"
+            />
+            <c-button
+              :icon="icons.googleSyncBaseline"
+              :size="18"
+              :upper-case="false"
+              label="Sync Translations"
+              @click="syncTranslations"
+            />
+          </div>
+        </c-menu>
       </div>
     </header>
 
@@ -168,6 +185,7 @@ import {
 } from 'ramda';
 
 import {
+  googleArrowDropDownBaseline,
   googleCheckCircleBaseline,
   googleSearchBaseline,
   googleSyncBaseline,
@@ -176,6 +194,7 @@ import {
 import cAlert from '~components/ezAlert.vue';
 import cIcon from '~components/ezIcon.vue';
 import cButton from '~components/cButton.vue';
+import cMenu from '~components/cMenu.vue';
 
 import Fuse from 'fuse.js';
 
@@ -183,6 +202,7 @@ import {
   getProducts,
   publishAllProducts,
   publishProducts,
+  syncTranslations,
 } from '~scripts/api';
 
 
@@ -193,6 +213,7 @@ export default {
     cAlert,
     cIcon,
     cButton,
+    cMenu,
   },
 
   props: {
@@ -220,6 +241,7 @@ export default {
         googleSyncBaseline,
         googleCheckCircleBaseline,
         googleSearchBaseline,
+        googleArrowDropDownBaseline,
       },
     };
   },
@@ -280,6 +302,12 @@ export default {
       Object.keys(this.selectedProductsIds).forEach(key => {
         this.selectedProductsIds[key] = isChecked;
       });
+    },
+
+    async syncTranslations() {
+      await syncTranslations();
+
+      this.sendMsg('Translations synced');
     },
   },
 
@@ -399,5 +427,10 @@ export default {
 .products-item__checkbox {
   width: 18px;
   height: 18px;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
 }
 </style>

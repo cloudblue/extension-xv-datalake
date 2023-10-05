@@ -24,6 +24,10 @@ export const getSettings = () => fetch('/api/settings').then(getJson);
 
 export const getHubs = () => fetch('/api/hubs').then(getJson);
 
+export const syncTranslations = () => fetch('/api/localization/translations/*/publish-all', {
+  method: 'POST',
+});
+
 export const validateSettings = (hubId) => fetch(`/api/settings/validate/${hubId}`).then(getJson);
 
 export const updateSettings = (hubId, settings) => fetch(`/api/settings/${hubId}`, {
