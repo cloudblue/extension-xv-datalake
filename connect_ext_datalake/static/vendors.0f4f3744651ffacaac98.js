@@ -3322,6 +3322,30 @@ var result = _svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTE
 
 /***/ }),
 
+/***/ 940:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _svg_baker_runtime_browser_symbol_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(854);
+/* harmony import */ var _svg_baker_runtime_browser_symbol_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_svg_baker_runtime_browser_symbol_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(348);
+/* harmony import */ var _svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var symbol = new (_svg_baker_runtime_browser_symbol_js__WEBPACK_IMPORTED_MODULE_0___default())({
+  "id": "arrow_drop_down_baseline_eebf67",
+  "use": "arrow_drop_down_baseline_eebf67-usage",
+  "viewBox": "0 0 24 24",
+  "content": "<symbol xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" id=\"arrow_drop_down_baseline_eebf67\"><path d=\"M0 0h24v24H0z\" fill=\"none\" /><path d=\"M7 10l5 5 5-5z\" /></symbol>"
+});
+var result = _svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTED_MODULE_1___default().add(symbol);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (symbol);
+
+/***/ }),
+
 /***/ 171:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
