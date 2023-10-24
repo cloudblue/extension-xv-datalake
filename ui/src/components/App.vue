@@ -45,7 +45,7 @@ export default {
 <style scoped>
 .app {
   box-sizing: border-box;
-  min-height: 640px;
+  min-height: 740px;
   padding-top: 24px;
 }
 
