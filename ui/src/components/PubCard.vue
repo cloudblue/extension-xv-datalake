@@ -654,6 +654,7 @@ textarea[materialize].code:not(:last-child) {
 
 .account-json-wrapper {
   position: relative;
+  margin-bottom: 24px;
 }
 
 .menu-items {
