@@ -477,12 +477,20 @@ export default {
       }
 
       const reader = new FileReader();
-      reader.onload = ({ target }) => {
-        const fileContent = target.result;
-        const fileContentObj = JSON.parse(fileContent);
-        this.accountInfo = JSON.stringify(fileContentObj.account_info);
-        this.productTopic = fileContentObj.product_topic;
-      };
+      reader.addEventListener('load', ({ target }) => {
+        this.accountInfo = target.result;
+
+        if (!target.result) {
+          this.loadedFileName = '';
+          this.handleErr({ message: 'Uploaded file has no content' });
+        }
+      });
+
+      reader.addEventListener('error', err => {
+        this.loadedFileName = '';
+        this.handleErr(err);
+      });
+
       reader.readAsText(file);
     },
 
