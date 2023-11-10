@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 9593:
+/***/ 49:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 
@@ -1869,108 +1869,108 @@ function SyncCardvue_type_script_lang_js_asyncToGenerator(fn) { return function 
 const SyncCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(SyncCardvue_type_script_lang_js, [['render',SyncCardvue_type_template_id_5c01c1f5_scoped_true_render],['__scopeId',"data-v-5c01c1f5"]])
 
 /* harmony default export */ const SyncCard = (SyncCard_exports_);
-;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/PubCard.vue?vue&type=template&id=3d7cb4de&scoped=true
+;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/PubCard.vue?vue&type=template&id=c352baea&scoped=true
 
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_withScopeId = function _withScopeId(n) {
-  return (0,vue_esm_bundler/* pushScopeId */.dD)("data-v-3d7cb4de"), n = n(), (0,vue_esm_bundler/* popScopeId */.Cn)(), n;
+var PubCardvue_type_template_id_c352baea_scoped_true_withScopeId = function _withScopeId(n) {
+  return (0,vue_esm_bundler/* pushScopeId */.dD)("data-v-c352baea"), n = n(), (0,vue_esm_bundler/* popScopeId */.Cn)(), n;
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_1 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_1 = {
   id: "publishing-card",
   "class": "ez-card"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_2 = /*#__PURE__*/PubCardvue_type_template_id_3d7cb4de_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_2 = /*#__PURE__*/PubCardvue_type_template_id_c352baea_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("header", {
     "class": "ez-card__header"
   }, [/*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("h2", {
     "class": "ez-card__title"
   }, " Settings ")], -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_3 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_3 = {
   "class": "table-item"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_4 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_4 = {
   "class": "table-item__title"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_5 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_5 = {
   "class": "table-item__assistive"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_6 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_6 = {
   key: 0,
   "class": "table-item"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_7 = /*#__PURE__*/PubCardvue_type_template_id_3d7cb4de_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_7 = /*#__PURE__*/PubCardvue_type_template_id_c352baea_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("p", {
     "class": "table-item__title monospace-text"
   }, " ********* ", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_8 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_8 = {
   "class": "table-item__assistive"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_9 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_9 = {
   key: 1,
   "class": "table-item_empty"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_10 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_10 = {
   "class": "table-icons"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_11 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_11 = {
   "class": "menu-items"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_12 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_12 = {
   key: 0,
   "class": "menu-item"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_13 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_13 = {
   key: 0,
   "class": "ez-dialog__inner"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_14 = /*#__PURE__*/PubCardvue_type_template_id_3d7cb4de_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_14 = /*#__PURE__*/PubCardvue_type_template_id_c352baea_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("header", {
     "class": "ez-dialog__header"
   }, " Settings ", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_15 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_15 = {
   ref: "dialogContentEl",
   "class": "ez-dialog__content"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_16 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_16 = {
   "class": "hub-info"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_17 = /*#__PURE__*/PubCardvue_type_template_id_3d7cb4de_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_17 = /*#__PURE__*/PubCardvue_type_template_id_c352baea_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("p", {
     "class": "label-text"
   }, " Hub ", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_18 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_18 = {
   "class": "table-item"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_19 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_19 = {
   "class": "table-item__title"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_20 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_20 = {
   "class": "table-item__assistive"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_21 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_21 = {
   action: "",
   "class": "ez-dialog__form"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_22 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_22 = {
   "class": "account-json-wrapper"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_23 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_23 = {
   "class": "custom-file-input ez-dialog__controls"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_24 = {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_24 = {
   "for": "file-input",
   "class": "custom-file-input__label"
 };
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_25 = /*#__PURE__*/PubCardvue_type_template_id_3d7cb4de_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_25 = /*#__PURE__*/PubCardvue_type_template_id_c352baea_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("label", {
     "for": "account_info",
     "class": "label-text"
   }, "Google Credentials JSON", -1 /* HOISTED */);
 });
-var PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_26 = /*#__PURE__*/PubCardvue_type_template_id_3d7cb4de_scoped_true_withScopeId(function () {
+var PubCardvue_type_template_id_c352baea_scoped_true_hoisted_26 = /*#__PURE__*/PubCardvue_type_template_id_c352baea_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("label", {
     "for": "product_topic",
     "class": "label-text"
@@ -1983,7 +1983,7 @@ var _hoisted_28 = {
   key: 0,
   "class": "ez-dialog__inner"
 };
-var _hoisted_29 = /*#__PURE__*/PubCardvue_type_template_id_3d7cb4de_scoped_true_withScopeId(function () {
+var _hoisted_29 = /*#__PURE__*/PubCardvue_type_template_id_c352baea_scoped_true_withScopeId(function () {
   return /*#__PURE__*/(0,vue_esm_bundler/* createElementVNode */._)("header", {
     "class": "ez-dialog__header"
   }, " Delete credentials ", -1 /* HOISTED */);
@@ -1997,25 +1997,25 @@ var _hoisted_31 = {
 var _hoisted_32 = {
   "class": "ez-dialog__footer"
 };
-function PubCardvue_type_template_id_3d7cb4de_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
+function PubCardvue_type_template_id_c352baea_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_c_icon = (0,vue_esm_bundler/* resolveComponent */.up)("c-icon");
   var _component_c_button = (0,vue_esm_bundler/* resolveComponent */.up)("c-button");
   var _component_c_menu = (0,vue_esm_bundler/* resolveComponent */.up)("c-menu");
   var _component_ez_table = (0,vue_esm_bundler/* resolveComponent */.up)("ez-table");
   var _component_c_alert = (0,vue_esm_bundler/* resolveComponent */.up)("c-alert");
-  return (0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("section", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_1, [PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_2, (0,vue_esm_bundler/* createVNode */.Wm)(_component_ez_table, {
+  return (0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("section", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_1, [PubCardvue_type_template_id_c352baea_scoped_true_hoisted_2, (0,vue_esm_bundler/* createVNode */.Wm)(_component_ez_table, {
     items: $options.items,
     headers: $data.headers
   }, {
     hub: (0,vue_esm_bundler/* withCtx */.w5)(function (item) {
-      return [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_3, [(0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_4, (0,vue_esm_bundler/* toDisplayString */.zw)(item.hub.name), 1 /* TEXT */), (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_5, (0,vue_esm_bundler/* toDisplayString */.zw)(item.hub.id), 1 /* TEXT */)])];
+      return [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_3, [(0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_4, (0,vue_esm_bundler/* toDisplayString */.zw)(item.hub.name), 1 /* TEXT */), (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_5, (0,vue_esm_bundler/* toDisplayString */.zw)(item.hub.id), 1 /* TEXT */)])];
     }),
 
     credentials: (0,vue_esm_bundler/* withCtx */.w5)(function (item) {
-      return [item.credentials ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_6, [PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_7, (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_8, (0,vue_esm_bundler/* toDisplayString */.zw)(item.credentials.topic), 1 /* TEXT */)])) : ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("span", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_9, "—"))];
+      return [item.credentials ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_6, [PubCardvue_type_template_id_c352baea_scoped_true_hoisted_7, (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_8, (0,vue_esm_bundler/* toDisplayString */.zw)(item.credentials.topic), 1 /* TEXT */)])) : ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("span", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_9, "—"))];
     }),
     actions: (0,vue_esm_bundler/* withCtx */.w5)(function (item) {
-      return [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_10, [(0,vue_esm_bundler/* createVNode */.Wm)(_component_c_icon, {
+      return [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_10, [(0,vue_esm_bundler/* createVNode */.Wm)(_component_c_icon, {
         "class": (0,vue_esm_bundler/* normalizeClass */.C_)(["error-icon", {
           'error-icon_visible': $data.itemsWithErrors[item.hub.id]
         }]),
@@ -2044,7 +2044,7 @@ function PubCardvue_type_template_id_3d7cb4de_scoped_true_render(_ctx, _cache, $
           }, null, 8 /* PROPS */, ["disabled", "icon", "title"])];
         }),
         "default": (0,vue_esm_bundler/* withCtx */.w5)(function () {
-          return [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_11, [(0,vue_esm_bundler/* createElementVNode */._)("div", {
+          return [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_11, [(0,vue_esm_bundler/* createElementVNode */._)("div", {
             "class": (0,vue_esm_bundler/* normalizeClass */.C_)(["menu-item", {
               'menu-item_disabled': !item.credentials
             }])
@@ -2059,7 +2059,7 @@ function PubCardvue_type_template_id_3d7cb4de_scoped_true_render(_ctx, _cache, $
             onClick: function onClick($event) {
               return $options.validateConfig(item);
             }
-          }, null, 8 /* PROPS */, ["disabled", "icon", "title", "onClick"])], 2 /* CLASS */), item.credentials ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_12, [(0,vue_esm_bundler/* createVNode */.Wm)(_component_c_button, {
+          }, null, 8 /* PROPS */, ["disabled", "icon", "title", "onClick"])], 2 /* CLASS */), item.credentials ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_12, [(0,vue_esm_bundler/* createVNode */.Wm)(_component_c_button, {
             icon: $data.icons.googleDeleteBaseline,
             "upper-case": false,
             "class": "menu-item__btn",
@@ -2079,14 +2079,14 @@ function PubCardvue_type_template_id_3d7cb4de_scoped_true_render(_ctx, _cache, $
     "class": (0,vue_esm_bundler/* normalizeClass */.C_)(["ez-dialog", {
       'ez-dialog_open': $data.isEditDialogOpen
     }])
-  }, [$data.isEditDialogOpen ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("section", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_13, [PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_14, (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_15, [$data.dialogError ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createBlock */.j4)(_component_c_alert, {
+  }, [$data.isEditDialogOpen ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createElementBlock */.iD)("section", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_13, [PubCardvue_type_template_id_c352baea_scoped_true_hoisted_14, (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_15, [$data.dialogError ? ((0,vue_esm_bundler/* openBlock */.wg)(), (0,vue_esm_bundler/* createBlock */.j4)(_component_c_alert, {
     key: 0,
     "class": "ez-card__alert",
     icon: $data.icons.googleWarningBaseline,
     message: $data.dialogError,
     type: "error",
     fluid: ""
-  }, null, 8 /* PROPS */, ["icon", "message"])) : (0,vue_esm_bundler/* createCommentVNode */.kq)("v-if", true), (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_16, [PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_17, (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_18, [(0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_19, (0,vue_esm_bundler/* toDisplayString */.zw)($data.currentItem.hub.name), 1 /* TEXT */), (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_20, (0,vue_esm_bundler/* toDisplayString */.zw)($data.currentItem.hub.id), 1 /* TEXT */)])]), (0,vue_esm_bundler/* createElementVNode */._)("form", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_21, [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_22, [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_23, [(0,vue_esm_bundler/* createElementVNode */._)("label", PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_24, [(0,vue_esm_bundler/* createVNode */.Wm)(_component_c_icon, {
+  }, null, 8 /* PROPS */, ["icon", "message"])) : (0,vue_esm_bundler/* createCommentVNode */.kq)("v-if", true), (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_16, [PubCardvue_type_template_id_c352baea_scoped_true_hoisted_17, (0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_18, [(0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_19, (0,vue_esm_bundler/* toDisplayString */.zw)($data.currentItem.hub.name), 1 /* TEXT */), (0,vue_esm_bundler/* createElementVNode */._)("p", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_20, (0,vue_esm_bundler/* toDisplayString */.zw)($data.currentItem.hub.id), 1 /* TEXT */)])]), (0,vue_esm_bundler/* createElementVNode */._)("form", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_21, [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_22, [(0,vue_esm_bundler/* createElementVNode */._)("div", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_23, [(0,vue_esm_bundler/* createElementVNode */._)("label", PubCardvue_type_template_id_c352baea_scoped_true_hoisted_24, [(0,vue_esm_bundler/* createVNode */.Wm)(_component_c_icon, {
     icon: $data.icons.googleUploadBaseline,
     size: "16",
     "class": "custom-file-input__label-icon"
@@ -2098,7 +2098,7 @@ function PubCardvue_type_template_id_3d7cb4de_scoped_true_render(_ctx, _cache, $
     onChange: _cache[0] || (_cache[0] = function () {
       return $options.onFileChange && $options.onFileChange.apply($options, arguments);
     })
-  }, null, 32 /* HYDRATE_EVENTS */)]), PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_25, (0,vue_esm_bundler/* withDirectives */.wy)((0,vue_esm_bundler/* createElementVNode */._)("textarea", {
+  }, null, 32 /* HYDRATE_EVENTS */)]), PubCardvue_type_template_id_c352baea_scoped_true_hoisted_25, (0,vue_esm_bundler/* withDirectives */.wy)((0,vue_esm_bundler/* createElementVNode */._)("textarea", {
     id: "account_info",
     ref: "textarea-account-info",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -2106,7 +2106,7 @@ function PubCardvue_type_template_id_3d7cb4de_scoped_true_render(_ctx, _cache, $
     }),
     "class": "code account-info-area",
     materialize: ""
-  }, null, 512 /* NEED_PATCH */), [[vue_esm_bundler/* vModelText */.nr, $data.accountInfo]])]), PubCardvue_type_template_id_3d7cb4de_scoped_true_hoisted_26, (0,vue_esm_bundler/* withDirectives */.wy)((0,vue_esm_bundler/* createElementVNode */._)("textarea", {
+  }, null, 512 /* NEED_PATCH */), [[vue_esm_bundler/* vModelText */.nr, $data.accountInfo]])]), PubCardvue_type_template_id_c352baea_scoped_true_hoisted_26, (0,vue_esm_bundler/* withDirectives */.wy)((0,vue_esm_bundler/* createElementVNode */._)("textarea", {
     id: "product_topic",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.productTopic = $event;
@@ -2137,7 +2137,7 @@ function PubCardvue_type_template_id_3d7cb4de_scoped_true_render(_ctx, _cache, $
     onClick: $options.deleteCredentials
   }, null, 8 /* PROPS */, ["loading", "onClick"])])])) : (0,vue_esm_bundler/* createCommentVNode */.kq)("v-if", true)], 2 /* CLASS */)]);
 }
-;// CONCATENATED MODULE: ./ui/src/components/PubCard.vue?vue&type=template&id=3d7cb4de&scoped=true
+;// CONCATENATED MODULE: ./ui/src/components/PubCard.vue?vue&type=template&id=c352baea&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/@cloudblueconnect/material-svg/icons/google/upload/baseline.svg
 var upload_baseline = __webpack_require__(8390);
@@ -2471,13 +2471,20 @@ var simplestJSONLength = 9;
         this.loadedFileName = "".concat(file.name.slice(0, 20), "...").concat(file.name.slice(-20, file.name.length));
       }
       var reader = new FileReader();
-      reader.onload = function (_ref2) {
+      reader.addEventListener('load', function (_ref2) {
         var target = _ref2.target;
-        var fileContent = target.result;
-        var fileContentObj = JSON.parse(fileContent);
-        _this4.accountInfo = JSON.stringify(fileContentObj.account_info);
-        _this4.productTopic = fileContentObj.product_topic;
-      };
+        _this4.accountInfo = target.result;
+        if (!target.result) {
+          _this4.loadedFileName = '';
+          _this4.handleErr({
+            message: 'Uploaded file has no content'
+          });
+        }
+      });
+      reader.addEventListener('error', function (err) {
+        _this4.loadedFileName = '';
+        _this4.handleErr(err);
+      });
       reader.readAsText(file);
     },
     loadSettings: function loadSettings() {
@@ -2532,7 +2539,7 @@ var simplestJSONLength = 9;
 
 
 
-const PubCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(PubCardvue_type_script_lang_js, [['render',PubCardvue_type_template_id_3d7cb4de_scoped_true_render],['__scopeId',"data-v-3d7cb4de"]])
+const PubCard_exports_ = /*#__PURE__*/(0,exportHelper/* default */.Z)(PubCardvue_type_script_lang_js, [['render',PubCardvue_type_template_id_c352baea_scoped_true_render],['__scopeId',"data-v-c352baea"]])
 
 /* harmony default export */ const PubCard = (PubCard_exports_);
 ;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js??clonedRuleSet-1.use!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[8].use[0]!./ui/src/components/App.vue?vue&type=script&lang=js
@@ -2767,7 +2774,7 @@ All rights reserved.
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], () => (__webpack_require__(9593)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], () => (__webpack_require__(49)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
