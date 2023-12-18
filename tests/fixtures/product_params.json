@@ -41,13 +41,17 @@
             "unique": false,
             "readonly": false,
             "dependency": {
-                "id": "PRM-814-505-018-0005",
-                "name": "tenant_preference",
-                "value": [
+                "parameter": {
+                    "id": "PRM-814-505-018-0005",
+                    "name": "tenant_preference"
+                },
+                "values": [
                     "new",
                     "existing"
                 ],
-                "hidden": false
+                "hidden": false,
+                "required": true,
+                "readonly": false
             },
             "choices": [
                 {
@@ -73,9 +77,11 @@
             "unique": false,
             "readonly": false,
             "dependency": {
-                "id": "PRM-814-505-018-0005",
-                "name": "tenant_preference",
-                "value": [
+                "parameter": {
+                    "id": "PRM-814-505-018-0005",
+                    "name": "tenant_preference"
+                },
+                "values": [
                     "new"
                 ],
                 "hidden": false
@@ -107,9 +113,11 @@
             "unique": false,
             "readonly": false,
             "dependency": {
-                "id": "PRM-814-505-018-0005",
-                "name": "tenant_preference",
-                "value": [
+                "parameter": {
+                    "id": "PRM-814-505-018-0005",
+                    "name": "tenant_preference"
+                },
+                "values": [
                     "new"
                 ],
                 "hidden": false
@@ -131,9 +139,11 @@
             "unique": false,
             "readonly": false,
             "dependency": {
-                "id": "PRM-814-505-018-0005",
-                "name": "tenant_preference",
-                "value": [
+                "parameter": {
+                    "id": "PRM-814-505-018-0005",
+                    "name": "tenant_preference"
+                },
+                "values": [
                     "new"
                 ],
                 "hidden": false
@@ -156,9 +166,11 @@
             "unique": false,
             "readonly": false,
             "dependency": {
-                "id": "PRM-814-505-018-0005",
-                "name": "tenant_preference",
-                "value": [
+                "parameter": {
+                    "id": "PRM-814-505-018-0005",
+                    "name": "tenant_preference"
+                },
+                "values": [
                     "new"
                 ],
                 "hidden": false
@@ -180,13 +192,17 @@
             "unique": false,
             "readonly": false,
             "dependency": {
-                "id": "PRM-814-505-018-0005",
-                "name": "tenant_preference",
-                "value": [
+                "parameter": {
+                    "id": "PRM-814-505-018-0005",
+                    "name": "tenant_preference"
+                },
+                "values": [
                     "new",
                     "existing"
                 ],
-                "hidden": false
+                "hidden": true,
+                "required": false
+
             },
             "choices": [
                 {
@@ -212,9 +228,11 @@
             "unique": false,
             "readonly": false,
             "dependency": {
-                "id": "PRM-814-505-018-0005",
-                "name": "tenant_preference",
-                "value": [
+                "parameter": {
+                    "id": "PRM-814-505-018-0005",
+                    "name": "tenant_preference"
+                },
+                "values": [
                     "new"
                 ],
                 "hidden": false
