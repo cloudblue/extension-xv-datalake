@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2023, Ingram Micro - Rahul Mondal
+# Copyright (c) 2023, Ingram Micro
 # All rights reserved.
 #
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
 from connect.client import ConnectClient, R
@@ -28,24 +29,44 @@ def verify_property(obj: dict, properties: dict[str, str]):
 
 
 def populate_dependents(parameters: list):
-    dependency_map = {}
+    """
+    Approx. the following reversal logic is directly applied to the list of parameters for deps:
+    [
+      {'id': 'PRM-1', 'constraints': {'dependency': {'parameter': {'id': 'PRM-2'}}}},
+      {'id': 'PRM-2'},
+    ]
 
+    ->
+
+    [
+      {'id': 'PRM-1'},
+      {'id': 'PRM-2', 'constraints': {'dependents': [{'id': 'PRM-2'}]}},
+    ]
+    """
+
+    dependency_exists = False
+    dependency_map = defaultdict(list)
     for param in parameters:
-        if 'constraints' in param.keys() and 'dependency' in param['constraints'].keys():
-            parent_param_id = param['constraints']['dependency']['id']
+        dep = ((param.get('constraints') or {}).get('dependency') or {}).pop('parameter', None)
+
+        if dep:
+            dependency_exists = True
+
             dependent_object = param['constraints'].pop('dependency')
             dependent_object['id'] = param['id']
-            dependent_object['name'] = param['name']
+            dependent_object['name'] = param.get('name')
+            dependent_object['value'] = dependent_object.pop('values', [])
+            dependency_map[dep['id']].append(dependent_object)
 
-            if parent_param_id not in dependency_map.keys():
-                dependency_map[parent_param_id] = []
+    if not dependency_exists:
+        return
 
-            dependency_map[parent_param_id].append(dependent_object)
+    for param in parameters:
+        dependents = dependency_map.get(param['id'])
 
-    if dependency_map:
-        for param in parameters:
-            if param['id'] in dependency_map.keys():
-                param['constraints']['dependents'] = dependency_map[param['id']]
+        if dependents:
+            param.setdefault('constraints', {})
+            param['constraints']['dependents'] = dependents
 
 
 def sanitize_product(product: dict):
@@ -74,6 +95,7 @@ def sanitize_product(product: dict):
 
 
 def sanitize_parameters(parameters: list):
+    populate_dependents(parameters)
     for parameter in parameters:
         remove_properties(
             parameter,

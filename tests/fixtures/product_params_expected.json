@@ -31,7 +31,9 @@
                         "new",
                         "existing"
                     ],
-                    "hidden": false
+                    "hidden": false,
+                    "required": true,
+                    "readonly": false
                 },
                 {
                     "id": "PRM-814-505-018-0012",
@@ -72,7 +74,8 @@
                         "new",
                         "existing"
                     ],
-                    "hidden": false
+                    "hidden": true,
+                    "required": false
                 },
                 {
                     "id": "PRM-814-505-018-0096",
