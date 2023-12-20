@@ -1,7 +1,7 @@
 env: production
 type: multiaccount
-package_id: com.cloudblue.datalake.xvs
-name: CloudBlue XV Datalake Extension
+package_id: imc.xvantage.datalake.export
+name: xVantage DataLake Sync
 description: XV Datalake Extension
 overview: overview.md
 website: https://connect.cloudblue.com
