@@ -35,7 +35,8 @@ def create_task_publish_product(
     logger.info(f'Creating dynamic one time schedule method with payload: {payload}')
 
     client('devops').services[context.extension_id].environments[
-        context.environment_id].schedules.create(payload=payload)
+        context.environment_id
+    ].schedules.create(payload=payload)
 
 
 def create_task_publish_tc(
@@ -58,7 +59,8 @@ def create_task_publish_tc(
     logger.info(f'Creating dynamic one time schedule method with payload: {payload}')
 
     client('devops').services[context.extension_id].environments[
-        context.environment_id].schedules.create(payload=payload)
+        context.environment_id
+    ].schedules.create(payload=payload)
 
 
 def create_task_publish_translation(
@@ -81,4 +83,5 @@ def create_task_publish_translation(
     logger.info(f'Creating dynamic one time schedule method with payload: {payload}')
 
     client('devops').services[context.extension_id].environments[
-        context.environment_id].schedules.create(payload=payload)
+        context.environment_id
+    ].schedules.create(payload=payload)

@@ -1,13 +1,13 @@
 from copy import deepcopy
 from unittest.mock import patch
 
+import pytest
 from connect.client import ClientError, R
 from connect.eaas.core.inject.models import Context
 from google.api_core.exceptions import PermissionDenied
-import pytest
 
-from connect_ext_datalake.services.client import GooglePubsubClient
 from connect_ext_datalake.events import DatalakeExtensionEventsApplication
+from connect_ext_datalake.services.client import GooglePubsubClient
 from connect_ext_datalake.services.payloads import TCR_UPDATE_TYPE_MAPPING
 
 
@@ -516,12 +516,16 @@ def test_publish_tcs_success(
     ).mock(return_value=tc_params)
     client_mocker('tier').config_requests.filter(
         R().configuration.id.eq(tcs[0]['id']),
-    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+    ).select(
+        '-tiers', '-configuration'
+    ).order_by('-created').first().mock(
         return_value=tcr_list,
     )
     client_mocker('tier').config_requests.filter(
         R().configuration.id.eq(tcs[1]['id']),
-    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+    ).select(
+        '-tiers', '-configuration'
+    ).order_by('-created').first().mock(
         return_value=tcr_list,
     )
     client_mocker('devops').installations[installation['id']].get(

@@ -5,16 +5,15 @@
 #
 from connect.eaas.core.extension import EventsApplicationBase
 
-from connect_ext_datalake.services.events.product import (
-    ProductEventsMixin,
-    ProductTasksMixin,
-)
 from connect_ext_datalake.services.events import (
+    FulfillmentEventsMixin,
+    FulfillmentTasksMixin,
     TierConfigEventsMixin,
     TierConfigTasksMixin,
     TranslationEventsMixin,
     TranslationTaskMixin,
 )
+from connect_ext_datalake.services.events.product import ProductEventsMixin, ProductTasksMixin
 
 
 class DatalakeExtensionEventsApplication(
@@ -25,5 +24,7 @@ class DatalakeExtensionEventsApplication(
     TierConfigTasksMixin,
     TranslationEventsMixin,
     TranslationTaskMixin,
+    FulfillmentEventsMixin,
+    FulfillmentTasksMixin,
 ):
     pass

@@ -8,18 +8,11 @@ from logging import LoggerAdapter
 from connect.client import ConnectClient
 from connect.eaas.core.decorators import router
 from connect.eaas.core.inject.common import get_logger
-from connect.eaas.core.inject.synchronous import (
-    get_installation,
-    get_installation_client,
-)
+from connect.eaas.core.inject.synchronous import get_installation, get_installation_client
 from fastapi import Depends
 
+from connect_ext_datalake.schemas import Hub, Setting, SettingInput
 from connect_ext_datalake.services.client import GooglePubsubClient
-from connect_ext_datalake.schemas import (
-    Hub,
-    Setting,
-    SettingInput,
-)
 from connect_ext_datalake.services.publish import list_hubs
 from connect_ext_datalake.services.settings import (
     delete_settings,
@@ -48,9 +41,9 @@ class SettingsWebAppMixin:
         response_model=Setting,
     )
     def validate_settings(
-            self,
-            hub_id: str,
-            installation: dict = Depends(get_installation),
+        self,
+        hub_id: str,
+        installation: dict = Depends(get_installation),
     ):
         try:
             settings = get_settings(installation, hub_id)
@@ -94,11 +87,11 @@ class SettingsWebAppMixin:
         summary='Clear Datalake Pubsub Settings',
     )
     def remove_settings(
-            self,
-            hub_id: str,
-            installation: dict = Depends(get_installation),
-            client: ConnectClient = Depends(get_installation_client),
-            logger: LoggerAdapter = Depends(get_logger),
+        self,
+        hub_id: str,
+        installation: dict = Depends(get_installation),
+        client: ConnectClient = Depends(get_installation_client),
+        logger: LoggerAdapter = Depends(get_logger),
     ):
         try:
             delete_settings(
@@ -116,7 +109,7 @@ class SettingsWebAppMixin:
         response_model=list[Hub],
     )
     def list_hubs(
-            self,
-            client: ConnectClient = Depends(get_installation_client),
+        self,
+        client: ConnectClient = Depends(get_installation_client),
     ):
         return list_hubs(client)

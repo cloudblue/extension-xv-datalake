@@ -2,8 +2,8 @@ from copy import deepcopy
 from unittest import TestCase
 from unittest.mock import patch
 
-from google.cloud.pubsub_v1 import PublisherClient
 import pytest
+from google.cloud.pubsub_v1 import PublisherClient
 
 from connect_ext_datalake.services.payloads import populate_dependents, sanitize_parameters
 from connect_ext_datalake.services.publish import get_pubsub_client
@@ -49,111 +49,114 @@ def test_populate_dependents_positional_change(
     TestCase().assertListEqual(params, expected_param_list)
 
 
-@pytest.mark.parametrize('inp,outp', [
-    [[], []],
-    [[{'id': 'PRM-1'}], [{'id': 'PRM-1'}]],
+@pytest.mark.parametrize(
+    'inp,outp',
     [
+        [[], []],
+        [[{'id': 'PRM-1'}], [{'id': 'PRM-1'}]],
         [
-            {
-                'id': 'PRM-1',
-                'name': '1',
-                'constraints': {
-                    'hidden': True,
-                    'dependency': {
-                        'parameter': {
-                            'id': 'PRM-2',
-                            'name': '2',
-                        },
-                        'values': ['1'],
-                        'required': True,
-                        'xyz': False,
-                    },
-                },
-                'events': {
-                    'created': {},
-                },
-            },
-            {
-                'id': 'PRM-2',
-                'name': '2',
-            },
-            {
-                'id': 'PRM-3',
-                'name': '3',
-                'constraints': {
-                    'dependency': {
-                        'parameter': {
-                            'id': 'PRM-2',
-                            'name': '2',
-                        },
-                        'values': ['2', '1'],
-                    },
-                },
-            },
-            {
-                'id': 'PRM-4',
-                'constraints': {
-                    'something': True,
-                    'dependency': {
-                        'parameter': {
-                            'id': 'PRM-1',
-                            'name': '1',
-                        },
-                        'values': [''],
-                        'required': False,
-                    },
-                },
-            },
-        ],
-        [
-            {
-                'id': 'PRM-1',
-                'name': '1',
-                'constraints': {
-                    'hidden': True,
-                    'dependents': [
-                        {
-                            'id': 'PRM-4',
-                            'name': None,
-                            'value': [''],
-                            'required': False,
-                        },
-                    ],
-                },
-            },
-            {
-                'id': 'PRM-2',
-                'name': '2',
-                'constraints': {
-                    'dependents': [
-                        {
-                            'id': 'PRM-1',
-                            'name': '1',
-                            'value': ['1'],
+            [
+                {
+                    'id': 'PRM-1',
+                    'name': '1',
+                    'constraints': {
+                        'hidden': True,
+                        'dependency': {
+                            'parameter': {
+                                'id': 'PRM-2',
+                                'name': '2',
+                            },
+                            'values': ['1'],
                             'required': True,
                             'xyz': False,
                         },
-                        {
-                            'id': 'PRM-3',
-                            'name': '3',
-                            'value': ['2', '1'],
+                    },
+                    'events': {
+                        'created': {},
+                    },
+                },
+                {
+                    'id': 'PRM-2',
+                    'name': '2',
+                },
+                {
+                    'id': 'PRM-3',
+                    'name': '3',
+                    'constraints': {
+                        'dependency': {
+                            'parameter': {
+                                'id': 'PRM-2',
+                                'name': '2',
+                            },
+                            'values': ['2', '1'],
                         },
-                    ],
+                    },
                 },
-            },
-            {
-                'id': 'PRM-3',
-                'name': '3',
-                'constraints': {},
-            },
-            {
-                'id': 'PRM-4',
-                'constraints': {
-                    'something': True,
+                {
+                    'id': 'PRM-4',
+                    'constraints': {
+                        'something': True,
+                        'dependency': {
+                            'parameter': {
+                                'id': 'PRM-1',
+                                'name': '1',
+                            },
+                            'values': [''],
+                            'required': False,
+                        },
+                    },
                 },
-            },
+            ],
+            [
+                {
+                    'id': 'PRM-1',
+                    'name': '1',
+                    'constraints': {
+                        'hidden': True,
+                        'dependents': [
+                            {
+                                'id': 'PRM-4',
+                                'name': None,
+                                'value': [''],
+                                'required': False,
+                            },
+                        ],
+                    },
+                },
+                {
+                    'id': 'PRM-2',
+                    'name': '2',
+                    'constraints': {
+                        'dependents': [
+                            {
+                                'id': 'PRM-1',
+                                'name': '1',
+                                'value': ['1'],
+                                'required': True,
+                                'xyz': False,
+                            },
+                            {
+                                'id': 'PRM-3',
+                                'name': '3',
+                                'value': ['2', '1'],
+                            },
+                        ],
+                    },
+                },
+                {
+                    'id': 'PRM-3',
+                    'name': '3',
+                    'constraints': {},
+                },
+                {
+                    'id': 'PRM-4',
+                    'constraints': {
+                        'something': True,
+                    },
+                },
+            ],
         ],
     ],
-])
+)
 def test_sanitize_parameters(inp, outp):
     assert outp == sanitize_parameters(inp)
