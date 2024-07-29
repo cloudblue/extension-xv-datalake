@@ -39,7 +39,8 @@ def test_publish_product_info_success(
     client_mocker = client_mocker_factory()
 
     client_mocker('devops').services[context['extension_id']].environments[
-        context['environment_id']].schedules.create(return_value={})
+        context['environment_id']
+    ].schedules.create(return_value={})
 
     client = test_client_factory(DatalakeExtensionWebApplication)
 
@@ -63,7 +64,8 @@ def test_publish_product_info_failed(
     client_mocker = client_mocker_factory()
 
     client_mocker('devops').services[context['extension_id']].environments[
-        context['environment_id']].schedules.create(status_code=400)
+        context['environment_id']
+    ].schedules.create(status_code=400)
 
     client = test_client_factory(DatalakeExtensionWebApplication)
 
@@ -86,7 +88,8 @@ def test_publish_all_product_info_success(
     client_mocker = client_mocker_factory()
 
     client_mocker('devops').services[context['extension_id']].environments[
-        context['environment_id']].schedules.create(return_value={})
+        context['environment_id']
+    ].schedules.create(return_value={})
 
     client = test_client_factory(DatalakeExtensionWebApplication)
 
@@ -108,7 +111,8 @@ def test_publish_all_product_info_failed(
     client_mocker = client_mocker_factory()
 
     client_mocker('devops').services[context['extension_id']].environments[
-        context['environment_id']].schedules.create(status_code=400)
+        context['environment_id']
+    ].schedules.create(status_code=400)
 
     client = test_client_factory(DatalakeExtensionWebApplication)
 

@@ -20,7 +20,8 @@ def test_publish_all_tc_info_success(
     client_mocker = client_mocker_factory()
 
     client_mocker('devops').services[context['extension_id']].environments[
-        context['environment_id']].schedules.create(return_value={})
+        context['environment_id']
+    ].schedules.create(return_value={})
 
     client = test_client_factory(DatalakeExtensionWebApplication)
 
@@ -42,7 +43,8 @@ def test_publish_all_tc_info_failed(
     client_mocker = client_mocker_factory()
 
     client_mocker('devops').services[context['extension_id']].environments[
-        context['environment_id']].schedules.create(status_code=400)
+        context['environment_id']
+    ].schedules.create(status_code=400)
 
     client = test_client_factory(DatalakeExtensionWebApplication)
 
@@ -81,7 +83,9 @@ def test_publish_tc_info_success(
     ).mock(return_value=tc_params)
     client_mocker('tier').config_requests.filter(
         R().configuration.id.eq(tc_active['id']),
-    ).select('-tiers', '-configuration').order_by('-created').first().mock(
+    ).select(
+        '-tiers', '-configuration'
+    ).order_by('-created').first().mock(
         return_value=tcr_list,
     )
 

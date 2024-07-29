@@ -5,7 +5,7 @@
 #
 from logging import LoggerAdapter
 
-from connect.client import ConnectClient
+from connect.client import ConnectClient, R
 from connect.client.exceptions import ClientError
 from connect.eaas.core.decorators import router
 from connect.eaas.core.inject.common import get_call_context, get_logger
@@ -20,8 +20,8 @@ from fastapi.responses import HTMLResponse
 
 from connect_ext_datalake.services.client import GooglePubsubClient
 from connect_ext_datalake.services.publish import publish_tc
-from connect_ext_datalake.services.tasks import create_task_publish_tc
 from connect_ext_datalake.services.settings import get_settings
+from connect_ext_datalake.services.tasks import create_task_publish_tc
 
 
 class TierConfigsWebAppMixin:
@@ -31,11 +31,11 @@ class TierConfigsWebAppMixin:
         summary='Publish All Tier Configs Info',
     )
     def publish_all_tc_info(
-            self,
-            context: Context = Depends(get_call_context),
-            client: ConnectClient = Depends(get_extension_client),
-            installation: dict = Depends(get_installation),
-            logger: LoggerAdapter = Depends(get_logger),
+        self,
+        context: Context = Depends(get_call_context),
+        client: ConnectClient = Depends(get_extension_client),
+        installation: dict = Depends(get_installation),
+        logger: LoggerAdapter = Depends(get_logger),
     ):
         try:
             create_task_publish_tc(
@@ -53,11 +53,11 @@ class TierConfigsWebAppMixin:
         summary='Publish All Tier Configs Info',
     )
     def publish_tc_info(
-            self,
-            tc_id: str,
-            client: ConnectClient = Depends(get_installation_client),
-            installation: dict = Depends(get_installation),
-            logger: LoggerAdapter = Depends(get_logger),
+        self,
+        tc_id: str,
+        client: ConnectClient = Depends(get_installation_client),
+        installation: dict = Depends(get_installation),
+        logger: LoggerAdapter = Depends(get_logger),
     ):
         try:
             tc = client('tier').configs[tc_id].get()
@@ -72,8 +72,10 @@ class TierConfigsWebAppMixin:
                     logger,
                 )
             else:
-                logger.info(f"Publish of TC {tc['id']} is not processed"
-                            f' as settings not available for respective hub.')
+                logger.info(
+                    f"Publish of TC {tc['id']} is not processed"
+                    f' as settings not available for respective hub.'
+                )
             return HTMLResponse(status_code=200)
         except ClientError as e:
             return self.get_error_response(e)

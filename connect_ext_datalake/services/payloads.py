@@ -15,6 +15,16 @@ TCR_UPDATE_TYPE_MAPPING = {
     'adjustment': 'update',
 }
 
+FF_REQUEST_UPDATE_TYPE_MAPPING = {
+    'pending': 'update',
+    'approved': 'update',
+    'failed': 'update',
+    'inquiring': 'update',
+    'scheduled': 'update',
+    'revoking': 'update',
+    'revoked': 'update',
+}
+
 
 def remove_properties(obj: dict, properties: list):
     for prop in properties:
@@ -192,13 +202,30 @@ def sanitize_tcr(tcr: dict):
     )
 
 
+def sanitize_ff_request(ff_request: dict):
+    remove_properties(
+        ff_request,
+        [
+            'events',
+            'previous_approved_request',
+            'assignee',
+        ],
+    )
+
+
 def include_last_tcr_request(client: ConnectClient, tc: dict):
-    last_tcr = client('tier').config_requests.filter(
-        R().configuration.id.eq(tc['id']),
-    ).select(
-        '-tiers',
-        '-configuration',
-    ).order_by('-created').first()
+    last_tcr = (
+        client('tier')
+        .config_requests.filter(
+            R().configuration.id.eq(tc['id']),
+        )
+        .select(
+            '-tiers',
+            '-configuration',
+        )
+        .order_by('-created')
+        .first()
+    )
 
     sanitize_tcr(last_tcr)
     tc['last_request'] = last_tcr
@@ -256,6 +283,34 @@ def prepare_tc_data(client: ConnectClient, tc: dict):
         'table_name': 'cmp_connect_tierconfig',
         'update_type': 'update',
         'tier_config': sanitize_tc(client, tc),
+    }
+
+
+def prepare_tcr_data(tcr: dict):
+    tcr["activation_link"] = tcr.get('activation', {}).get('link', None)
+    tcr["name"] = f"Tier Configuration Request for {tcr['configuration']['account']['id']}."
+    tcr["tier_level"] = tcr['configuration']['tier_level']
+    sanitize_tcr(tcr)
+
+    return {
+        'table_name': 'cmp_connect_tierconfigrequest',
+        'update_type': TCR_UPDATE_TYPE_MAPPING[tcr['type']],
+        'tier_config_request': tcr,
+    }
+
+
+def prepare_ff_request_data(ff_request: dict):
+    ff_request["name"] = f"Fulfillment request for asset {ff_request['asset']['id']}."
+    ff_request["asset_id"] = ff_request['asset']['id']
+    ff_request["asset_external_id"] = ff_request['asset']['external_id']
+    ff_request["asset_external_uid"] = ff_request['asset']['external_uid']
+    ff_request["activation_link"] = ff_request.get('params_form_url', None)
+    sanitize_ff_request(ff_request)
+
+    return {
+        'table_name': 'cmp_connect_fulfillmentrequest',
+        'update_type': FF_REQUEST_UPDATE_TYPE_MAPPING[ff_request['status']],
+        'fulfillment_request': ff_request,
     }
 
 

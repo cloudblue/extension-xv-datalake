@@ -1,5 +1,4 @@
-from connect.client import ConnectClient
-from connect.client import R
+from connect.client import ConnectClient, R
 
 from connect_ext_datalake.schemas import Hub, Setting, SettingInput
 
@@ -98,13 +97,14 @@ def prepare_product_marketplace_map(listings: list):
 
 
 def prepare_marketplace_hub_map(client: ConnectClient, marketplace_ids: list):
-    marketplaces = list(client.marketplaces.filter(
-        R().id.in_(marketplace_ids),
-    ))
+    marketplaces = list(
+        client.marketplaces.filter(
+            R().id.in_(marketplace_ids),
+        )
+    )
     return {
-        marketplace['id']: [
-            hub['hub']['id'] for hub in marketplace.get('hubs', [])
-        ] for marketplace in marketplaces
+        marketplace['id']: [hub['hub']['id'] for hub in marketplace.get('hubs', [])]
+        for marketplace in marketplaces
     }
 
 
@@ -157,9 +157,11 @@ def creating_settings_map_from_product(
     installation: dict,
     client: ConnectClient,
 ):
-    listings = list(client.listings.filter(
-        R().product.id.in_([product['id'] for product in products]),
-    ))
+    listings = list(
+        client.listings.filter(
+            R().product.id.in_([product['id'] for product in products]),
+        )
+    )
 
     return create_setting_map_from_listings(
         listings,

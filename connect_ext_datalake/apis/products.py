@@ -18,10 +18,7 @@ from connect.eaas.core.inject.synchronous import (
 from fastapi import Depends
 from fastapi.responses import HTMLResponse
 
-from connect_ext_datalake.schemas import (
-    Product,
-    ProductInput,
-)
+from connect_ext_datalake.schemas import Product, ProductInput
 from connect_ext_datalake.services.publish import list_products
 from connect_ext_datalake.services.tasks import create_task_publish_product
 
@@ -68,11 +65,11 @@ class ProductsWebAppMixin:
         summary='Publish All Products Info',
     )
     def publish_all_product_info(
-            self,
-            context: Context = Depends(get_call_context),
-            client: ConnectClient = Depends(get_extension_client),
-            installation: dict = Depends(get_installation),
-            logger: LoggerAdapter = Depends(get_logger),
+        self,
+        context: Context = Depends(get_call_context),
+        client: ConnectClient = Depends(get_extension_client),
+        installation: dict = Depends(get_installation),
+        logger: LoggerAdapter = Depends(get_logger),
     ):
         try:
             create_task_publish_product(

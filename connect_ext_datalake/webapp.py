@@ -3,11 +3,7 @@
 # Copyright (c) 2023, Rahul Mondal
 # All rights reserved.
 #
-from connect.eaas.core.decorators import (
-    account_settings_page,
-    router,
-    web_app,
-)
+from connect.eaas.core.decorators import account_settings_page, router, web_app
 from connect.eaas.core.extension import WebApplicationBase
 from fastapi.responses import JSONResponse
 
