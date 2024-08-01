@@ -290,6 +290,9 @@ def prepare_tcr_data(tcr: dict):
     tcr["activation_link"] = tcr.get('activation', {}).get('link', None)
     tcr["name"] = f"Tier Configuration Request for {tcr['configuration']['account']['id']}."
     tcr["tier_level"] = tcr['configuration']['tier_level']
+    tcr["published_at"] = datetime.now(tz=timezone(timedelta(hours=0))).isoformat(
+        timespec='seconds'
+    )
     sanitize_tcr(tcr)
 
     return {
@@ -305,6 +308,9 @@ def prepare_ff_request_data(ff_request: dict):
     ff_request["asset_external_id"] = ff_request['asset']['external_id']
     ff_request["asset_external_uid"] = ff_request['asset']['external_uid']
     ff_request["activation_link"] = ff_request.get('params_form_url', None)
+    ff_request["published_at"] = datetime.now(tz=timezone(timedelta(hours=0))).isoformat(
+        timespec='seconds'
+    )
     sanitize_ff_request(ff_request)
 
     return {
