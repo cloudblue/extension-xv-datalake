@@ -289,6 +289,8 @@ def prepare_tc_data(client: ConnectClient, tc: dict):
 def prepare_tcr_data(tcr: dict):
     tcr["activation_link"] = tcr.get('activation', {}).get('link', None)
     tcr["name"] = f"Tier Configuration Request for {tcr['configuration']['account']['id']}."
+    tcr['tier_account_id'] = tcr['configuration']['account']['id']
+    tcr['product_id'] = tcr['configuration']['product']['id']
     tcr["tier_level"] = tcr['configuration']['tier_level']
     tcr["published_at"] = datetime.now(tz=timezone(timedelta(hours=0))).isoformat(
         timespec='seconds'
@@ -305,6 +307,7 @@ def prepare_tcr_data(tcr: dict):
 def prepare_ff_request_data(ff_request: dict):
     ff_request["name"] = f"Fulfillment request for asset {ff_request['asset']['id']}."
     ff_request["asset_id"] = ff_request['asset']['id']
+    ff_request['product_id'] = ff_request['asset']['product']['id']
     ff_request["asset_external_id"] = ff_request['asset']['external_id']
     ff_request["asset_external_uid"] = ff_request['asset']['external_uid']
     ff_request["activation_link"] = ff_request.get('params_form_url', None)
