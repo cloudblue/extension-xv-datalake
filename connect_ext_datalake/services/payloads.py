@@ -318,7 +318,7 @@ def prepare_ff_request_data(ff_request: dict):
 
     return {
         'table_name': 'cmp_connect_fulfillmentrequest',
-        'update_type': FF_REQUEST_UPDATE_TYPE_MAPPING[ff_request['status']],
+        'update_type': 'update',
         'fulfillment_request': ff_request,
     }
 
