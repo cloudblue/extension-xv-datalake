@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "extension-xv-datalake"
-version = "0.2.16"
+version = "0.2.19"
 description = "This extension is responsoible for publishing Cloudblue Connect data to Xvantage Datalake."
 authors = ["Ingram Micro - Rahul Mondal "]
 license = "Apache Software License 2.0"
@@ -14,9 +14,9 @@ readme = "./README.md"
 "webapp" = "connect_ext_datalake.webapp:DatalakeExtensionWebApplication"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
-connect-eaas-core = ">=30,<31"
-google-cloud-pubsub = "2.17.1"
+python = ">=3.9,<4"
+connect-eaas-core = ">=33,<34"
+google-cloud-pubsub = "^2.23.1"
 
 [tool.poetry.dev-dependencies]
 black = "^24.4.2"
@@ -55,8 +55,7 @@ relative_files = true
 branch = true
 
 [tool.coverage.report]
-omit = [
-]
+omit = []
 
 [tool.black]
 line_length = 100
