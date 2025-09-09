@@ -734,7 +734,7 @@ def test_handle_translation_change_success(
     ).mock(
         return_value=[marketplace],
     )
-    client_mocker('localization').translations[translation['id']].attributes.all().mock(
+    client_mocker('localization').translations[translation['id']].attributes.all().limit(1000).mock(
         return_value=translation_attributes,
     )
 
@@ -769,7 +769,7 @@ def test_handle_translation_change_failed(
     ).mock(
         return_value=[marketplace],
     )
-    client_mocker('localization').translations[translation['id']].attributes.all().mock(
+    client_mocker('localization').translations[translation['id']].attributes.all().limit(1000).mock(
         status_code=400,
     )
 
