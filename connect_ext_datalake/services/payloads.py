@@ -25,6 +25,8 @@ FF_REQUEST_UPDATE_TYPE_MAPPING = {
     'revoked': 'update',
 }
 
+TRANSLATION_ATTRIBUTES_PAGE_SIZE = 1000
+
 
 def remove_properties(obj: dict, properties: list):
     for prop in properties:
@@ -361,7 +363,12 @@ def sanitize_translation_attribute(attribute: dict):
 
 def include_translation_attributes(client: ConnectClient, translation: dict):
     translation['attributes'] = []
-    attributes = client('localization').translations[translation['id']].attributes.all()
+    attributes = (
+        client('localization')
+        .translations[translation['id']]
+        .attributes.all()
+        .limit(TRANSLATION_ATTRIBUTES_PAGE_SIZE)
+    )
     for attribute in attributes:
         translation['attributes'].append(sanitize_translation_attribute(attribute))
 
